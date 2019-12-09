@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1032101318345",
+    "firebase_url": "https://capung-pedia-cb932.firebaseio.com",
+    "project_id": "capung-pedia-cb932",
+    "storage_bucket": "capung-pedia-cb932.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032101318345:android:472e46b923157cf024c718",
+        "android_client_info": {
+          "package_name": "site.ishaalim.capungpedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032101318345-ahsl93lvragusc4a54sjq9fks2b9tbn0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "site.ishaalim.capungpedia",
+            "certificate_hash": "433e256a846e6d657c53b3dfce803548962622fb"
+          }
+        },
+        {
+          "client_id": "1032101318345-a6soppa0jkriue8a0onbu45p0hrr1fqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGemFOBx0_qaF6hdgmz7ZpuwVeER1LLuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032101318345-a6soppa0jkriue8a0onbu45p0hrr1fqu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
