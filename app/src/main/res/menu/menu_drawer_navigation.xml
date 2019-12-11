@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/beranda"
+            android:icon="@drawable/ic_notif"
+            android:title="Beranda"/>
+
+        <item android:id="@+id/pendahuluan"
+            android:icon="@drawable/ic_notif"
+            android:title="Pendahuluan"/>
+
+        <item android:id="@+id/mengenal_capung"
+            android:icon="@drawable/ic_notif"
+            android:title="Mengenal Capung"/>
+
+        <item android:id="@+id/mengenal_kawasan_desa"
+            android:icon="@drawable/ic_notif"
+            android:title="Mengenal Kawasan Desa"/>
+    </group>
+
+   <item android:title="Pengamatan Capung">
+       <menu>
+           <item android:id="@+id/panduan_pengamatan"
+               android:icon="@drawable/ic_notif"
+               android:title="Panduan Pengamatan"/>
+           <item android:id="@+id/panduan_Identifikasi"
+               android:icon="@drawable/ic_notif"
+               android:title="Panduan Identifikasi"/>
+           <item android:id="@+id/identifikasi_capung"
+               android:icon="@drawable/ic_notif"
+               android:title="Identifikasi Capung"/>
+           <item android:id="@+id/ayo_pengamatan"
+               android:icon="@drawable/ic_notif"
+               android:title="Ayo Pengamatan!"/>
+           <item android:id="@+id/evaluasi"
+               android:icon="@drawable/ic_notif"
+               android:title="Evaluasi"
+               />
+       </menu>
+   </item>
+
+    <item android:title="Lainnya">
+        <menu>
+            <item android:id="@+id/pengaturan"
+                android:icon="@drawable/ic_notif"
+                android:title="Pengaturan"/>
+            <item android:id="@+id/petunjuk_penggunaan"
+                android:icon="@drawable/ic_notif"
+                android:title="Petunjuk Penggunaan"/>
+            <item android:id="@+id/tentang_pengembang"
+                android:icon="@drawable/ic_notif"
+                android:title="Tetntang Pengembang"/>
+            <item android:id="@+id/glosarium"
+                android:icon="@drawable/ic_notif"
+                android:title="Glosarium"/>
+            <item android:id="@+id/referensi"
+                android:icon="@drawable/ic_notif"
+                android:title="Referensi"
+                />
+            <item android:id="@+id/bagikan_aplikasi"
+                android:icon="@drawable/ic_notif"
+                android:title="Bagikan Aplikasi"/>
+
+            <item android:id="@+id/laporkan_bug"
+                android:icon="@drawable/ic_notif"
+                android:title="Laporkan Bug"/>
+        </menu>
+    </item>
+
+</menu>
