@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Beranda.FragmentBeranda">
 
     <androidx.cardview.widget.CardView
@@ -30,7 +29,7 @@
                 android:background="@drawable/ic_drawer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/btn_notification"
@@ -40,15 +39,15 @@
                 android:background="@drawable/ic_notif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="25dp"
                 android:background="@drawable/ic_logo_font"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -56,10 +55,41 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv"
+        android:id="@+id/cv_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar_main"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        app:cardBackgroundColor="?attr/cardbackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
+
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/imageSlider_Header"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="right"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="#41f5b2"
+            app:sliderIndicatorUnselectedColor="#575757"
+            app:sliderScrollTimeInSec="1" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_header"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
         android:padding="15dp"
@@ -76,18 +106,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Test judul"
-                android:textColor="?attr/textcolor"
                 android:fontFamily="@font/montserrat_bold"
+                android:text="Pendahuluan"
+                android:textColor="?attr/textcolor"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia, ipsum vel malesuada tincidunt, nisi diam lacinia arcu, nec lacinia ex ex at magna. Cras tempus iaculis ligula."
                 android:textColor="?attr/textcolor"
-                android:fontFamily="@font/montserrat_regular"
                 android:textSize="14sp" />
 
 
@@ -117,16 +147,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="?attr/tintcolor"
-                android:text="CheckBox"
                 android:fontFamily="@font/montserrat_regular"
+                android:text="CheckBox"
                 android:textColor="?attr/textcolor" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="?attr/tintcolor"
-                android:text="Radio Button"
                 android:fontFamily="@font/montserrat_regular"
+                android:text="Radio Button"
                 android:textColor="?attr/textcolor" />
 
             <TextView
@@ -147,10 +177,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/buttoncolor"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="CheckBox"
                     android:textColor="#ffffff"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/montserrat_bold"/>
+                    android:textSize="12sp" />
             </androidx.cardview.widget.CardView>
 
 
@@ -175,6 +205,13 @@
             android:orientation="vertical"
             android:padding="10dp">
 
+            <Switch
+                android:id="@+id/myswitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DarkMode"
+                android:textColor="?attr/textcolor" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -182,13 +219,6 @@
                 android:textColor="?attr/textcolor"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/myswitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="DarkMode"
-                android:textColor="?attr/textcolor" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

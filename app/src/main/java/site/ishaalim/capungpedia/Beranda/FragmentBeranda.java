@@ -15,6 +15,15 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+
+import java.util.ArrayList;
+
+import androidx.fragment.app.FragmentManager;
+import site.ishaalim.capungpedia.Beranda.adapter.SliderAdapter;
+import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.R;
 
 
@@ -22,6 +31,11 @@ public class FragmentBeranda extends Fragment {
 
     private Switch DarkModeswitch;
     private ImageButton buttonNav;
+
+    SliderAdapter sliderAdapter;
+
+    ArrayList<String> links = new ArrayList<>();
+
     public FragmentBeranda() {
     }
 
@@ -39,7 +53,14 @@ public class FragmentBeranda extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI();
 
+        setUpSliderView();
 
+        buttonNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).openDrawer();
+            }
+        });
         /*if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
             DarkModeswitch.setChecked(true);
         }
@@ -58,10 +79,24 @@ public class FragmentBeranda extends Fragment {
 
     }
 
+    private void setUpSliderView() {
+        SliderView sliderView = getView().findViewById(R.id.imageSlider_Header);
+        sliderAdapter = new  SliderAdapter(getContext(), links);
+        sliderView.setSliderAdapter(sliderAdapter);
+
+        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+
+        sliderView.setScrollTimeInSec(5);
+        sliderView.startAutoCycle();
+    }
+
     private void initUI() {
         DarkModeswitch = getView().findViewById(R.id.myswitch);
         buttonNav = getView().findViewById(R.id.btn_drawer);
     }
+
 
 }
 

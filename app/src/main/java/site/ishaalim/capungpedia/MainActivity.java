@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
 import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
 
@@ -39,14 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         initUI();
 
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
-
-        drawerLayout.addDrawerListener(drawerToggle);
-
-        drawerToggle.syncState();
+        setUpDrawer();
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -55,12 +49,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-        /*buttonNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });*/
+    }
+
+    private void setUpDrawer() {
+        navigationView.setNavigationItemSelectedListener(this);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+    }
+
+    public void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     @Override
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         buttonNav = findViewById(R.id.btn_drawer);
     }
 
-    private void checktheme() {
+    public void checktheme() {
         if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
             setTheme(R.style.DarkTheme);
         }else {
