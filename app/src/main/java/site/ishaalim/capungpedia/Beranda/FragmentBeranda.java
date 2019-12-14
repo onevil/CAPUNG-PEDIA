@@ -8,13 +8,23 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -22,9 +32,15 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import site.ishaalim.capungpedia.Beranda.adapter.SliderAdapter;
 import site.ishaalim.capungpedia.MainActivity;
+import site.ishaalim.capungpedia.Materi.adapter.ListMateriAdapter;
+import site.ishaalim.capungpedia.Materi.model.listMateri;
 import site.ishaalim.capungpedia.R;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class FragmentBeranda extends Fragment {
@@ -32,9 +48,15 @@ public class FragmentBeranda extends Fragment {
     private Switch DarkModeswitch;
     private ImageButton buttonNav;
 
+    FirebaseFirestore firestore;
+
+    RecyclerView listMateriRV;
+
+    ListMateriAdapter listMateriAdapter;
     SliderAdapter sliderAdapter;
 
     ArrayList<String> links = new ArrayList<>();
+    ArrayList<listMateri> listMateriArrayList;
 
     public FragmentBeranda() {
     }
@@ -53,7 +75,15 @@ public class FragmentBeranda extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI();
 
+        listMateriArrayList = new ArrayList<>();
+
+        setUpFirestore();
+
         setUpSliderView();
+
+        setUplistMateriRV();
+
+        loadlistMateriRV();
 
         buttonNav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +107,46 @@ public class FragmentBeranda extends Fragment {
             }
         });*/
 
+    }
+
+    private void loadlistMateriRV() {
+        listMateriArrayList.clear();
+        CollectionReference firestoreRef = firestore.collection("materi");
+        Query queryListMateri = firestoreRef.orderBy("judul", Query.Direction.ASCENDING);
+        queryListMateri.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot querySnapshotListMateri : task.getResult()){
+                            if(task.getResult() != null){
+                                listMateri listmateri = querySnapshotListMateri.toObject(listMateri.class);
+                                listMateriArrayList.add(listmateri);
+                            }else{
+                                Log.d(TAG, "No such Document");
+                            }
+                        }
+
+                        listMateriAdapter = new ListMateriAdapter(getContext(), listMateriArrayList);
+                        listMateriRV.setAdapter(listMateriAdapter);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    private void setUpFirestore() {
+        firestore = FirebaseFirestore.getInstance();
+    }
+
+    private void setUplistMateriRV() {
+        listMateriRV = getView().findViewById(R.id.rv_materi);
+        listMateriRV.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        listMateriRV.setLayoutManager(layoutManager);
     }
 
     private void setUpSliderView() {
