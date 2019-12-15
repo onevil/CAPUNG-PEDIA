@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.Materi.model;
 
 public class listMateri {
+    String id;
     String judul;
     String deskripsi;
     String imageURL;
@@ -8,10 +9,19 @@ public class listMateri {
     public listMateri() {
     }
 
-    public listMateri(String judul, String deskripsi, String imageURL) {
+    public listMateri(String id, String judul, String deskripsi, String imageURL) {
+        this.id = id;
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.imageURL = imageURL;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getJudul() {

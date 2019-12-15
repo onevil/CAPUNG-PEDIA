@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -57,6 +58,8 @@ public class FragmentBeranda extends Fragment {
 
     ArrayList<String> links = new ArrayList<>();
     ArrayList<listMateri> listMateriArrayList;
+
+    String idmateri;
 
     public FragmentBeranda() {
     }
@@ -111,7 +114,7 @@ public class FragmentBeranda extends Fragment {
 
     private void loadlistMateriRV() {
         listMateriArrayList.clear();
-        CollectionReference firestoreRef = firestore.collection("materi");
+        final CollectionReference firestoreRef = firestore.collection("materi");
         Query queryListMateri = firestoreRef.orderBy("judul", Query.Direction.ASCENDING);
         queryListMateri.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -125,6 +128,7 @@ public class FragmentBeranda extends Fragment {
                                 Log.d(TAG, "No such Document");
                             }
                         }
+
 
                         listMateriAdapter = new ListMateriAdapter(getContext(), listMateriArrayList);
                         listMateriRV.setAdapter(listMateriAdapter);

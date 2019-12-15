@@ -150,7 +150,9 @@
               android:layout_below="@+id/tv_materi"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical"/>
+              android:orientation="vertical"
+              tools:listitem="@layout/item_rv_materi"
+              tools:itemCount="5"/>
 
       </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

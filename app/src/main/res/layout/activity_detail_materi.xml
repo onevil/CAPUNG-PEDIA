@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor"
+    tools:context=".DetailMateriActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_iv_detail_materi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="25dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="?attr/cardbackground">
+
+                    <ImageView
+                        android:id="@+id/iv_detail_materi"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_detail_judul_materi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp"
+                android:textSize="25sp"
+                android:text="Judul materi"
+                android:layout_below="@+id/cv_iv_detail_materi"
+                android:textColor="?attr/textcolor"
+                android:fontFamily="@font/montserrat_bold"
+                />
+
+            <TextView
+                android:id="@+id/tv_detail_deskripsi_materi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia, ipsum vel malesuada tincidunt, nisi diam lacinia arcu, nec lacinia ex ex at magna. Cras tempus iaculis ligula."
+                android:layout_below="@+id/tv_detail_judul_materi"
+                android:textColor="?attr/textcolor"
+                android:fontFamily="@font/montserrat_regular"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@id/tv_detail_deskripsi_materi"
+                android:layout_marginTop="10dp"
+                android:id="@+id/rv_detail_materi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_rv_detail_materi"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
