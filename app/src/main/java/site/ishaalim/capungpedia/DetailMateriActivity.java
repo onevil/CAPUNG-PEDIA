@@ -63,11 +63,7 @@ public class DetailMateriActivity extends AppCompatActivity {
         loadContent();
         setUpDetailMateriRV();
         loadDetailMateriRV();
-
-        Toast.makeText(this, materiId, Toast.LENGTH_LONG).show();
-
-
-
+        
     }
 
 
