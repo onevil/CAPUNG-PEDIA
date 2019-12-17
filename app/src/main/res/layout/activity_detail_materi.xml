@@ -7,7 +7,7 @@
     android:background="?attr/backgroundcolor"
     tools:context=".DetailMateriActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -61,10 +61,11 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/rv_detail_materi"
                 android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/item_rv_detail_materi"/>
         </RelativeLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

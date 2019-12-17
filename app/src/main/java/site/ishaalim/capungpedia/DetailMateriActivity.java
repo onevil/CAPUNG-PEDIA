@@ -3,6 +3,7 @@ package site.ishaalim.capungpedia;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import io.opencensus.tags.Tag;
 import maes.tech.intentanim.CustomIntent;
@@ -56,6 +57,7 @@ public class DetailMateriActivity extends AppCompatActivity {
         isiMateriArrayList = new ArrayList<>();
         options = new RequestOptions().centerCrop();
 
+
         initUI();
 
         setUpFirestore();
@@ -63,11 +65,13 @@ public class DetailMateriActivity extends AppCompatActivity {
         loadContent();
         setUpDetailMateriRV();
         loadDetailMateriRV();
-        
+
     }
 
 
-    private void loadDetailMateriRV() {
+
+
+    public void loadDetailMateriRV() {
         isiMateriArrayList.clear();
         CollectionReference firestoreRef = firestore.collection("materi").document(materiId).collection("isiMateri");
         Query queryMateri = firestoreRef.orderBy("id", Query.Direction.ASCENDING);
@@ -93,12 +97,14 @@ public class DetailMateriActivity extends AppCompatActivity {
     private void loadmateri() {
         isiMateriAdapter = new IsiMateriAdapter(this, isiMateriArrayList);
         rvDetailMateri.setAdapter(isiMateriAdapter);
+        rvDetailMateri.smoothScrollToPosition(rvDetailMateri.getAdapter().getItemCount());
     }
 
     private void setUpDetailMateriRV() {
+
         rvDetailMateri = findViewById(R.id.rv_detail_materi);
         rvDetailMateri.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         rvDetailMateri.setLayoutManager(layoutManager);
     }
 
@@ -115,7 +121,6 @@ public class DetailMateriActivity extends AppCompatActivity {
     private void loadContent() {
         tvDetailJudul.setText(materiJudul);
         tvDetailDeskripsi.setText(materiDeskripsi);
-
         Glide.with(getApplicationContext()).load(materiImageURL).apply(options).into(ivDetailMateri);
     }
 

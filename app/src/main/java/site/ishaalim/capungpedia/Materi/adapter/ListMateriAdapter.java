@@ -46,6 +46,7 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ListMateriViewHolder holder, final int position) {
+
         idmateri = listMateriArrayList.get(position).getId();
         holder.tvJudul.setText(listMateriArrayList.get(position).getJudul());
         holder.tvDeskripsi.setText(listMateriArrayList.get(position).getDeskripsi());

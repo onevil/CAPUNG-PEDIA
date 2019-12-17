@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.Beranda;
 
 
+import android.icu.text.Transliterator;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import site.ishaalim.capungpedia.Beranda.adapter.SliderAdapter;
 import site.ishaalim.capungpedia.MainActivity;
@@ -129,9 +131,10 @@ public class FragmentBeranda extends Fragment {
                             }
                         }
 
-
                         listMateriAdapter = new ListMateriAdapter(getContext(), listMateriArrayList);
                         listMateriRV.setAdapter(listMateriAdapter);
+                        listMateriRV.smoothScrollToPosition(listMateriAdapter.getItemCount());
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
