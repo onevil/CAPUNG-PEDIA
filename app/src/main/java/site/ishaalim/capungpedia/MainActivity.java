@@ -18,6 +18,7 @@ import android.widget.Switch;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
+import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
 
 import com.google.android.material.navigation.NavigationView;
@@ -68,15 +69,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.beranda:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentBeranda()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.beranda);
                 break;
             case R.id.pendahuluan:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentPendahuluan()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.pendahuluan);
+                break;
+
+            case R.id.glosarium:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FragmentGlosarium()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.glosarium);
                 break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void uncheckNavItem() {
+        int navSize = navigationView.getMenu().size();
+        for (int i = 0; i < navSize; i++){
+            navigationView.getMenu().getItem(i).setCheckable(false);
+        }
     }
 
     private void initUI() {

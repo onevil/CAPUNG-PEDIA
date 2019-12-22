@@ -64,6 +64,7 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
                 intent.putExtra("judulMateri", listMateriArrayList.get(position).getJudul());
                 intent.putExtra("deskripsiMateri", listMateriArrayList.get(position).getDeskripsi());
                 intent.putExtra("imageURL", listMateriArrayList.get(position).getImageURL());
+                intent.putExtra("jumlahHalaman", listMateriArrayList.get(position).getJumlahHalaman());
                 context.startActivity(intent);
                 CustomIntent.customType(context, "left-to-right");
             }

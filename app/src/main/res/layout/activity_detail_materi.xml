@@ -7,7 +7,33 @@
     android:background="?attr/backgroundcolor"
     tools:context=".DetailMateriActivity">
 
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_materi"
+                android:layout_width="match_parent"
+                android:background="?attr/cardbackground"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="2dp"
+                android:titleTextColor="?attr/textcolor"
+                app:layout_collapseMode="parallax"/>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_materi"
+                android:layout_below="@id/toolbar_materi"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/cardbackground"
+                app:tabTextColor="?attr/textcolor"
+                android:elevation="2dp"
+                app:tabSelectedTextColor="?attr/buttoncolor">
+            </com.google.android.material.tabs.TabLayout>
+
+
+
+
     <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/tl_materi"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout

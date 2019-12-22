@@ -1,4 +1,4 @@
-package site.ishaalim.capungpedia.IdentifikasiSpesies;
+package site.ishaalim.capungpedia.IdentifikasiCapung;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import site.ishaalim.capungpedia.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IdentifikasiSpesiesFragment extends Fragment {
+public class IdentifikasiCapungFragment extends Fragment {
 
 
-    public IdentifikasiSpesiesFragment() {
+    public IdentifikasiCapungFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class IdentifikasiSpesiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_identifikasi_spesies, container, false);
+        return inflater.inflate(R.layout.fragment_identifikasi_capung, container, false);
     }
 
 }

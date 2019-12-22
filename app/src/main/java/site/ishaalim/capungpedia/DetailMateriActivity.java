@@ -2,6 +2,7 @@ package site.ishaalim.capungpedia;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,6 +41,10 @@ public class DetailMateriActivity extends AppCompatActivity {
 
     private RecyclerView rvDetailMateri;
 
+    private Toolbar toolbar;
+
+    private TabLayout tabLayout;
+
     private ArrayList<isiMateri> isiMateriArrayList;
 
     FirebaseFirestore firestore;
@@ -49,26 +55,36 @@ public class DetailMateriActivity extends AppCompatActivity {
 
     String materiId, materiJudul, materiDeskripsi, materiImageURL;
 
+    int materiJumlahHalaman;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_materi);
 
+        getExtra();
         isiMateriArrayList = new ArrayList<>();
         options = new RequestOptions().centerCrop();
 
-
+        setSupportActionBar(toolbar);
         initUI();
 
         setUpFirestore();
-        getExtra();
+        setupTabLayout();
         loadContent();
+        toolbar.setTitle(materiJudul);
         setUpDetailMateriRV();
         loadDetailMateriRV();
 
     }
 
+    private void setupTabLayout() {
+        for (int i = 1; i<=materiJumlahHalaman; i++ ){
 
+            tabLayout.addTab(tabLayout.newTab().setText("Hal " + i));
+        }
+
+    }
 
 
     public void loadDetailMateriRV() {
@@ -129,11 +145,14 @@ public class DetailMateriActivity extends AppCompatActivity {
         materiJudul = getIntent().getExtras().getString("judulMateri");
         materiDeskripsi = getIntent().getExtras().getString("deskripsiMateri");
         materiImageURL = getIntent().getExtras().getString("imageURL");
+        materiJumlahHalaman = getIntent().getExtras().getInt("jumlahHalaman");
     }
 
     private void initUI() {
         ivDetailMateri = findViewById(R.id.iv_detail_materi);
         tvDetailJudul = findViewById(R.id.tv_detail_judul_materi);
         tvDetailDeskripsi = findViewById(R.id.tv_detail_deskripsi_materi);
+        tabLayout = findViewById(R.id.tl_materi);
+        toolbar = findViewById(R.id.toolbar_materi);
     }
 }

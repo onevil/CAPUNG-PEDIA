@@ -5,15 +5,17 @@ public class listMateri {
     String judul;
     String deskripsi;
     String imageURL;
+    int jumlahHalaman;
 
     public listMateri() {
     }
 
-    public listMateri(String id, String judul, String deskripsi, String imageURL) {
+    public listMateri(String id, String judul, String deskripsi, String imageURL, int jumlahHalaman) {
         this.id = id;
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.imageURL = imageURL;
+        this.jumlahHalaman = jumlahHalaman;
     }
 
     public String getId() {
@@ -46,5 +48,13 @@ public class listMateri {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public int getJumlahHalaman() {
+        return jumlahHalaman;
+    }
+
+    public void setJumlahHalaman(int jumlahHalaman) {
+        this.jumlahHalaman = jumlahHalaman;
     }
 }

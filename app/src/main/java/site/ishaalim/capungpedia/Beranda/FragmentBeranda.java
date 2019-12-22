@@ -116,7 +116,7 @@ public class FragmentBeranda extends Fragment {
 
     private void loadlistMateriRV() {
         listMateriArrayList.clear();
-        final CollectionReference firestoreRef = firestore.collection("materi");
+        CollectionReference firestoreRef = firestore.collection("materi");
         Query queryListMateri = firestoreRef.orderBy("judul", Query.Direction.ASCENDING);
         queryListMateri.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
