@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +49,9 @@ public class FragmentGlosarium extends Fragment {
     RecyclerView glosariumRV;
 
     GlosariumAdapter glosariumAdapter;
-    ArrayList<Glosarium> glosariumArrayList;
+    ArrayList<Glosarium> glosariumArrayList, searchGlosariumArrayList;
+
+    String searchGlosarium;
 
 
     public FragmentGlosarium() {
@@ -67,11 +71,38 @@ public class FragmentGlosarium extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         glosariumArrayList = new ArrayList<>();
+        searchGlosariumArrayList = new ArrayList<>();
 
         setUpFirestore();
         initUI();
         setUpglosariumRV();
         loadGlosariumRV();
+
+        edtGlosarium.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchGlosarium = edtGlosarium.getText().toString().toLowerCase();
+
+                if (searchGlosarium != null){
+                    search();
+                }
+                else {
+                    glosariumArrayList.clear();
+                     loadGlosariumRV();
+                    }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
 
@@ -81,6 +112,39 @@ public class FragmentGlosarium extends Fragment {
                 ((MainActivity)getActivity()).openDrawer();
             }
         });
+    }
+
+    private void search() {
+        searchGlosariumArrayList.clear();
+
+        CollectionReference firestoreRef = firestore.collection("glosarium");
+        Query queryGlosarium = firestoreRef.orderBy("kataKunci", Query.Direction.ASCENDING);
+        queryGlosarium.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        for (DocumentSnapshot querySearchSnapshotGlosarium : task.getResult()){
+                            if(task.getResult() != null){
+                                String keyWord = querySearchSnapshotGlosarium.getString("kataKunci").toLowerCase();
+
+                                if(keyWord.contains(searchGlosarium)){
+
+                                    Glosarium glosarium = querySearchSnapshotGlosarium.toObject(Glosarium.class);
+                                    searchGlosariumArrayList.add(glosarium);
+                                }
+                            }else{
+                                Log.d(TAG, "No such Document");
+                            }
+                        }
+
+                        glosariumAdapter = new GlosariumAdapter(getContext(), searchGlosariumArrayList);
+                        glosariumRV.setAdapter(glosariumAdapter);
+                        glosariumRV.smoothScrollToPosition(glosariumAdapter.getItemCount());
+
+                    }
+                });
+
     }
 
     private void loadGlosariumRV() {
