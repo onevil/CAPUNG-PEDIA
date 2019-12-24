@@ -86,30 +86,31 @@ public class FragmentGlosarium extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchGlosarium = edtGlosarium.getText().toString().toLowerCase();
 
-                if (searchGlosarium != null){
-                    search();
-                }
-                else {
-                    glosariumArrayList.clear();
-                     loadGlosariumRV();
-                    }
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                searchGlosariumArrayList.clear();
+                glosariumArrayList.clear();
+                searchGlosarium = s.toString().toLowerCase();
 
+                if (searchGlosarium != null) {
+                    search();
+
+                } else {
+                    loadGlosariumRV();
+                }
             }
-        });
 
+        });
 
 
         buttonNavGlosarium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).openDrawer();
+                ((MainActivity) getActivity()).openDrawer();
             }
         });
     }
@@ -118,22 +119,21 @@ public class FragmentGlosarium extends Fragment {
         searchGlosariumArrayList.clear();
 
         CollectionReference firestoreRef = firestore.collection("glosarium");
-        Query queryGlosarium = firestoreRef.orderBy("kataKunci", Query.Direction.ASCENDING);
-        queryGlosarium.get()
+        Query querySearchGlosarium = firestoreRef.orderBy("kataKunci", Query.Direction.ASCENDING);
+        querySearchGlosarium.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                        for (DocumentSnapshot querySearchSnapshotGlosarium : task.getResult()){
-                            if(task.getResult() != null){
+                        searchGlosariumArrayList.clear();
+                        for (DocumentSnapshot querySearchSnapshotGlosarium : task.getResult()) {
+                            if (task.getResult() != null) {
                                 String keyWord = querySearchSnapshotGlosarium.getString("kataKunci").toLowerCase();
 
-                                if(keyWord.contains(searchGlosarium)){
-
+                                if (keyWord.contains(searchGlosarium)) {
                                     Glosarium glosarium = querySearchSnapshotGlosarium.toObject(Glosarium.class);
                                     searchGlosariumArrayList.add(glosarium);
                                 }
-                            }else{
+                            } else {
                                 Log.d(TAG, "No such Document");
                             }
                         }
@@ -141,6 +141,7 @@ public class FragmentGlosarium extends Fragment {
                         glosariumAdapter = new GlosariumAdapter(getContext(), searchGlosariumArrayList);
                         glosariumRV.setAdapter(glosariumAdapter);
                         glosariumRV.smoothScrollToPosition(glosariumAdapter.getItemCount());
+
 
                     }
                 });
@@ -157,11 +158,11 @@ public class FragmentGlosarium extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                        for (DocumentSnapshot querySnapshotGlosarium : task.getResult()){
-                            if(task.getResult() != null){
+                        for (DocumentSnapshot querySnapshotGlosarium : task.getResult()) {
+                            if (task.getResult() != null) {
                                 Glosarium glosarium = querySnapshotGlosarium.toObject(Glosarium.class);
                                 glosariumArrayList.add(glosarium);
-                            }else{
+                            } else {
                                 Log.d(TAG, "No such Document");
                             }
                         }
@@ -169,6 +170,7 @@ public class FragmentGlosarium extends Fragment {
                         glosariumAdapter = new GlosariumAdapter(getContext(), glosariumArrayList);
                         glosariumRV.setAdapter(glosariumAdapter);
                         glosariumRV.smoothScrollToPosition(glosariumAdapter.getItemCount());
+
 
                     }
                 });
