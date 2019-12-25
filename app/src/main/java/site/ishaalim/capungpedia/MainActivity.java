@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setUpDrawer();
 
+
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new FragmentBeranda()).commit();
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
 
     private void setUpDrawer() {
         navigationView.setNavigationItemSelectedListener(this);

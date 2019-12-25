@@ -17,6 +17,7 @@
             android:background="?attr/cardbackground"
             android:layout_height="?attr/actionBarSize"
             android:elevation="2dp"
+            android:fitsSystemWindows="true"
             app:title="Identifikasi Capung"
             app:layout_scrollFlags="scroll|enterAlways"
             android:titleTextColor="?attr/textcolor"
