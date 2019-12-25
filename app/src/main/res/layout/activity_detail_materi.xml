@@ -14,55 +14,51 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_materi"
             android:layout_width="match_parent"
-            android:background="?attr/cardbackground"
             android:layout_height="?attr/actionBarSize"
+            android:background="?attr/cardbackground"
             android:elevation="2dp"
-            app:layout_scrollFlags="scroll|enterAlways"
             android:titleTextColor="?attr/textcolor"
-            />
+            app:layout_scrollFlags="scroll|enterAlways" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_materi"
-            android:layout_below="@id/toolbar_materi"
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar_materi"
+            android:layout_gravity="bottom"
             android:background="?attr/cardbackground"
-            app:tabTextColor="?attr/textcolor"
             android:elevation="2dp"
-            app:tabSelectedTextColor="?attr/buttoncolor">
-        </com.google.android.material.tabs.TabLayout>
+            app:tabSelectedTextColor="?attr/buttoncolor"
+            app:tabTextColor="?attr/textcolor"></com.google.android.material.tabs.TabLayout>
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
-
-
-
     <androidx.core.widget.NestedScrollView
-        android:layout_below="@+id/tl_materi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/tl_materi"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_iv_detail_materi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="?attr/cardbackground"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="?attr/cardbackground">
+                app:cardElevation="2dp">
 
-                    <ImageView
-                        android:id="@+id/iv_detail_materi"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"/>
+                <ImageView
+                    android:id="@+id/iv_detail_materi"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -70,36 +66,34 @@
                 android:id="@+id/tv_detail_judul_materi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/cv_iv_detail_materi"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="10dp"
-                android:textSize="25sp"
-                android:text="Judul materi"
-                android:layout_below="@+id/cv_iv_detail_materi"
-                android:textColor="?attr/textcolor"
                 android:fontFamily="@font/montserrat_bold"
-                />
+                android:text="Judul materi"
+                android:textColor="?attr/textcolor"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/tv_detail_deskripsi_materi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detail_judul_materi"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="5dp"
-                android:textSize="15sp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia, ipsum vel malesuada tincidunt, nisi diam lacinia arcu, nec lacinia ex ex at magna. Cras tempus iaculis ligula."
-                android:layout_below="@+id/tv_detail_judul_materi"
-                android:textColor="?attr/textcolor"
                 android:fontFamily="@font/montserrat_regular"
-                />
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia, ipsum vel malesuada tincidunt, nisi diam lacinia arcu, nec lacinia ex ex at magna. Cras tempus iaculis ligula."
+                android:textColor="?attr/textcolor"
+                android:textSize="15sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@id/tv_detail_deskripsi_materi"
-                android:layout_marginTop="10dp"
                 android:id="@+id/rv_detail_materi"
                 android:layout_width="match_parent"
-                android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_rv_detail_materi"/>
+                android:layout_below="@id/tv_detail_deskripsi_materi"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_rv_detail_materi" />
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
