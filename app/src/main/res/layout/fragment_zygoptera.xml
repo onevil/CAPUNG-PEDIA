@@ -10,16 +10,72 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_zygoptera"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:spanCount="2"
-            android:layout_marginHorizontal="10dp"
-            tools:listitem="@layout/item_rv_capung">
+            android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/toolbar_zygoptera"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                app:cardBackgroundColor="?attr/cardbackground"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp">
+
+
+                    <EditText
+                        android:id="@+id/edt_zygoptera"
+                        android:layout_width="280dp"
+                        android:layout_height="25dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="#ffffff"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:hint="Cari capung..."
+                        android:textColor="?attr/textcolor"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_search_anisoptera"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btn_search_zygoptera"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/ic_search"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_zygoptera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar_zygoptera"
+                android:layout_marginTop="10dp"
+                app:spanCount="2"
+                android:layout_marginHorizontal="10dp"
+                tools:listitem="@layout/item_rv_capung">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+
+
     </ScrollView>
 
 </RelativeLayout>

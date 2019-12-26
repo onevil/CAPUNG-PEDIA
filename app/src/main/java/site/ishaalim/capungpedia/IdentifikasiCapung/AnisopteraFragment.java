@@ -9,10 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,9 +42,11 @@ public class AnisopteraFragment extends Fragment {
     FirebaseFirestore firestore;
 
     RecyclerView anisopteraRV;
+    EditText edtSearch;
 
     CapungAdapter capungAdapter;
     ArrayList<Capung> capungArrayList;
+    ArrayList<Capung> searchArrayList;
 
 
     public AnisopteraFragment() {
@@ -60,14 +66,85 @@ public class AnisopteraFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         capungArrayList = new ArrayList<>();
+        searchArrayList = new ArrayList<>();
+
 
         setUpFirestore();
         initUI();
         setUpcapungRV();
         loadcapungRV();
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query = s.toString().toLowerCase().trim();
+                if (query != null) {
+                    searchCapung(query);
+                } else {
+                    loadcapungRV();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
-    private void loadcapungRV() {
+
+    public void searchCapung(final String query) {
+        searchArrayList.clear();
+        CollectionReference firestoreRef = firestore.collection("capung");
+        Query querySearchCapung = firestoreRef.orderBy("namaSpesies", Query.Direction.ASCENDING);
+        querySearchCapung.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        searchArrayList.clear();
+                        for (DocumentSnapshot querySnapshotSearchMateri : task.getResult()) {
+                            if (task.getResult() != null) {
+                                if (task.getResult() != null) {
+                                    String subOrdo = querySnapshotSearchMateri.getString("subOrdo");
+                                    String namaSpesies = querySnapshotSearchMateri.getString("namaSpesies").toLowerCase();
+                                    String querySearch = query.toLowerCase();
+
+                                    if (subOrdo.contains("Anisoptera")) {
+                                        if (namaSpesies.contains(querySearch)) {
+                                            Capung capung = querySnapshotSearchMateri.toObject(Capung.class);
+                                            searchArrayList.add(capung);
+                                        }
+
+                                    }
+                                }
+
+                            } else {
+                                Log.d(TAG, "No such Document");
+                            }
+                        }
+
+                        capungAdapter = new CapungAdapter(getContext(), searchArrayList);
+                        anisopteraRV.setAdapter(capungAdapter);
+                        anisopteraRV.smoothScrollToPosition(capungAdapter.getItemCount());
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    public void loadcapungRV() {
         capungArrayList.clear();
         CollectionReference firestoreRef = firestore.collection("capung");
         Query queryListCapung = firestoreRef.orderBy("namaSpesies", Query.Direction.ASCENDING);
@@ -75,8 +152,8 @@ public class AnisopteraFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (DocumentSnapshot querySnapshotListMateri : task.getResult()){
-                            if(task.getResult() != null){
+                        for (DocumentSnapshot querySnapshotListMateri : task.getResult()) {
+                            if (task.getResult() != null) {
                                 if (task.getResult() != null) {
                                     String subOrdo = querySnapshotListMateri.getString("subOrdo");
 
@@ -86,7 +163,7 @@ public class AnisopteraFragment extends Fragment {
                                     }
                                 }
 
-                            }else{
+                            } else {
                                 Log.d(TAG, "No such Document");
                             }
                         }
@@ -107,12 +184,13 @@ public class AnisopteraFragment extends Fragment {
 
     private void setUpcapungRV() {
         anisopteraRV.setHasFixedSize(true);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         anisopteraRV.setLayoutManager(layoutManager);
     }
 
     private void initUI() {
         anisopteraRV = getView().findViewById(R.id.rv_anisoptera);
+        edtSearch = getView().findViewById(R.id.edt_anisoptera);
     }
 
     private void setUpFirestore() {
