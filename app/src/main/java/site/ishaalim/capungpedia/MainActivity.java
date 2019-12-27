@@ -11,16 +11,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.Switch;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
-import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
+import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -75,9 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.beranda);
                 break;
-            case R.id.pendahuluan:
+            case R.id.mengenal_capung:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentPendahuluan()).commit();
+                        new FragmentMengenalCapung()).commit();
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.pendahuluan);
                 break;

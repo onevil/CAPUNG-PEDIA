@@ -80,7 +80,6 @@ public class DetailMateriActivity extends AppCompatActivity {
 
     private void setupTabLayout() {
         for (int i = 1; i<=materiJumlahHalaman; i++ ){
-
             tabLayout.addTab(tabLayout.newTab().setText("Hal " + i));
         }
 
