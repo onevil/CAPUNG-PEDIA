@@ -1,4 +1,4 @@
-package site.ishaalim.capungpedia.panduanPengamatan;
+package site.ishaalim.capungpedia.panduanIdentifikasi;
 
 
 import android.os.Bundle;
@@ -25,21 +25,21 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 import site.ishaalim.capungpedia.R;
-import site.ishaalim.capungpedia.panduanPengamatan.adapter.PanduanPengamatanAdapter;
-import site.ishaalim.capungpedia.panduanPengamatan.model.isiHalamanPanduanPengamatan;
+import site.ishaalim.capungpedia.panduanIdentifikasi.adapter.PanduanIdentifikasiAdapter;
+import site.ishaalim.capungpedia.panduanIdentifikasi.model.isiHalamanPanduanIdentifikasi;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChildFragmentPanduanPengamatan extends Fragment {
+public class ChildFragmentPanduanIdentifikasi extends Fragment {
 
     FirebaseFirestore firestore;
-    private RecyclerView rvPanduanPengamatan;
+    private RecyclerView rvPanduanIdentifikasi;
 
-    private ArrayList<isiHalamanPanduanPengamatan> isiHalamanPanduanPengamatanArrayList;
-    PanduanPengamatanAdapter panduanPengamatanAdapter;
+    private ArrayList<isiHalamanPanduanIdentifikasi> isiHalamanPanduanIdentifikasiArrayList;
+    PanduanIdentifikasiAdapter panduanIdentifikasiAdapter;
 
 
     RequestOptions options;
@@ -47,7 +47,7 @@ public class ChildFragmentPanduanPengamatan extends Fragment {
     int halaman;
     String hal;
 
-    public ChildFragmentPanduanPengamatan() {
+    public ChildFragmentPanduanIdentifikasi() {
         // Required empty public constructor
     }
 
@@ -55,7 +55,7 @@ public class ChildFragmentPanduanPengamatan extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_child_panduan_pengamatan, container, false);
+        return inflater.inflate(R.layout.fragment_child_panduan_identifikasi, container, false);
     }
 
     @Override
@@ -69,10 +69,10 @@ public class ChildFragmentPanduanPengamatan extends Fragment {
         }
 
         options = new RequestOptions().centerCrop();
-        isiHalamanPanduanPengamatanArrayList = new ArrayList<>();
+        isiHalamanPanduanIdentifikasiArrayList = new ArrayList<>();
 
         setUpFirestore();
-        setUpPanduanPengamatanRV();
+        setUpPanduanIdentifikasiRV();
         getIsiHalaman(hal);
 
     }
@@ -82,9 +82,9 @@ public class ChildFragmentPanduanPengamatan extends Fragment {
     }
 
     public void getIsiHalaman(final String halaman) {
-        isiHalamanPanduanPengamatanArrayList.clear();
-        CollectionReference firestoreRef = firestore.collection("panduanPengamatan")
-                .document("5x2ebsOYqmqZJQQYggVX")
+        isiHalamanPanduanIdentifikasiArrayList.clear();
+        CollectionReference firestoreRef = firestore.collection("panduanIdentifikasi")
+                .document("dDL5eGmceaUk0NRRgxUd")
                 .collection("halaman")
                 .document(halaman)
                 .collection("isiHalaman");
@@ -96,18 +96,18 @@ public class ChildFragmentPanduanPengamatan extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (DocumentSnapshot queryIsiHalamanSnapshot : task.getResult()){
                     if (task.getResult() != null){
-                        isiHalamanPanduanPengamatan isiHalamanPanduanPengamatan = queryIsiHalamanSnapshot.toObject(isiHalamanPanduanPengamatan.class);
+                        isiHalamanPanduanIdentifikasi isiHalamanPanduanIdentifikasi = queryIsiHalamanSnapshot.toObject(isiHalamanPanduanIdentifikasi.class);
 
-                        isiHalamanPanduanPengamatanArrayList.add(isiHalamanPanduanPengamatan);
+                        isiHalamanPanduanIdentifikasiArrayList.add(isiHalamanPanduanIdentifikasi);
                         Log.d(TAG,"Halaman sukses :" +halaman);
                     }else {
                         Log.d(TAG,"No such Document");
                     }
                 }
-                panduanPengamatanAdapter = new PanduanPengamatanAdapter(getContext(), isiHalamanPanduanPengamatanArrayList);
-                rvPanduanPengamatan.setAdapter(panduanPengamatanAdapter);
-                rvPanduanPengamatan.smoothScrollToPosition(rvPanduanPengamatan.getAdapter().getItemCount());
-                Log.d(TAG,"Array:" + isiHalamanPanduanPengamatanArrayList);
+                panduanIdentifikasiAdapter = new PanduanIdentifikasiAdapter(getContext(), isiHalamanPanduanIdentifikasiArrayList);
+                rvPanduanIdentifikasi.setAdapter(panduanIdentifikasiAdapter);
+                rvPanduanIdentifikasi.smoothScrollToPosition(rvPanduanIdentifikasi.getAdapter().getItemCount());
+                Log.d(TAG,"Array:" + isiHalamanPanduanIdentifikasiArrayList);
             }
         });
     }
@@ -117,11 +117,11 @@ public class ChildFragmentPanduanPengamatan extends Fragment {
 
 
     }
-    private void setUpPanduanPengamatanRV() {
+    private void setUpPanduanIdentifikasiRV() {
 
-        rvPanduanPengamatan = getView().findViewById(R.id.rv_panduan_pengamatan);
-        rvPanduanPengamatan.setHasFixedSize(true);
+        rvPanduanIdentifikasi = getView().findViewById(R.id.rv_panduan_identifikasi);
+        rvPanduanIdentifikasi.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        rvPanduanPengamatan.setLayoutManager(layoutManager);
+        rvPanduanIdentifikasi.setLayoutManager(layoutManager);
     }
 }

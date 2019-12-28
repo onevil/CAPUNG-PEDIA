@@ -1,4 +1,4 @@
-package site.ishaalim.capungpedia.panduanPengamatan;
+package site.ishaalim.capungpedia.panduanIdentifikasi;
 
 
 import android.os.Bundle;
@@ -27,22 +27,22 @@ import java.util.ArrayList;
 
 import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.R;
-import site.ishaalim.capungpedia.panduanPengamatan.adapter.PanduanPengamatanViewPagerAdapter;
-import site.ishaalim.capungpedia.panduanPengamatan.model.panduanPengamatan;
+import site.ishaalim.capungpedia.panduanIdentifikasi.adapter.PanduanIdentifikasiViewPagerAdapter;
+import site.ishaalim.capungpedia.panduanIdentifikasi.model.panduanIdentifikasi;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class FragmentPanduanPengamatan extends Fragment {
+public class FragmentPanduanIdentifikasi extends Fragment {
 
     FirebaseFirestore firestore;
 
-    ArrayList<panduanPengamatan> panduanPengamatanArrayList;
+    ArrayList<panduanIdentifikasi> panduanIdentifikasiArrayList;
 
     private TabLayout tabLayout;
-    FrameLayout flPanduanPengamatan;
+    FrameLayout flPanduanIdentifikasi;
     private ViewPager viewPager;
-    private PanduanPengamatanViewPagerAdapter mengenalCapungViewPagerAdapter;
+    private PanduanIdentifikasiViewPagerAdapter mengenalCapungViewPagerAdapter;
 
     private Toolbar toolbar;
 
@@ -51,19 +51,19 @@ public class FragmentPanduanPengamatan extends Fragment {
     int halaman;
 
 
-    public FragmentPanduanPengamatan() {
+    public FragmentPanduanIdentifikasi() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_panduan_pengamatan, container, false);
+        return inflater.inflate(R.layout.fragment_panduan_identifikasi, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        panduanPengamatanArrayList = new ArrayList<>();
+        panduanIdentifikasiArrayList = new ArrayList<>();
         setUpFirestore();
         initUI();
         setupToolbar();
@@ -92,10 +92,10 @@ public class FragmentPanduanPengamatan extends Fragment {
                 halaman = 1 + tab.getPosition();
                 bundle.putInt("halaman", halaman);
                 Log.d(TAG,"halaman :"+halaman);
-                ChildFragmentPanduanPengamatan childFragmentPanduanPengamatan = new ChildFragmentPanduanPengamatan();
-                childFragmentPanduanPengamatan.setArguments(bundle);
+                ChildFragmentPanduanIdentifikasi childFragmentPanduanIdentifikasi = new ChildFragmentPanduanIdentifikasi();
+                childFragmentPanduanIdentifikasi.setArguments(bundle);
                 tab.getPosition();
-                getFragmentManager().beginTransaction().replace(R.id.fl_panduan_pengamatan, childFragmentPanduanPengamatan, "panduanPengamatan").commit();
+                getFragmentManager().beginTransaction().replace(R.id.fl_panduan_identifikasi, childFragmentPanduanIdentifikasi, "panduanIdentifikasi").commit();
             }
 
             @Override
@@ -111,47 +111,27 @@ public class FragmentPanduanPengamatan extends Fragment {
 
     }
 
-    private void addPage(int Ids) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", Ids);
-        String id = Integer.toString(Ids);
-        Log.d(TAG,"id :"+id);
-        ChildFragmentPanduanPengamatan childFragmentMengenalCapung = new ChildFragmentPanduanPengamatan();
-        childFragmentMengenalCapung.setArguments(bundle);
-        mengenalCapungViewPagerAdapter.addPage(childFragmentMengenalCapung);
-        mengenalCapungViewPagerAdapter.notifyDataSetChanged();
-
-
-        int count =  mengenalCapungViewPagerAdapter.getCount();
-        String counts = Integer.toString(count);
-        Toast.makeText(getContext(),counts,Toast.LENGTH_LONG);
-        Log.d(TAG,"count :"+counts);
-
-
-        selectedTabPosition = viewPager.getCurrentItem();
-
-    }
 
     private void getTabSize() {
-        panduanPengamatanArrayList.clear();
+        panduanIdentifikasiArrayList.clear();
 
-        CollectionReference firestoreref = firestore.collection("panduanPengamatan")
-                .document("5x2ebsOYqmqZJQQYggVX")
+        CollectionReference firestoreref = firestore.collection("panduanIdentifikasi")
+                .document("dDL5eGmceaUk0NRRgxUd")
                 .collection("halaman");
         firestoreref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (DocumentSnapshot documentSnapshot : task.getResult()){
                     if(task.getResult() != null){
-                        panduanPengamatan panduanPengamatan = documentSnapshot.toObject(panduanPengamatan.class);
-                        panduanPengamatanArrayList.add(panduanPengamatan);
+                        panduanIdentifikasi panduanIdentifikasi = documentSnapshot.toObject(panduanIdentifikasi.class);
+                        panduanIdentifikasiArrayList.add(panduanIdentifikasi);
                         Log.d(TAG,"size :"+tabSize);
 
                     }else {
                         Log.d(TAG,"No such Document");
                     }
                 }
-                tabSize = panduanPengamatanArrayList.size();
+                tabSize = panduanIdentifikasiArrayList.size();
                 setupTabLayout(tabSize);
             }
         });
@@ -166,9 +146,9 @@ public class FragmentPanduanPengamatan extends Fragment {
     }
 
     public void initUI() {
-        tabLayout = getView().findViewById(R.id.tl_panduan_pengamatan);
-        flPanduanPengamatan = getView().findViewById(R.id.fl_panduan_pengamatan);
-        toolbar = getView().findViewById(R.id.toolbar_panduan_pengamatan);
+        tabLayout = getView().findViewById(R.id.tl_panduan_identifikasi);
+        flPanduanIdentifikasi = getView().findViewById(R.id.fl_panduan_identifikasi);
+        toolbar = getView().findViewById(R.id.toolbar_panduan_identifikasi);
 
 
     }

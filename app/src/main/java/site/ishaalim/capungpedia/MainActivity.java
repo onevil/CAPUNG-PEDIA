@@ -18,6 +18,7 @@ import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.MengenalCapung.ChildFragmentMengenalCapung;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
+import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
 import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
 
 import com.google.android.material.navigation.NavigationView;
@@ -79,10 +80,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.pendahuluan);
                 break;
-
             case R.id.panduan_pengamatan:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentPanduanPengamatan()).commit();
+                uncheckNavItem();
+                break;
+            case R.id.panduan_Identifikasi:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FragmentPanduanIdentifikasi()).commit();
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.pendahuluan);
                 break;

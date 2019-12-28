@@ -18,6 +18,8 @@
             android:text="Header materi"
             android:textColor="?attr/textcolor"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_iv_header_panduan_pengamatan" />
 
