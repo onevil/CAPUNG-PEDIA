@@ -56,13 +56,8 @@ public class IdentifikasiCapungFragment extends Fragment {
 
 
         initUI();
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_drawer));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).openDrawer();
-            }
-        });
+        setupToolbar();
+
 
         setupTabLayout();
         setHasOptionsMenu(true);
@@ -102,104 +97,16 @@ public class IdentifikasiCapungFragment extends Fragment {
         });
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.menu_toolbar_idcapung, menu);
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//        SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
-//        searchView.setMaxWidth(Integer.MAX_VALUE);
-//
-//        if (searchItem != null) {
-//            searchView = (android.widget.SearchView) searchItem.getActionView();
-//        }
-//        if (searchView != null) {
-//            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-//            Toast.makeText(getActivity(), "test", Toast.LENGTH_LONG).show();
-//            searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-//                @Override
-//                public boolean onQueryTextSubmit(String Query) {
-//                    String query = Query;
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    Toast.makeText(getContext(), query, Toast.LENGTH_LONG).show();
-//
-//                    if (query != null) {
-//                        AnisopteraFragment anisopteraFragment = (AnisopteraFragment) fragmentManager.findFragmentByTag("anisoptera");
-//                        anisopteraFragment.searchCapung(query);
-//                    } else {
-//                        AnisopteraFragment anisopteraFragment = (AnisopteraFragment) fragmentManager.findFragmentByTag("anisoptera");
-//                        anisopteraFragment.loadcapungRV();
-//                        //        ZygopteraFragment zygopteraFragment = (ZygopteraFragment)fragmentManager.findFragmentByTag("zygoptera");
-//                    }
-//                    return false;
-//                }
-//
-//                @Override
-//                public boolean onQueryTextChange(String newText) {
-//                    String query = newText;
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    Toast.makeText(getContext(), query, Toast.LENGTH_LONG).show();
-//
-//                    if (query != null) {
-//                        AnisopteraFragment anisopteraFragment = (AnisopteraFragment) fragmentManager.findFragmentByTag("anisoptera");
-//                        anisopteraFragment.searchCapung(query);
-//                    }
-//
-//                    return false;
-//                }
-//            });
-//        }
-//    }
+    private void setupToolbar() {
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_drawer));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).openDrawer();
+            }
+        });
+    }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.action_search:
-//                // Not implemented here
-//                return true;
-//            default:
-//                break;
-//        }
-//        searchView.setMaxWidth(Integer.MAX_VALUE);
-//        searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String Query) {
-//                String query = Query;
-//                FragmentManager fragmentManager = getFragmentManager();
-//                Toast.makeText(getContext(), query, Toast.LENGTH_LONG).show();
-//
-//                if (query != null) {
-//                    AnisopteraFragment anisopteraFragment = (AnisopteraFragment) fragmentManager.findFragmentByTag("anisoptera");
-//                    anisopteraFragment.searchCapung(query);
-//                } else {
-//                    AnisopteraFragment anisopteraFragment = (AnisopteraFragment) fragmentManager.findFragmentByTag("anisoptera");
-//                    anisopteraFragment.loadcapungRV();
-//                    //        ZygopteraFragment zygopteraFragment = (ZygopteraFragment)fragmentManager.findFragmentByTag("zygoptera");
-//                }
-//
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                String query = newText;
-//                FragmentManager fragmentManager = getFragmentManager();
-//                Toast.makeText(getContext(), query, Toast.LENGTH_LONG).show();
-//
-//                if (query != null) {
-//                    AnisopteraFragment anisopteraFragment = (AnisopteraFragment) fragmentManager.findFragmentByTag("anisoptera");
-//                    anisopteraFragment.searchCapung(query);
-//                } else {
-//                    AnisopteraFragment anisopteraFragment = (AnisopteraFragment) fragmentManager.findFragmentByTag("anisoptera");
-//                    anisopteraFragment.loadcapungRV();
-//                    //        ZygopteraFragment zygopteraFragment = (ZygopteraFragment)fragmentManager.findFragmentByTag("zygoptera");
-//                }
-//                return true;
-//            }
-//        });
-//        return super.onOptionsItemSelected(item);
-//    }
 
     private void setupTabLayout() {
     }

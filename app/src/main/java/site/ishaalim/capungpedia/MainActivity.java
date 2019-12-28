@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
+import site.ishaalim.capungpedia.MengenalCapung.ChildFragmentMengenalCapung;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 
 import com.google.android.material.navigation.NavigationView;

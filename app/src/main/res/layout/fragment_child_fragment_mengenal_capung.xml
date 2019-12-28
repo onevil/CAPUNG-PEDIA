@@ -5,10 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".MengenalCapung.ChildFragmentMengenalCapung">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mengenal_capung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_rv_mengenal_capung"/>
+    </ScrollView>
+
 
 </LinearLayout>

@@ -41,12 +41,19 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_mengenal_capung"
+<!--        <androidx.viewpager.widget.ViewPager-->
+<!--            android:id="@+id/vp_mengenal_capung"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--        </androidx.viewpager.widget.ViewPager>-->
+
+        <FrameLayout
+            android:id="@+id/fl_mengenal_capung"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </androidx.viewpager.widget.ViewPager>
+        </FrameLayout>
     </androidx.core.widget.NestedScrollView>
 
 
