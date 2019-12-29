@@ -20,6 +20,7 @@ import site.ishaalim.capungpedia.MengenalCapung.ChildFragmentMengenalCapung;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
 import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
+import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -97,6 +98,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new IdentifikasiCapungFragment()).commit();
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.identifikasi_capung);
+                break;
+
+            case R.id.petunjuk_penggunaan:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FragmentPetunjukPenggunaan()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.petunjuk_penggunaan);
                 break;
 
             case R.id.glosarium:
