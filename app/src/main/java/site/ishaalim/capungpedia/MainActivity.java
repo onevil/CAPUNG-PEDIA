@@ -18,6 +18,7 @@ import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.MengenalCapung.ChildFragmentMengenalCapung;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
+import site.ishaalim.capungpedia.mengenalDesa.FragmentMengenalDesa;
 import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
 import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
 import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
@@ -80,6 +81,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new FragmentMengenalCapung()).commit();
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.pendahuluan);
+                break;
+            case R.id.mengenal_kawasan_desa:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FragmentMengenalDesa()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.mengenal_kawasan_desa);
                 break;
             case R.id.panduan_pengamatan:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
