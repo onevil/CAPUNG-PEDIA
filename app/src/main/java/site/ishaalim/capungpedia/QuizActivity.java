@@ -1,10 +1,12 @@
 package site.ishaalim.capungpedia;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -231,9 +233,19 @@ public class QuizActivity extends AppCompatActivity {
 
         nilaiDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         nilaiDialog.setCanceledOnTouchOutside(false);
+        nilaiDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                }
+                return true;
+            }
+        });
         nilaiDialog.show();
 
     }
+
 
 
     private void getExtra() {
