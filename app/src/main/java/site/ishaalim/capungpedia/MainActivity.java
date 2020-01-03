@@ -13,7 +13,9 @@ import android.provider.Settings;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
+import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
+import site.ishaalim.capungpedia.Evaluasi.IntroEvaluasiFragment;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.MengenalCapung.ChildFragmentMengenalCapung;
@@ -105,6 +107,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new IdentifikasiCapungFragment()).commit();
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.identifikasi_capung);
+                break;
+
+            case R.id.evaluasi:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new IntroEvaluasiFragment()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.evaluasi);
                 break;
 
             case R.id.petunjuk_penggunaan:

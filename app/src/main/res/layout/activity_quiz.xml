@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor"
+    tools:context=".QuizActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/cardbackground"
+        android:elevation="2dp">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_quiz">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_indicator_quiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Soal 10 dari 10"
+                android:textAlignment="center"
+                android:textColor="?attr/textcolor"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_soal_quiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_indicator_quiz"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAlignment="center"
+                android:textColor="?attr/textcolor"
+                android:textSize="20dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_answer1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_soal_quiz"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:background="?attr/cardbackground"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/btn_answer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardbackground"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ANSWER 1" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_answer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_answer1"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="?attr/cardbackground"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/btn_answer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardbackground"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ANSWER 2" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_answer3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_answer2"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="?attr/cardbackground"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/btn_answer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardbackground"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ANSWER 2" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_answer4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_answer3"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:background="?attr/cardbackground"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/btn_answer4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardbackground"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ANSWER 4" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_answer5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_answer4"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="?attr/cardbackground"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/btn_answer5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/cardbackground"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ANSWER 5" />
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

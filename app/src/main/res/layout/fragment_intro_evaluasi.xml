@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Evaluasi.IntroEvaluasiFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_intro_evaluasi"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/cardbackground"
+        android:elevation="2dp">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_intro_evaluasi"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="25dp"
+        android:padding="15dp"
+        app:cardCornerRadius="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp">
+
+            <TextView
+                android:id="@+id/tv_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Intro"
+                android:textColor="?attr/textcolor"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_isi_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_intro"
+                android:layout_marginHorizontal="15dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna"
+                android:textColor="?attr/textcolor"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tv_penjelasan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_isi_intro"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Penjelasan"
+                android:textColor="?attr/textcolor"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_isi_penjelasan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_penjelasan"
+                android:layout_marginHorizontal="15dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna"
+                android:textColor="?attr/textcolor"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tv_cara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_isi_penjelasan"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Penjelasan"
+                android:textColor="?attr/textcolor"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_isi_cara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_cara"
+                android:layout_marginHorizontal="15dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna"
+                android:textColor="?attr/textcolor"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cv_intro"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="10dp">
+
+        <Button
+            android:id="@+id/btn_lanjutkan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/buttoncolor"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Lanjutkan"
+            android:textColor="#FFFFFF" />
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
