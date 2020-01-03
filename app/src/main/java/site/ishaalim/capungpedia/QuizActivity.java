@@ -22,6 +22,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import site.ishaalim.capungpedia.Evaluasi.model.isiSoal;
 
@@ -251,6 +252,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
         JawabanArrayList = isiSoalArrayList.get(posisi).getJawaban();
+        Collections.shuffle(JawabanArrayList);
         if (JawabanArrayList != null) {
             btn1 = JawabanArrayList.get(0);
             btn_answer1.setText(btn1);
@@ -274,6 +276,7 @@ public class QuizActivity extends AppCompatActivity {
 
     void GetArray(ArrayList<isiSoal> tempisiSoalArrayList) {
         isiSoalArrayList = tempisiSoalArrayList;
+        Collections.shuffle(isiSoalArrayList);
         Log.d(TAG, "arraylist :" + isiSoalArrayList);
         setSoal(posisisoal);
 
