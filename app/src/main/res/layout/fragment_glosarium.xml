@@ -52,7 +52,7 @@
                         android:id="@+id/edt_glosarium"
                         android:layout_width="250dp"
                         android:layout_height="25dp"
-                        android:background="#ffffff"
+                        android:background="?attr/cardbackground"
                         android:hint="Cari kata kunci..."
                         android:textColor="?attr/textcolor"
                         android:fontFamily="@font/montserrat_semibold"

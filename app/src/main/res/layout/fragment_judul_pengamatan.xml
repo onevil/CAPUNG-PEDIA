@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor"
+    android:orientation="vertical"
+    tools:context=".ayoPengamatan.JudulPengamatanFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_judul_pengamatan"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/cardbackground"
+        android:elevation="2dp"
+        android:theme="@style/ToolbarTheme"
+        app:title="Ayo Pengamatan!">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="10dp">
+
+        <EditText
+            android:id="@+id/edt_judul_pengamatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="?attr/cardbackground"
+            android:fontFamily="@font/montserrat_semibold"
+            android:hint="Masukkan judul pengamatan"
+            android:textSize="14sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="10dp">
+
+        <EditText
+            android:id="@+id/edt_lokasi_pengamatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="?attr/cardbackground"
+            android:fontFamily="@font/montserrat_semibold"
+            android:hint="Lokasi pengamatan"
+            android:textSize="14sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="10dp">
+
+        <EditText
+            android:id="@+id/edt_tanggal_pengamatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="?attr/cardbackground"
+            android:fontFamily="@font/montserrat_semibold"
+            android:hint="Tanggal pengamatan"
+            android:textSize="14sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="10dp">
+
+        <Button
+            android:id="@+id/btn_spesies_keterangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Tambah Spesies dan Keterangan"
+            android:background="?attr/buttoncolor"
+            android:textColor="#ffffff"
+             />
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
