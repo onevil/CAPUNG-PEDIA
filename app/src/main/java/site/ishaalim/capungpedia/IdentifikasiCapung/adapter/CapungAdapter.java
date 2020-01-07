@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.IdentifikasiCapung.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
+import maes.tech.intentanim.CustomIntent;
+import site.ishaalim.capungpedia.DetailCapungActivity;
 import site.ishaalim.capungpedia.Glosarium.viewholder.GlosariumViewHolder;
 import site.ishaalim.capungpedia.IdentifikasiCapung.model.Capung;
 import site.ishaalim.capungpedia.IdentifikasiCapung.viewholder.CapungViewHolder;
@@ -47,6 +50,18 @@ public class CapungAdapter extends RecyclerView.Adapter<CapungViewHolder> {
 
         Glide.with(holder.itemView).load(capungArrayList.get(position).getImageURL())
                 .apply(options).into(holder.ivCapung);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailCapungActivity.class);
+                context.startActivity(intent);
+                CustomIntent.customType(context, "left-to-right");
+
+            }
+        });
+
+
 
     }
 
