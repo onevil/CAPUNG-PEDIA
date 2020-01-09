@@ -31,8 +31,8 @@ import site.ishaalim.capungpedia.Evaluasi.model.isiSoal;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class QuizActivity extends AppCompatActivity {
-    Button btn_answer1, btn_answer2, btn_answer3, btn_answer4, btn_answer5, btnSelesai;
-    TextView tv_indicator, tv_soal, tvNilaiAkhir, tvNilai;
+    private Button btn_answer1, btn_answer2, btn_answer3, btn_answer4, btn_answer5, btnSelesai;
+    private TextView tv_indicator, tv_soal, tvNilaiAkhir, tvNilai;
     Toolbar tb_quiz;
 
     Dialog nilaiDialog;

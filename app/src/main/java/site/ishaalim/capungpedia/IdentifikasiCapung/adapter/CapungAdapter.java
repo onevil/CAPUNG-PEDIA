@@ -44,7 +44,7 @@ public class CapungAdapter extends RecyclerView.Adapter<CapungViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CapungViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CapungViewHolder holder, final int position) {
         holder.tvNamaSpesies.setText(capungArrayList.get(position).getNamaSpesies());
         holder.tvnamaFamili.setText(capungArrayList.get(position).getFamili());
 
@@ -55,6 +55,28 @@ public class CapungAdapter extends RecyclerView.Adapter<CapungViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailCapungActivity.class);
+                intent.putExtra("namaSpesies", capungArrayList.get(position).getNamaSpesies());
+                intent.putExtra("familli", capungArrayList.get(position).getFamili());
+                intent.putExtra("fillum", capungArrayList.get(position).getFillum());
+                intent.putExtra("kingdom", capungArrayList.get(position).getKingdom());
+                intent.putExtra("kelas", capungArrayList.get(position).getKelas());
+                intent.putExtra("ordo", capungArrayList.get(position).getOrdo());
+                intent.putExtra("deskripsi", capungArrayList.get(position).getDeskripsi());
+                intent.putExtra("image1", capungArrayList.get(position).getImageURL());
+                intent.putExtra("image2", capungArrayList.get(position).getImageURL2());
+                intent.putExtra("image3", capungArrayList.get(position).getImageURL3());
+                intent.putExtra("kepalaJantan", capungArrayList.get(position).getKepala_jantan());
+                intent.putExtra("kepalaBetina", capungArrayList.get(position).getKepala_betina());
+                intent.putExtra("badanJantan", capungArrayList.get(position).getBadan_jantan());
+                intent.putExtra("badanBetina", capungArrayList.get(position).getBadan_betina());
+                intent.putExtra("perutJantan", capungArrayList.get(position).getPerut_jantan());
+                intent.putExtra("perutBetina", capungArrayList.get(position).getPerut_betina());
+                intent.putExtra("kakiJantan", capungArrayList.get(position).getKaki_jantan());
+                intent.putExtra("kakiBetina", capungArrayList.get(position).getKaki_betina());
+                intent.putExtra("sayapJantan", capungArrayList.get(position).getSayap_jantan());
+                intent.putExtra("sayapBetina", capungArrayList.get(position).getSayap_betina());
+                intent.putExtra("embelanJantan", capungArrayList.get(position).getEmbelan_jantan());
+                intent.putExtra("embelanBetina", capungArrayList.get(position).getEmbelan_betina());
                 context.startActivity(intent);
                 CustomIntent.customType(context, "left-to-right");
 
