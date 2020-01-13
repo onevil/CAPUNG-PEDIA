@@ -51,7 +51,6 @@ public class PetunjukPenggunaanAdapter extends RecyclerView.Adapter<PetunjukPeng
 
         holder.tvHeaderPetunjukPenggunaan.setText(isiHalamanPetunjukPenggunaanArrayList.get(position).getHeader());
         String isi = isiHalamanPetunjukPenggunaanArrayList.get(position).getIsi();
-        isi.replace("\n","\n");
         holder.tvIsiPetunjukPenggunaan.setText(isi);
 
 

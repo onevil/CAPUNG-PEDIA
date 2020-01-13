@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -14,12 +15,21 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import maes.tech.intentanim.CustomIntent;
+import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
 import site.ishaalim.capungpedia.DetailMateriActivity;
+import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.Materi.model.listMateri;
 import site.ishaalim.capungpedia.Materi.viewholder.ListMateriViewHolder;
+import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
+import site.ishaalim.capungpedia.mengenalDesa.FragmentMengenalDesa;
+import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
+import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
 
 public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder> {
 
@@ -56,17 +66,38 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
                 .apply(options)
                 .into(holder.ivMateri);
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailMateriActivity.class);
-                intent.putExtra("idMateri", listMateriArrayList.get(position).getId());
-                intent.putExtra("judulMateri", listMateriArrayList.get(position).getJudul());
-                intent.putExtra("deskripsiMateri", listMateriArrayList.get(position).getDeskripsi());
-                intent.putExtra("imageURL", listMateriArrayList.get(position).getImageURL());
-                intent.putExtra("jumlahHalaman", listMateriArrayList.get(position).getJumlahHalaman());
-                context.startActivity(intent);
-                CustomIntent.customType(context, "left-to-right");
+                FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                switch (position){
+                    case 0:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                                new FragmentMengenalCapung()).commit();
+                        break;
+                    case 1:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                                new FragmentMengenalDesa()).commit();
+                        break;
+                    case 2:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                                new FragmentPanduanPengamatan()).commit();
+                        break;
+                    case 3:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                                new FragmentPanduanIdentifikasi()).commit();
+                        break;
+                    case 4:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                                new IdentifikasiCapungFragment()).commit();
+                        break;
+
+                    case 5:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                                new AyoPengamatanFragment()).commit();
+                        break;
+                }
             }
         });
 

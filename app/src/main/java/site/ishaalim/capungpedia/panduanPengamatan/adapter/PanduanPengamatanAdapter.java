@@ -51,7 +51,6 @@ public class PanduanPengamatanAdapter extends RecyclerView.Adapter<PanduanPengam
 
         holder.tvHeaderPanduanPengamatan.setText(isiHalamanPanduanPengamatanArrayList.get(position).getHeader());
         String isi = isiHalamanPanduanPengamatanArrayList.get(position).getIsi();
-        isi.replace("\n","\n");
         holder.tvIsiPanduanPengamatan.setText(isi);
 
 

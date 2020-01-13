@@ -51,7 +51,6 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
 
         holder.tvHeaderMengenalDesa.setText(isiHalamanMengenalDesaArrayList.get(position).getHeader());
         String isi = isiHalamanMengenalDesaArrayList.get(position).getIsi();
-        isi.replace("\n","\n");
         holder.tvIsiMengenalDesa.setText(isi);
 
 
