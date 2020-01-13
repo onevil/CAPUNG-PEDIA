@@ -2,6 +2,7 @@ package site.ishaalim.capungpedia;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class DetailCapungActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar_detail_capung);
         setSupportActionBar(toolbar);
+        setUpToolbar();
 
 
         initUI();
@@ -41,6 +43,16 @@ public class DetailCapungActivity extends AppCompatActivity {
         Log.d(TAG,"Image URL3 : " + image3);
         loadContent();
 
+    }
+
+    private void setUpToolbar() {
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
