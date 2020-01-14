@@ -76,7 +76,7 @@
               <com.smarteist.autoimageslider.SliderView
                   android:id="@+id/imageSlider_Header"
                   android:layout_width="match_parent"
-                  android:layout_height="300dp"
+                  android:layout_height="600dp"
                   app:sliderAnimationDuration="600"
                   app:sliderAutoCycleDirection="right"
                   app:sliderAutoCycleEnabled="true"
@@ -123,7 +123,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:fontFamily="@font/montserrat_regular"
-                      android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lacinia, ipsum vel malesuada tincidunt, nisi diam lacinia arcu, nec lacinia ex ex at magna. Cras tempus iaculis ligula."
+                      android:text="CAPUNG PEDIA merupakan aplikasi pintar untuk mengenal lebih dekat dengan capung, berisi materi-materi yang dikemas secara menarik dan dilengkapi dengan fitur identifikasi spesies capung, fitur evaluasi/kuis dan fitur Ayo Pengamatan!"
                       android:textColor="?attr/textcolor"
                       android:textSize="14sp" />
 

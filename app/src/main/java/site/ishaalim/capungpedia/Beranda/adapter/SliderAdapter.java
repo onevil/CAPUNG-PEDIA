@@ -41,23 +41,23 @@ public class SliderAdapter extends SliderViewAdapter<SliderViewHolder> {
 
         switch(position){
             case 0:
-                viewHolder.tvHeader.setText("Capung Endemik");
+                viewHolder.tvHeader.setText("Capung-hutan pita-tunggal (Drepanosticta gazella) capung endemik Pulau Jawa");
                 Glide.with(viewHolder.itemView)
-                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Header_Beranda1.jpg?alt=media&token=26629a86-cf6c-445e-9e2f-3bffcda9a28f")
+                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%201.jpg?alt=media&token=e45befe3-6bd6-4ff1-a395-ee0e0c8061ad")
                         .apply(options)
                         .into(viewHolder.imageViewBackGround);
                 break;
             case 1:
-                viewHolder.tvHeader.setText("Royal River Cruiser");
+                viewHolder.tvHeader.setText("Salah satu habitat capung di kawasan Desa Wisata Jatimulyo");
                 Glide.with(viewHolder.itemView)
-                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Header_Beranda2.jpg?alt=media&token=dc663eff-fc1c-4c4b-b2f3-b99a799e4217")
+                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%202.jpg?alt=media&token=ac4c48e0-0db5-4595-b2ce-c49c82bd3031")
                         .apply(options)
                         .into(viewHolder.imageViewBackGround);
                 break;
             case 2:
-                viewHolder.tvHeader.setText("Blue-Eyed Darner");
+                viewHolder.tvHeader.setText("Capung-jarum gelap (Prodasineura autumnalis) pada posisi kopulasi");
                 Glide.with(viewHolder.itemView)
-                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Header_Beranda3.JPG?alt=media&token=2153c5ac-4035-4507-a368-983d204891d9")
+                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%203.jpg?alt=media&token=d530c794-fa98-465e-82f5-4db61cb6b685")
                         .apply(options)
                         .into(viewHolder.imageViewBackGround);
                 break;
