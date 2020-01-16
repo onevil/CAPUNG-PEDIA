@@ -2,15 +2,16 @@ package site.ishaalim.capungpedia.ayoPengamatan;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.appcompat.widget.ToolbarWidgetWrapper;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,9 +25,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,13 +37,20 @@ import java.util.Random;
 
 import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.ayoPengamatan.model.Pengamatan;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class JudulPengamatanFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     private Toolbar toolbar;
-    Button btnTambahKeterangan;
-    EditText edtJudulPengamatan, edtLokasi, edtTanggal;
+    private Button btnTambahKeterangan;
+    private EditText edtJudulPengamatan, edtLokasi, edtTanggal;
+
+    ArrayList<Pengamatan> pengamatanArrayList;
+
+
 
     String Characters = "ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
     String docID = "";
@@ -55,19 +65,19 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
     }
 
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_judul_pengamatan, container, false);
 
-        return inflater.inflate(R.layout.fragment_judul_pengamatan, container, false);
-    }
+        pengamatanArrayList = new ArrayList<>();
+        toolbar = v.findViewById(R.id.toolbar_judul_pengamatan);
+        btnTambahKeterangan = v.findViewById(R.id.btn_spesies_keterangan);
+        edtJudulPengamatan = v.findViewById(R.id.edt_judul_pengamatan);
+        edtLokasi = v.findViewById(R.id.edt_lokasi_pengamatan);
+        edtTanggal = v.findViewById(R.id.edt_tanggal_pengamatan);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         setupFirestore();
-        initUI();
         setHasOptionsMenu(true);
         setupToolbar();
 
@@ -78,7 +88,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                 DetailPengamatanFragment detailPengamatanFragment = new DetailPengamatanFragment();
 
                 getFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, detailPengamatanFragment).addToBackStack("detailPengamatanFragment").commit();
+                        .add(R.id.fragment_container, detailPengamatanFragment).commit();
             }
         });
 
@@ -92,7 +102,11 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         });
 
         GenerateID();
+
+        return v;
     }
+
+
 
     private void setupFirestore() {
         firestore = FirebaseFirestore.getInstance();
@@ -111,7 +125,22 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
             docID += chars[i];
         }
 
+    }
 
+
+
+    public void updateArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil) {
+        Pengamatan pengamatan = new Pengamatan();
+        pengamatan.setNamaPengamat(namapengamat);
+        pengamatan.setHabitat(habitat);
+        pengamatan.setCuaca(cuaca);
+        pengamatan.setAktifiktas(aktifiktas);
+        pengamatan.setDeskripsi(deskripsi);
+        pengamatan.setHasil(hasil);
+        pengamatanArrayList.add(pengamatan);
+        Log.d(TAG, "Document : " + pengamatan);
+        Log.d(TAG, "Arraylist : " + pengamatanArrayList);
+        Log.d(TAG, "Arraylist Size : " + pengamatanArrayList.size());
 
     }
 
@@ -126,6 +155,9 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                 .set(pengamatan).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                for (int i = 0; i < pengamatanArrayList.size(); i++){
+                    saveSpesies(i);
+                }
                 Toast.makeText(getContext(), "Data Berhasil Disimpan!", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -137,17 +169,34 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
     }
 
+    private void saveSpesies(int position) {
+        Map<String, Object> spesies = new HashMap<>();
+        spesies.put("namaPengamat", pengamatanArrayList.get(position).getNamaPengamat());
+        spesies.put("habitat", pengamatanArrayList.get(position).getHabitat());
+        spesies.put("cuaca", pengamatanArrayList.get(position).getCuaca());
+        spesies.put("aktifiktas", pengamatanArrayList.get(position).getAktifiktas());
+        spesies.put("deskripsi", pengamatanArrayList.get(position).getDeskripsi());
+        spesies.put("hasil", pengamatanArrayList.get(position).getHasil());
+
+        firestore.collection("ayoPengamatan").document(docID).collection("pengamatan")
+                .add(spesies).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d(TAG, "Pengamatan berhasil disimpan!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Pengamatan gagal disimpan!");
+            }
+        });
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_toolbar_ayopengamatan, menu);
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-
     }
 
     private void initUI() {
@@ -188,7 +237,6 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
             }
         });
     }
-
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

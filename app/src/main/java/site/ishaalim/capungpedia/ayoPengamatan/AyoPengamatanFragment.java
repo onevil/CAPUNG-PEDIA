@@ -55,7 +55,7 @@ public class AyoPengamatanFragment extends Fragment {
             public void onClick(View v) {
                 JudulPengamatanFragment judulPengamatanFragment = new JudulPengamatanFragment();
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, judulPengamatanFragment).addToBackStack("judulPengamatan").commit();
+                        .replace(R.id.fragment_container, judulPengamatanFragment, "judulPengamatan").commit();
             }
         });
 

@@ -21,6 +21,8 @@ import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.MengenalCapung.ChildFragmentMengenalCapung;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
+import site.ishaalim.capungpedia.ayoPengamatan.DetailPengamatanFragment;
+import site.ishaalim.capungpedia.ayoPengamatan.JudulPengamatanFragment;
 import site.ishaalim.capungpedia.mengenalDesa.FragmentMengenalDesa;
 import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
 import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
@@ -28,7 +30,7 @@ import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DetailPengamatanFragment.DetailPengamatanListener {
 
 
     private DrawerLayout drawerLayout;
@@ -36,10 +38,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ImageButton buttonNav;
 
+    private DetailPengamatanFragment detailPengamatanFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
 
         checktheme();
+
+
+        detailPengamatanFragment = new DetailPengamatanFragment();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
 
 
     private void setUpDrawer() {
@@ -169,5 +178,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent i = new Intent(getApplicationContext(), Settings.class);
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil) {
+        JudulPengamatanFragment judulPengamatanFragment = (JudulPengamatanFragment)getSupportFragmentManager().findFragmentByTag("judulPengamatan");
+        judulPengamatanFragment.updateArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil);
     }
 }
