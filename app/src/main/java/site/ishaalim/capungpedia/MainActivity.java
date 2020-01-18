@@ -13,12 +13,10 @@ import android.provider.Settings;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
-import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
 import site.ishaalim.capungpedia.Evaluasi.IntroEvaluasiFragment;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
-import site.ishaalim.capungpedia.MengenalCapung.ChildFragmentMengenalCapung;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.DetailPengamatanFragment;
@@ -183,6 +181,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil) {
         JudulPengamatanFragment judulPengamatanFragment = (JudulPengamatanFragment)getSupportFragmentManager().findFragmentByTag("judulPengamatan");
-        judulPengamatanFragment.updateArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil);
+        judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil);
     }
 }

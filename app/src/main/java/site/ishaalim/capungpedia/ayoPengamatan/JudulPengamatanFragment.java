@@ -2,7 +2,6 @@ package site.ishaalim.capungpedia.ayoPengamatan;
 
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,21 +36,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.ayoPengamatan.adapter.tambahPengamatanAdapter;
 import site.ishaalim.capungpedia.ayoPengamatan.model.Pengamatan;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class JudulPengamatanFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+public class JudulPengamatanFragment extends Fragment implements DatePickerDialog.OnDateSetListener, tambahPengamatanAdapter.OnDeletePengamatan {
 
     private Toolbar toolbar;
     private Button btnTambahKeterangan;
     private EditText edtJudulPengamatan, edtLokasi, edtTanggal;
+    private RecyclerView pengamatanRV;
 
     ArrayList<Pengamatan> pengamatanArrayList;
 
+    tambahPengamatanAdapter adapter;
 
 
     String Characters = "ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
@@ -76,6 +79,11 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         edtJudulPengamatan = v.findViewById(R.id.edt_judul_pengamatan);
         edtLokasi = v.findViewById(R.id.edt_lokasi_pengamatan);
         edtTanggal = v.findViewById(R.id.edt_tanggal_pengamatan);
+        pengamatanRV = v.findViewById(R.id.rv_tambah_pengamatan);
+
+        adapter = new tambahPengamatanAdapter(getContext(), pengamatanArrayList, this);
+
+
 
         setupFirestore();
         setHasOptionsMenu(true);
@@ -103,9 +111,24 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
         GenerateID();
 
+        setUpRecycler();
+
+        adapter.setOnItemClickListener(new tambahPengamatanAdapter.OnDeletePengamatan() {
+            @Override
+            public void onDeleteClick(int position) {
+                deleteArray(position);
+            }
+        });
+
         return v;
     }
 
+    public void setUpRecycler() {
+        pengamatanRV.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        pengamatanRV.setLayoutManager(linearLayoutManager);
+        pengamatanRV.setAdapter(adapter);
+    }
 
 
     private void setupFirestore() {
@@ -129,7 +152,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
 
 
-    public void updateArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil) {
+    public void insertArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil) {
         Pengamatan pengamatan = new Pengamatan();
         pengamatan.setNamaPengamat(namapengamat);
         pengamatan.setHabitat(habitat);
@@ -141,6 +164,18 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         Log.d(TAG, "Document : " + pengamatan);
         Log.d(TAG, "Arraylist : " + pengamatanArrayList);
         Log.d(TAG, "Arraylist Size : " + pengamatanArrayList.size());
+        adapter.notifyDataSetChanged();
+
+    }
+
+    public void deleteArray(int position){
+        Log.d(TAG, "ARRAY : " + pengamatanArrayList.size());
+        pengamatanArrayList.remove(position);
+        pengamatanRV.removeViewAt(position);
+        adapter.notifyItemRemoved(position);
+        adapter.notifyItemRangeChanged(position, pengamatanArrayList.size());
+        Log.d(TAG, "Delete Clicked! ");
+        Toast.makeText(getContext(), "Delete!" + position, Toast.LENGTH_LONG).show();
 
     }
 
@@ -247,5 +282,10 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         tanggal = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 
         edtTanggal.setText(tanggal);
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        deleteArray(position);
     }
 }
