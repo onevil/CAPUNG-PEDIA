@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 
 import site.ishaalim.capungpedia.R;
@@ -19,6 +22,7 @@ public class tambahPengamatanAdapter extends RecyclerView.Adapter<tambahPengamat
     private ArrayList<Pengamatan> pengamatanArrayList;
     public OnDeletePengamatan deletePengamatan;
     Context context;
+    RequestOptions options;
 
     public interface OnDeletePengamatan {
         void onDeleteClick(int position);
@@ -33,6 +37,7 @@ public class tambahPengamatanAdapter extends RecyclerView.Adapter<tambahPengamat
         this.pengamatanArrayList = pengamatanArrayList;
         this.context = context;
         this.deletePengamatan = deletePengamatan;
+        options = new RequestOptions().centerCrop();
     }
 
     @NonNull
@@ -49,6 +54,13 @@ public class tambahPengamatanAdapter extends RecyclerView.Adapter<tambahPengamat
     public void onBindViewHolder(@NonNull final tambahPengamatanVH holder, final int position) {
         holder.tvTambahNamaPengamat.setText(pengamatanArrayList.get(position).getNamaPengamat());
         holder.tvTambahDeskripsi.setText(pengamatanArrayList.get(position).getDeskripsi());
+//        holder.ivTambahPengamtan.setImageURI(pengamatanArrayList.get(position).getImageUri());
+        Glide.with(holder.itemView)
+                .load(pengamatanArrayList.get(position).getImageUri())
+                .apply(options)
+                .into(holder.ivTambahPengamtan);
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

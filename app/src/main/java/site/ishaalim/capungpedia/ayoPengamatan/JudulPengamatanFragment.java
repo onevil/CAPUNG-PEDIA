@@ -2,6 +2,8 @@ package site.ishaalim.capungpedia.ayoPengamatan;
 
 
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,15 +21,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -49,6 +59,10 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     private Button btnTambahKeterangan;
     private EditText edtJudulPengamatan, edtLokasi, edtTanggal;
     private RecyclerView pengamatanRV;
+
+    private StorageTask uploadTask;
+
+    private StorageReference storageReference;
 
     ArrayList<Pengamatan> pengamatanArrayList;
 
@@ -72,7 +86,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_judul_pengamatan, container, false);
-
+        storageReference = FirebaseStorage.getInstance().getReference();
         pengamatanArrayList = new ArrayList<>();
         toolbar = v.findViewById(R.id.toolbar_judul_pengamatan);
         btnTambahKeterangan = v.findViewById(R.id.btn_spesies_keterangan);
@@ -152,7 +166,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
 
 
-    public void insertArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil) {
+    public void insertArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri) {
         Pengamatan pengamatan = new Pengamatan();
         pengamatan.setNamaPengamat(namapengamat);
         pengamatan.setHabitat(habitat);
@@ -160,6 +174,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         pengamatan.setAktifiktas(aktifiktas);
         pengamatan.setDeskripsi(deskripsi);
         pengamatan.setHasil(hasil);
+        pengamatan.setImageUri(imageUri);
         pengamatanArrayList.add(pengamatan);
         Log.d(TAG, "Document : " + pengamatan);
         Log.d(TAG, "Arraylist : " + pengamatanArrayList);
@@ -170,12 +185,20 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
     public void deleteArray(int position){
         Log.d(TAG, "ARRAY : " + pengamatanArrayList.size());
-        pengamatanArrayList.remove(position);
-        pengamatanRV.removeViewAt(position);
-        adapter.notifyItemRemoved(position);
-        adapter.notifyItemRangeChanged(position, pengamatanArrayList.size());
-        Log.d(TAG, "Delete Clicked! ");
-        Toast.makeText(getContext(), "Delete!" + position, Toast.LENGTH_LONG).show();
+       if (position < pengamatanArrayList.size()){
+           pengamatanArrayList.remove(position);
+           pengamatanRV.removeViewAt(position);
+           adapter.notifyItemRemoved(position);
+           adapter.notifyItemRangeChanged(position, pengamatanArrayList.size());
+           Log.d(TAG, "Delete Clicked! ");
+           Toast.makeText(getContext(), "Delete!" + position, Toast.LENGTH_LONG).show();
+       }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContext().getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
 
     }
 
@@ -193,7 +216,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                 for (int i = 0; i < pengamatanArrayList.size(); i++){
                     saveSpesies(i);
                 }
-                Toast.makeText(getContext(), "Data Berhasil Disimpan!", Toast.LENGTH_LONG).show();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -202,29 +225,77 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
             }
         });
 
+
+
     }
 
-    private void saveSpesies(int position) {
-        Map<String, Object> spesies = new HashMap<>();
-        spesies.put("namaPengamat", pengamatanArrayList.get(position).getNamaPengamat());
-        spesies.put("habitat", pengamatanArrayList.get(position).getHabitat());
-        spesies.put("cuaca", pengamatanArrayList.get(position).getCuaca());
-        spesies.put("aktifiktas", pengamatanArrayList.get(position).getAktifiktas());
-        spesies.put("deskripsi", pengamatanArrayList.get(position).getDeskripsi());
-        spesies.put("hasil", pengamatanArrayList.get(position).getHasil());
+    private void saveSpesies(final int position) {
+        String tanggal = edtTanggal.getText().toString();
+        Uri uri = pengamatanArrayList.get(position).getImageUri();
+        final StorageReference fileStorage = storageReference.child("photo_pengamatan").child(tanggal +"."+getFileExtension(uri));
+        uploadTask = fileStorage.putFile(uri);
 
-        firestore.collection("ayoPengamatan").document(docID).collection("pengamatan")
-                .add(spesies).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        final Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Log.d(TAG, "Pengamatan berhasil disimpan!");
+            public Object then(@NonNull Task task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                return fileStorage.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()){
+                    Uri downloadUri = task.getResult();
+
+                    Map<String, Object> spesies = new HashMap<>();
+                    spesies.put("namaPengamat", pengamatanArrayList.get(position).getNamaPengamat());
+                    spesies.put("habitat", pengamatanArrayList.get(position).getHabitat());
+                    spesies.put("cuaca", pengamatanArrayList.get(position).getCuaca());
+                    spesies.put("aktifiktas", pengamatanArrayList.get(position).getAktifiktas());
+                    spesies.put("deskripsi", pengamatanArrayList.get(position).getDeskripsi());
+                    spesies.put("hasil", pengamatanArrayList.get(position).getHasil());
+                    spesies.put("imageURL", downloadUri.toString());
+
+
+                    firestore.collection("ayoPengamatan").document(docID).collection("pengamatan")
+                            .add(spesies).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            if (position == pengamatanArrayList.size()-1){
+                                clearFragment();
+                                Toast.makeText(getContext(), "Data Berhasil Disimpan!", Toast.LENGTH_LONG).show();
+                            }
+                            Log.d(TAG, "Pengamatan berhasil disimpan!");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d(TAG, "Pengamatan gagal disimpan!");
+                        }
+                    });
+
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Pengamatan gagal disimpan!");
+
             }
         });
+
+
+
+    }
+
+    private void clearFragment() {
+        pengamatanArrayList.clear();
+        adapter.notifyDataSetChanged();
+        edtJudulPengamatan.setText("");
+        edtTanggal.setText("");
+        edtLokasi.setText("");
     }
 
 

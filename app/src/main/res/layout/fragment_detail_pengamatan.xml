@@ -32,8 +32,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_iv_detail_pengamatan"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="25dp"
                 app:cardCornerRadius="10dp"
@@ -42,9 +42,8 @@
 
                 <ImageView
                     android:id="@+id/iv_detail_pengamatan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:background="?attr/cardbackground"
                     android:fontFamily="@font/montserrat_semibold"
                     android:hint="Nama Pengamat"
