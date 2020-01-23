@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailCapungActivity"></activity>
+        <activity android:name=".tentangPengembangActivity"></activity>
+        <activity android:name=".DetailCapungActivity" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".DetailMateriActivity" />
         <activity android:name=".SettingActivity" />

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.provider.Settings;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
+import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
 import site.ishaalim.capungpedia.Evaluasi.IntroEvaluasiFragment;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
@@ -144,6 +146,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new FragmentGlosarium()).commit();
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.glosarium);
+                break;
+
+            case R.id.tentang_pengembang:
+                Intent intent = new Intent(getApplicationContext(), tentangPengembangActivity.class);
+                startActivity(intent);
+                CustomIntent.customType(this, "left-to-right");
                 break;
         }
 

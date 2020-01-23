@@ -36,9 +36,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Intro"
+                android:text="Selamat datang di laman Evaluasi!"
                 android:textColor="?attr/textcolor"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/tv_isi_intro"
@@ -47,7 +47,7 @@
                 android:layout_below="@+id/tv_intro"
                 android:layout_marginHorizontal="15dp"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna"
+                android:text="@string/selamat_datang_di_laman_evaluasi"
                 android:textColor="?attr/textcolor"
                 android:textSize="16dp" />
 
@@ -59,9 +59,9 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Penjelasan"
+                android:text="Petunjuk Pengerjaan Soal."
                 android:textColor="?attr/textcolor"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/tv_isi_penjelasan"
@@ -70,32 +70,10 @@
                 android:layout_below="@+id/tv_penjelasan"
                 android:layout_marginHorizontal="15dp"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna"
+                android:text="@string/Petunjuk_Pengerjaan_Soal"
                 android:textColor="?attr/textcolor"
                 android:textSize="16dp" />
 
-            <TextView
-                android:id="@+id/tv_cara"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_isi_penjelasan"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="Penjelasan"
-                android:textColor="?attr/textcolor"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/tv_isi_cara"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_cara"
-                android:layout_marginHorizontal="15dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna"
-                android:textColor="?attr/textcolor"
-                android:textSize="16dp" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

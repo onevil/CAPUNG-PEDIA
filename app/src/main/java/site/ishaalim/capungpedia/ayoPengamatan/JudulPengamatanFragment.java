@@ -259,11 +259,24 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                     spesies.put("hasil", pengamatanArrayList.get(position).getHasil());
                     spesies.put("imageURL", downloadUri.toString());
 
+                    Map<String, Object> imageHeader = new HashMap<>();
+                    imageHeader.put("imageURL", downloadUri.toString());
+
+                    for (int i = 0; i <= 1; i++){
+                        firestore.collection("ayoPengamatan").document(docID).update(imageHeader)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "ImageURL Disimpan!");
+                                    }
+                                });
+                    }
 
                     firestore.collection("ayoPengamatan").document(docID).collection("pengamatan")
                             .add(spesies).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
+
                             if (position == pengamatanArrayList.size()-1){
                                 clearFragment();
                                 Toast.makeText(getContext(), "Data Berhasil Disimpan!", Toast.LENGTH_LONG).show();
