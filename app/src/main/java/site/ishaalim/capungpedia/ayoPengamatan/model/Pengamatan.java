@@ -2,14 +2,17 @@ package site.ishaalim.capungpedia.ayoPengamatan.model;
 
 import android.net.Uri;
 
+import java.util.Date;
+
 public class Pengamatan {
     String namaPengamat, habitat, cuaca, aktifiktas, deskripsi, hasil;
     Uri imageUri;
+    Date pukul;
 
     public Pengamatan() {
     }
 
-    public Pengamatan(String namaPengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri) {
+    public Pengamatan(String namaPengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date pukul) {
         this.namaPengamat = namaPengamat;
         this.habitat = habitat;
         this.cuaca = cuaca;
@@ -17,6 +20,7 @@ public class Pengamatan {
         this.deskripsi = deskripsi;
         this.hasil = hasil;
         this.imageUri = imageUri;
+        this.pukul = pukul;
     }
 
     public String getNamaPengamat() {
@@ -73,5 +77,13 @@ public class Pengamatan {
 
     public void setImageUri(Uri imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public Date getPukul() {
+        return pukul;
+    }
+
+    public void setPukul(Date pukul) {
+        this.pukul = pukul;
     }
 }

@@ -2,6 +2,7 @@ package site.ishaalim.capungpedia.ayoPengamatan;
 
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,6 +62,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     private Button btnTambahKeterangan;
     private EditText edtJudulPengamatan, edtLokasi, edtTanggal;
     private RecyclerView pengamatanRV;
+    private ProgressDialog progressDialog;
 
     private StorageTask uploadTask;
 
@@ -98,6 +100,12 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         edtLokasi = v.findViewById(R.id.edt_lokasi_pengamatan);
         edtTanggal = v.findViewById(R.id.edt_tanggal_pengamatan);
         pengamatanRV = v.findViewById(R.id.rv_tambah_pengamatan);
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Menyimpan Pengamatan");
+        progressDialog.setMessage("Mohon tunggu...");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         adapter = new tambahPengamatanAdapter(getContext(), pengamatanArrayList, this);
 
@@ -170,7 +178,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
 
 
-    public void insertArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri) {
+    public void insertArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date) {
         Pengamatan pengamatan = new Pengamatan();
         pengamatan.setNamaPengamat(namapengamat);
         pengamatan.setHabitat(habitat);
@@ -179,6 +187,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         pengamatan.setDeskripsi(deskripsi);
         pengamatan.setHasil(hasil);
         pengamatan.setImageUri(imageUri);
+        pengamatan.setPukul(date);
         pengamatanArrayList.add(pengamatan);
         Log.d(TAG, "Document : " + pengamatan);
         Log.d(TAG, "Arraylist : " + pengamatanArrayList);
@@ -195,7 +204,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
            adapter.notifyItemRemoved(position);
            adapter.notifyItemRangeChanged(position, pengamatanArrayList.size());
            Log.d(TAG, "Delete Clicked! ");
-           Toast.makeText(getContext(), "Delete!" + position, Toast.LENGTH_LONG).show();
+           Toast.makeText(getContext(), "Berhasil Dihapus!", Toast.LENGTH_LONG).show();
        }
     }
 
@@ -207,6 +216,8 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     }
 
     public void SavePengamatan(){
+
+        progressDialog.show();
 
         Map<String, Object> pengamatan = new HashMap<>();
         pengamatan.put("judulPengamatan" , edtJudulPengamatan.getText().toString());
@@ -256,6 +267,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
                     Map<String, Object> spesies = new HashMap<>();
                     spesies.put("namaPengamat", pengamatanArrayList.get(position).getNamaPengamat());
+                    spesies.put("pukul", pengamatanArrayList.get(position).getPukul());
                     spesies.put("habitat", pengamatanArrayList.get(position).getHabitat());
                     spesies.put("cuaca", pengamatanArrayList.get(position).getCuaca());
                     spesies.put("aktifiktas", pengamatanArrayList.get(position).getAktifiktas());
@@ -283,6 +295,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
                             if (position == pengamatanArrayList.size()-1){
                                 clearFragment();
+                                progressDialog.dismiss();
                                 Toast.makeText(getContext(), "Data Berhasil Disimpan!", Toast.LENGTH_LONG).show();
                             }
                             Log.d(TAG, "Pengamatan berhasil disimpan!");

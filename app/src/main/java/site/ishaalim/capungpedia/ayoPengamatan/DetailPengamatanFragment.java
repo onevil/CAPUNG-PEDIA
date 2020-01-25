@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import site.ishaalim.capungpedia.R;
 
@@ -46,6 +47,12 @@ public class DetailPengamatanFragment extends Fragment {
     String namaPengamat, Habitat, Cuaca, Aktifiktas, Deskripsi, Hasil, imageFilePath;
     Button btnSimpan;
     ImageView ivDetailPengamatan;
+
+    Date date;
+
+    String pukul;
+
+    Long longtanggal;
 
     File mPhotoFile;
 
@@ -60,7 +67,7 @@ public class DetailPengamatanFragment extends Fragment {
     private static final int STORAGE_REQUEST_CODE = 2;
 
     public interface DetailPengamatanListener{
-        void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri);
+        void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date);
     }
 
 
@@ -84,6 +91,21 @@ public class DetailPengamatanFragment extends Fragment {
         setHasOptionsMenu(true);
         setupToolbar();
 
+        getPukul();
+
+    }
+
+    private void getPukul() {
+        date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh : mm ");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+7"));
+        pukul = simpleDateFormat.format(date) + "WIB";
+
+
+        edtPukul.setText(pukul);
+        edtPukul.setClickable(false);
+        edtPukul.setFocusable(false);
+
     }
 
     private void setupToolbar() {
@@ -99,6 +121,7 @@ public class DetailPengamatanFragment extends Fragment {
         edtCuaca = getView().findViewById(R.id.edt_cuaca);
         edtDeskripsi = getView().findViewById(R.id.edt_deskripsi);
         edtHasil = getView().findViewById(R.id.edt_hasil_identifikasi);
+        edtPukul = getView().findViewById(R.id.edt_pukul_pengamatan);
         btnSimpan = getView().findViewById(R.id.btn_simpan);
         ivDetailPengamatan = getView().findViewById(R.id.iv_detail_pengamatan);
 
@@ -119,7 +142,7 @@ public class DetailPengamatanFragment extends Fragment {
                 Deskripsi = edtDeskripsi.getText().toString();
                 Hasil = edtHasil.getText().toString();
 
-                listener.addArraylist(namaPengamat, Habitat, Cuaca, Aktifiktas, Deskripsi, Hasil, imageUri);
+                listener.addArraylist(namaPengamat, Habitat, Cuaca, Aktifiktas, Deskripsi, Hasil, imageUri, date);
 
                 removeFragment();
             }

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +29,8 @@ import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
 import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DetailPengamatanFragment.DetailPengamatanListener {
 
@@ -188,8 +189,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri) {
+    public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date) {
         JudulPengamatanFragment judulPengamatanFragment = (JudulPengamatanFragment)getSupportFragmentManager().findFragmentByTag("judulPengamatan");
-        judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil, imageUri);
+        judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil, imageUri, date);
     }
 }
