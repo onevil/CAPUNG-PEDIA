@@ -11,4 +11,8 @@
     <string name="tab_text_1">APLIKASI</string>
     <string name="tab_text_2">PENGEMBANG</string>
     <string name="tab_text_3">PEMBIMBING</string>
+    <string name="tentang_aplikasi">
+        \t\tAplikasi CAPUNG PEDIA merupakan aplikasi ponsel pintar yang bertujuan untuk memudahkan pengamat capung dalam melakukan pengamatan capung dan mengidentifikasi capung atau untuk memudahkan kepada masyarakat umum yang ingin mengenal lebih dekat dengan capung.
+
+        \n \n \t\tDengan hadirnya aplikasi ini sehingga Anda dapat mengoperasikannya dengan mudah, tidak lepas dari kerja keras tim Pengembang, tim IT, tim reviewer dan tim dosen pembimbing.</string>
 </resources>

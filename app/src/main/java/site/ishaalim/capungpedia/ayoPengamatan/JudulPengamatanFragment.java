@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -42,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -72,6 +74,8 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     String Characters = "ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
     String docID = "";
     String tanggal;
+
+    Date date;
 
     FirebaseFirestore firestore;
 
@@ -207,7 +211,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         Map<String, Object> pengamatan = new HashMap<>();
         pengamatan.put("judulPengamatan" , edtJudulPengamatan.getText().toString());
         pengamatan.put("lokasiPengamatan" , edtLokasi.getText().toString());
-        pengamatan.put("tanggalPengamatan" , edtTanggal.getText().toString());
+        pengamatan.put("tanggalPengamatan" , new Timestamp(date));
 
         firestore.collection("ayoPengamatan").document(docID)
                 .set(pengamatan).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -364,6 +368,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         tanggal = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        date = calendar.getTime();
 
         edtTanggal.setText(tanggal);
     }

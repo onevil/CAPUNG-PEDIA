@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.ayoPengamatan.model.Pengamatan;
@@ -24,7 +28,9 @@ public class ayoPengamatanAdapter extends RecyclerView.Adapter<ayoPengamatanVH> 
     private ArrayList<ayoPengamatan> pengamatanArrayList;
     Context context;
     RequestOptions options;
+    String date;
 
+    Date tanggal;
 
 
     public ayoPengamatanAdapter(Context context, ArrayList<ayoPengamatan> pengamatanArrayList) {
@@ -45,8 +51,14 @@ public class ayoPengamatanAdapter extends RecyclerView.Adapter<ayoPengamatanVH> 
 
     @Override
     public void onBindViewHolder(@NonNull final ayoPengamatanVH holder, final int position) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy ");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+7"));
+
+        tanggal = pengamatanArrayList.get(position).getTanggalPengamatan();
+
         holder.tvnamaPengamatan.setText(pengamatanArrayList.get(position).getJudulPengamatan());
-        holder.tvTanggalPengamatan.setText(pengamatanArrayList.get(position).getTanggalPengamatan());
+        holder.tvTanggalPengamatan.setText(sdf.format(tanggal));
         holder.tvTempatPengamatan.setText(pengamatanArrayList.get(position).getLokasiPengamatan());
 
         Glide.with(holder.itemView).load(pengamatanArrayList.get(position).getImageURL())
