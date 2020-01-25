@@ -102,7 +102,7 @@ public class AyoPengamatanFragment extends Fragment {
     public void loadRV() {
         ayoPengamatanArrayList.clear();
         CollectionReference firestoreRef = firestore.collection("ayoPengamatan");
-        Query queryListPengamatan = firestoreRef.orderBy("judulPengamatan", Query.Direction.ASCENDING);
+        Query queryListPengamatan = firestoreRef.orderBy("tanggalPengamatan", Query.Direction.ASCENDING);
         queryListPengamatan.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

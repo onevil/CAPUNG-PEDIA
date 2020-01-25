@@ -247,7 +247,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     private void saveSpesies(final int position) {
         String tanggal = edtTanggal.getText().toString();
         Uri uri = pengamatanArrayList.get(position).getImageUri();
-        final StorageReference fileStorage = storageReference.child("photo_pengamatan").child(tanggal +"."+getFileExtension(uri));
+        final StorageReference fileStorage = storageReference.child("photo_pengamatan").child(tanggal).child(System.currentTimeMillis()+"."+getFileExtension(uri));
         uploadTask = fileStorage.putFile(uri);
 
         final Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation() {
@@ -278,7 +278,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                     Map<String, Object> imageHeader = new HashMap<>();
                     imageHeader.put("imageURL", downloadUri.toString());
 
-                    for (int i = 0; i <= 1; i++){
+                    if (position == 0){
                         firestore.collection("ayoPengamatan").document(docID).update(imageHeader)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -296,6 +296,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                             if (position == pengamatanArrayList.size()-1){
                                 clearFragment();
                                 progressDialog.dismiss();
+                                GenerateID();
                                 Toast.makeText(getContext(), "Data Berhasil Disimpan!", Toast.LENGTH_LONG).show();
                             }
                             Log.d(TAG, "Pengamatan berhasil disimpan!");
