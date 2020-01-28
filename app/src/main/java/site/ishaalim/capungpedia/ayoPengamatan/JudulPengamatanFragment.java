@@ -126,14 +126,15 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
             }
         });
 
-        edtTanggal.setOnClickListener(new View.OnClickListener() {
+        edtTanggal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onFocusChange(View v, boolean hasFocus) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.setTargetFragment(JudulPengamatanFragment.this, 0);
                 datePicker.show(getFragmentManager(), "date picker");
             }
         });
+
 
         GenerateID();
 

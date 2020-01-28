@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,63 +10,66 @@
         android:id="@+id/lo_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_tentang_pengembang"
             android:layout_width="match_parent"
-            android:background="?attr/cardbackground"
             android:layout_height="?attr/actionBarSize"
+            android:background="?attr/cardbackground"
             android:elevation="2dp"
             android:fitsSystemWindows="true"
-            app:title="Tentang Pengembang"
-            app:layout_scrollFlags="scroll|enterAlways"
             android:titleTextColor="?attr/textcolor"
-            />
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="Tentang Pengembang" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_tentang_pengembang"
-            android:layout_below="@id/toolbar_materi"
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar_materi"
+            android:layout_gravity="bottom"
             android:background="?attr/cardbackground"
-            app:tabTextColor="?attr/textcolor"
             android:elevation="2dp"
-            app:tabSelectedTextColor="?attr/buttoncolor">
+            app:tabSelectedTextColor="?attr/buttoncolor"
+            app:tabTextColor="?attr/textcolor">
+
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabAplikasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aplikasi"/>
+                android:text="Aplikasi" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabPengembang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pengembang"/>
+                android:text="Pengembang" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabPembimbing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pembimbing"/>
+                android:text="Pembimbing" />
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_tentang_pengembang"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/lo_appbar"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            >
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_tentang_pengembang"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/lo_appbar"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lo_appbar">
 
-        </androidx.viewpager2.widget.ViewPager2>
+    </androidx.viewpager2.widget.ViewPager2>
 
 
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

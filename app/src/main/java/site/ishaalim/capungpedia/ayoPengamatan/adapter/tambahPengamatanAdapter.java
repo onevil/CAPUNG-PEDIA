@@ -61,7 +61,7 @@ public class tambahPengamatanAdapter extends RecyclerView.Adapter<tambahPengamat
                 .into(holder.ivTambahPengamtan);
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.ivDeletePengamatan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (deletePengamatan != null) {
