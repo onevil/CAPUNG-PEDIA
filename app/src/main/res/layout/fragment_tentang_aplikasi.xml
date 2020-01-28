@@ -14,8 +14,9 @@
             android:id="@+id/iv_header_app"
             android:layout_width="match_parent"
             android:layout_height="220dp"
+            android:scaleType="centerCrop"
             android:elevation="2dp"
-            android:background="@drawable/header_capung_pediamdpi" />
+            android:src="@drawable/header_capung_pediamdpi" />
 
         <TextView
             android:id="@+id/tv_tentang_aplikasi"

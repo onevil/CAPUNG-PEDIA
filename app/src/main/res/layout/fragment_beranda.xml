@@ -51,7 +51,7 @@
                   <ImageView
                       android:layout_width="200dp"
                       android:layout_height="25dp"
-                      android:background="@drawable/ic_logo_font"
+                      android:src="@drawable/ic_logo_font"
                       app:layout_constraintBottom_toBottomOf="parent"
                       app:layout_constraintEnd_toEndOf="parent"
                       app:layout_constraintStart_toStartOf="parent"
