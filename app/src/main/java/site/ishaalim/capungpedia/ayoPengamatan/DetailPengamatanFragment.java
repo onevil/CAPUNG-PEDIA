@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,13 +53,10 @@ public class DetailPengamatanFragment extends Fragment {
 
     String pukul;
 
-    Long longtanggal;
-
-    File mPhotoFile;
 
     RequestOptions options;
 
-    Uri imageUri;
+    Uri imageUri, viewImageURI;
 
     EditText edtNamaPengamat, edtHabitat, edtPukul, edtCuaca, edtAktifitas, edtDeskripsi, edtHasil;
 
@@ -175,18 +173,17 @@ public class DetailPengamatanFragment extends Fragment {
                         showImage();
                         break;
                     case 1:
-                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                                takePhotoFromCamera();
-                            }else {
-                                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
-                            }
-
-                            break;
-                        }else
-                        {
+                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
                             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                            break;
 
+                        }else if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+                        {
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
+                            break;
+
+                        }else {
+                            takePhotoFromCamera();
                         }
                         break;
                 }
@@ -214,11 +211,18 @@ public class DetailPengamatanFragment extends Fragment {
             if (resultCode == getActivity().RESULT_OK) {
 
                 Glide.with(getView()).load(imageUri).apply(options).into(ivDetailPengamatan);
+                setViewImageURI(imageUri);
+
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 Toast.makeText(getContext(), "Cancelled", Toast.LENGTH_LONG).show();
             }
         }
 
+    }
+
+
+    private void setViewImageURI(Uri imageUri) {
+        viewImageURI = imageUri;
     }
 
     private File createImageFile() throws IOException {
@@ -238,6 +242,18 @@ public class DetailPengamatanFragment extends Fragment {
     }
 
     private void showImage() {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+        View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
+        PhotoView photoView = mView.findViewById(R.id.imageView);
+
+        photoView.setImageURI(viewImageURI);
+
+
+        mBuilder.setView(mView);
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+
     }
 
     @Override
