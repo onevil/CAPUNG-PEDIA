@@ -1,7 +1,10 @@
 package site.ishaalim.capungpedia;
 
+import android.app.AlertDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.chrisbanes.photoview.PhotoView;
+
+import java.util.zip.Inflater;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -43,6 +49,37 @@ public class DetailCapungActivity extends AppCompatActivity {
         Log.d(TAG,"Image URL3 : " + image3);
         loadContent();
 
+        setEvents();
+
+    }
+
+    private void setEvents() {
+        ivImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ivImage1.getDrawable() != null){
+                    showImage(ivImage1.getDrawable());
+                }
+            }
+        });
+
+        ivImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ivImage2.getDrawable() != null){
+                    showImage(ivImage2.getDrawable());
+                }
+            }
+        });
+
+        ivImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ivImage3.getDrawable() != null){
+                    showImage(ivImage3.getDrawable());
+                }
+            }
+        });
     }
 
     private void setUpToolbar() {
@@ -134,6 +171,21 @@ public class DetailCapungActivity extends AppCompatActivity {
         ivImage1 = findViewById(R.id.iv_detail_capung);
         ivImage2 = findViewById(R.id.iv_capung1);
         ivImage3 = findViewById(R.id.iv_capung2);
+
+    }
+
+    private void showImage(Drawable drawable) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
+        PhotoView photoView = mView.findViewById(R.id.imageView);
+
+        photoView.setImageDrawable(drawable);
+
+
+        mBuilder.setView(mView);
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
 
     }
 

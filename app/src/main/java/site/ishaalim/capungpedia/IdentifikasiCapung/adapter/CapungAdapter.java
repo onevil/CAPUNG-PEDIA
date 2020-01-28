@@ -1,5 +1,6 @@
 package site.ishaalim.capungpedia.IdentifikasiCapung.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.DetailCapungActivity;
@@ -91,4 +94,5 @@ public class CapungAdapter extends RecyclerView.Adapter<CapungViewHolder> {
     public int getItemCount() {
         return capungArrayList.size();
     }
+
 }

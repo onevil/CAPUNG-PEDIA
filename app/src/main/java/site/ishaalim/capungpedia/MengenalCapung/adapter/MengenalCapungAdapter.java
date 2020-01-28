@@ -1,6 +1,8 @@
 package site.ishaalim.capungpedia.MengenalCapung.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
@@ -39,7 +42,7 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MengenalCapungViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull final MengenalCapungViewHoder holder, int position) {
         if(isiHalamanMengenalCapungArrayList.get(position).getImageURL() == null){
             holder.cvHeaderMengenalCapung.setVisibility(View.GONE);
             holder.ivHeaderMengenalCapung.setVisibility(View.GONE);
@@ -52,10 +55,32 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
         holder.tvHeaderMengenalCapung.setText(isiHalamanMengenalCapungArrayList.get(position).getHeader());
         holder.tvIsiMengenalCapung.setText(isiHalamanMengenalCapungArrayList.get(position).getIsi());
 
+        holder.ivHeaderMengenalCapung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImage(holder.ivHeaderMengenalCapung.getDrawable());
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return isiHalamanMengenalCapungArrayList.size();
+    }
+
+    private void showImage(Drawable drawable) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+        View mView = LayoutInflater.from(context).inflate(R.layout.dialog_photoview, null);
+        PhotoView photoView = mView.findViewById(R.id.imageView);
+
+        photoView.setImageDrawable(drawable);
+
+
+        mBuilder.setView(mView);
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+
     }
 }

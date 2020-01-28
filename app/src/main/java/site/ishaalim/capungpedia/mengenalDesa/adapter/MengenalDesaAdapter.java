@@ -1,6 +1,8 @@
 package site.ishaalim.capungpedia.mengenalDesa.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
@@ -39,7 +42,7 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MengenalDesaViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull final MengenalDesaViewHoder holder, int position) {
         if(isiHalamanMengenalDesaArrayList.get(position).getImageURL() == null){
             holder.cvHeaderMengenalDesa.setVisibility(View.GONE);
             holder.ivHeaderMengenalDesa.setVisibility(View.GONE);
@@ -53,11 +56,33 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
         String isi = isiHalamanMengenalDesaArrayList.get(position).getIsi();
         holder.tvIsiMengenalDesa.setText(isi);
 
+        holder.ivHeaderMengenalDesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImage(holder.ivHeaderMengenalDesa.getDrawable());
+            }
+        });
+
 
     }
 
     @Override
     public int getItemCount() {
         return isiHalamanMengenalDesaArrayList.size();
+    }
+
+    private void showImage(Drawable drawable) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+        View mView = LayoutInflater.from(context).inflate(R.layout.dialog_photoview, null);
+        PhotoView photoView = mView.findViewById(R.id.imageView);
+
+        photoView.setImageDrawable(drawable);
+
+
+        mBuilder.setView(mView);
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+
     }
 }
