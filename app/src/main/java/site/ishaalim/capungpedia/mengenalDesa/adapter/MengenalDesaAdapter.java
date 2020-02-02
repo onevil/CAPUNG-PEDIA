@@ -2,6 +2,7 @@ package site.ishaalim.capungpedia.mengenalDesa.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,9 @@ import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
+import maes.tech.intentanim.CustomIntent;
+import site.ishaalim.capungpedia.DetailCapungActivity;
+import site.ishaalim.capungpedia.MapsActivity;
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.mengenalDesa.model.isiHalamanMengenalDesa;
 import site.ishaalim.capungpedia.mengenalDesa.viewholder.MengenalDesaViewHoder;
@@ -58,6 +63,22 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
         holder.tvHeaderMengenalDesa.setText(isiHalamanMengenalDesaArrayList.get(position).getHeader());
         String isi = isiHalamanMengenalDesaArrayList.get(position).getIsi();
         holder.tvIsiMengenalDesa.setText(isi);
+
+        if (isiHalamanMengenalDesaArrayList.get(position).getLokasi() != null){
+            holder.cvLihatLokasi.setVisibility(View.VISIBLE);
+            holder.btnLihatLokasi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MapsActivity.class);
+                    context.startActivity(intent);
+                    CustomIntent.customType(context, "left-to-right");
+                    Toast.makeText(context,"Lokasi", Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }else {
+            holder.cvLihatLokasi.setVisibility(View.GONE);
+        }
 
         holder.ivHeaderMengenalDesa.setOnClickListener(new View.OnClickListener() {
             @Override

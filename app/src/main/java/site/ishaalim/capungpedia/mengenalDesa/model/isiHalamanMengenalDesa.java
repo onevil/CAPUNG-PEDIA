@@ -9,11 +9,12 @@ public class isiHalamanMengenalDesa {
     String imagePhotographer;
     String quotes;
     String author;
+    String lokasi;
 
     public isiHalamanMengenalDesa() {
     }
 
-    public isiHalamanMengenalDesa(String header, String isi, String id, String imageURL, String imageCaption, String imagePhotographer, String quotes, String author) {
+    public isiHalamanMengenalDesa(String header, String isi, String id, String imageURL, String imageCaption, String imagePhotographer, String quotes, String author, String lokasi) {
         this.header = header;
         this.isi = isi;
         this.id = id;
@@ -22,6 +23,7 @@ public class isiHalamanMengenalDesa {
         this.imagePhotographer = imagePhotographer;
         this.quotes = quotes;
         this.author = author;
+        this.lokasi = lokasi;
     }
 
     public String getHeader() {
@@ -86,5 +88,13 @@ public class isiHalamanMengenalDesa {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getLokasi() {
+        return lokasi;
+    }
+
+    public void setLokasi(String lokasi) {
+        this.lokasi = lokasi;
     }
 }

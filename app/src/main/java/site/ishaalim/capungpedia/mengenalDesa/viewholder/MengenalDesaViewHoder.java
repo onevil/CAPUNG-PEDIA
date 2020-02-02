@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.mengenalDesa.viewholder;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,8 @@ import site.ishaalim.capungpedia.R;
 public class MengenalDesaViewHoder extends RecyclerView.ViewHolder {
     public ImageView ivHeaderMengenalDesa;
     public TextView tvHeaderMengenalDesa, tvIsiMengenalDesa;
-    public CardView cvHeaderMengenalDesa;
+    public CardView cvHeaderMengenalDesa, cvLihatLokasi;
+    public Button btnLihatLokasi;
     public MengenalDesaViewHoder(@NonNull View itemView) {
         super(itemView);
 
@@ -21,8 +23,11 @@ public class MengenalDesaViewHoder extends RecyclerView.ViewHolder {
         tvHeaderMengenalDesa = itemView.findViewById(R.id.tv_header_mengenal_desa);
         tvIsiMengenalDesa = itemView.findViewById(R.id.tv_isi_mengenal_desa);
         cvHeaderMengenalDesa = itemView.findViewById(R.id.cv_iv_header_mengenal_desa);
+        cvLihatLokasi = itemView.findViewById(R.id.cv_btn_lihat_lokasi);
+        btnLihatLokasi = itemView.findViewById(R.id.btn_lihat_lokasi);
 
         cvHeaderMengenalDesa.setVisibility(View.GONE);
+        cvLihatLokasi.setVisibility(View.GONE);
         ivHeaderMengenalDesa.setVisibility(View.GONE);
     }
 }

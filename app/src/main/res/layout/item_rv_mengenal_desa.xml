@@ -40,7 +40,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_header_mengenal_desa"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_btn_lihat_lokasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_isi_mengenal_desa">
+
+            <Button
+                android:id="@+id/btn_lihat_lokasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/buttoncolor"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Lihat lokasi"
+                android:textColor="#ffffff" />
+        </androidx.cardview.widget.CardView>
+
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_iv_header_mengenal_desa"
