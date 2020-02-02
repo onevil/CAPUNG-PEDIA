@@ -25,6 +25,7 @@ import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.Materi.model.listMateri;
 import site.ishaalim.capungpedia.Materi.viewholder.ListMateriViewHolder;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
+import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
 import site.ishaalim.capungpedia.mengenalDesa.FragmentMengenalDesa;
@@ -74,26 +75,30 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
                 switch (position){
                     case 0:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentMengenalCapung()).commit();
+                                new FragmentPendahuluan()).commit();
                         break;
                     case 1:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentMengenalDesa()).commit();
+                                new FragmentMengenalCapung()).commit();
                         break;
                     case 2:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentPanduanPengamatan()).commit();
+                                new FragmentMengenalDesa()).commit();
                         break;
                     case 3:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentPanduanIdentifikasi()).commit();
+                                new FragmentPanduanPengamatan()).commit();
                         break;
                     case 4:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
+                                new FragmentPanduanIdentifikasi()).commit();
+                        break;
+                    case 5:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container,
                                 new IdentifikasiCapungFragment()).commit();
                         break;
 
-                    case 5:
+                    case 6:
                         fragmentManager.beginTransaction().replace(R.id.fragment_container,
                                 new AyoPengamatanFragment()).commit();
                         break;
