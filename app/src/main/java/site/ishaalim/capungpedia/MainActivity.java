@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DetailPengamatanFragment detailPengamatanFragment;
 
+    String share = "Yuk identifikasi Capung melalui Capung Pedia!!";
+    String link = "https://play.google.com/store/apps/details?id=site.ishaalim.capungpedia";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -168,6 +171,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new FragmentReferensi()).commit();
                 uncheckNavItem();
                 navigationView.setCheckedItem(R.id.referensi);
+                break;
+
+            case R.id.bagikan_aplikasi:
+                final Intent shareintent = new Intent(android.content.Intent.ACTION_SEND);
+                shareintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                shareintent.putExtra(Intent.EXTRA_TEXT, share+"\n"+link );
+                shareintent.setType("text/plain");
+                startActivity(Intent.createChooser(shareintent, "Share Aplikasi Via :"));
+                CustomIntent.customType(this, "bottom-to-top");
                 break;
 
         }
