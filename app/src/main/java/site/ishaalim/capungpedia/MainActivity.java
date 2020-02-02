@@ -28,6 +28,7 @@ import site.ishaalim.capungpedia.mengenalDesa.FragmentMengenalDesa;
 import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
 import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
 import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
+import site.ishaalim.capungpedia.referensi.FragmentReferensi;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -161,6 +162,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 CustomIntent.customType(this, "left-to-right");
                 break;
+
+            case R.id.referensi:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FragmentReferensi()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.referensi);
+                break;
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
