@@ -10,8 +10,14 @@ public class Capung {
     String ordo;
     String deskripsi;
     String imageURL;
+    String imageCaption;
+    String imagePhotographer;
     String imageURL2;
+    String imageCaption2;
+    String imagePhotographer2;
     String imageURL3;
+    String imageCaption3;
+    String imagePhotographer3;
     String kepala_jantan;
     String kepala_betina;
     String badan_jantan;
@@ -28,7 +34,7 @@ public class Capung {
     public Capung() {
     }
 
-    public Capung(String namaSpesies, String famili, String subOrdo, String fillum, String kelas, String kingdom, String ordo, String deskripsi, String imageURL, String imageURL2, String imageURL3, String kepala_jantan, String kepala_betina, String badan_jantan, String badan_betina, String perut_jantan, String perut_betina, String kaki_jantan, String kaki_betina, String sayap_jantan, String sayap_betina, String embelan_jantan, String embelan_betina) {
+    public Capung(String namaSpesies, String famili, String subOrdo, String fillum, String kelas, String kingdom, String ordo, String deskripsi, String imageURL, String imageCaption, String imagePhotographer, String imageURL2, String imageCaption2, String imagePhotographer2, String imageURL3, String imageCaption3, String imagePhotographer3, String kepala_jantan, String kepala_betina, String badan_jantan, String badan_betina, String perut_jantan, String perut_betina, String kaki_jantan, String kaki_betina, String sayap_jantan, String sayap_betina, String embelan_jantan, String embelan_betina) {
         this.namaSpesies = namaSpesies;
         this.famili = famili;
         this.subOrdo = subOrdo;
@@ -38,8 +44,14 @@ public class Capung {
         this.ordo = ordo;
         this.deskripsi = deskripsi;
         this.imageURL = imageURL;
+        this.imageCaption = imageCaption;
+        this.imagePhotographer = imagePhotographer;
         this.imageURL2 = imageURL2;
+        this.imageCaption2 = imageCaption2;
+        this.imagePhotographer2 = imagePhotographer2;
         this.imageURL3 = imageURL3;
+        this.imageCaption3 = imageCaption3;
+        this.imagePhotographer3 = imagePhotographer3;
         this.kepala_jantan = kepala_jantan;
         this.kepala_betina = kepala_betina;
         this.badan_jantan = badan_jantan;
@@ -126,6 +138,22 @@ public class Capung {
         this.imageURL = imageURL;
     }
 
+    public String getImageCaption() {
+        return imageCaption;
+    }
+
+    public void setImageCaption(String imageCaption) {
+        this.imageCaption = imageCaption;
+    }
+
+    public String getImagePhotographer() {
+        return imagePhotographer;
+    }
+
+    public void setImagePhotographer(String imagePhotographer) {
+        this.imagePhotographer = imagePhotographer;
+    }
+
     public String getImageURL2() {
         return imageURL2;
     }
@@ -134,12 +162,44 @@ public class Capung {
         this.imageURL2 = imageURL2;
     }
 
+    public String getImageCaption2() {
+        return imageCaption2;
+    }
+
+    public void setImageCaption2(String imageCaption2) {
+        this.imageCaption2 = imageCaption2;
+    }
+
+    public String getImagePhotographer2() {
+        return imagePhotographer2;
+    }
+
+    public void setImagePhotographer2(String imagePhotographer2) {
+        this.imagePhotographer2 = imagePhotographer2;
+    }
+
     public String getImageURL3() {
         return imageURL3;
     }
 
     public void setImageURL3(String imageURL3) {
         this.imageURL3 = imageURL3;
+    }
+
+    public String getImageCaption3() {
+        return imageCaption3;
+    }
+
+    public void setImageCaption3(String imageCaption3) {
+        this.imageCaption3 = imageCaption3;
+    }
+
+    public String getImagePhotographer3() {
+        return imagePhotographer3;
+    }
+
+    public void setImagePhotographer3(String imagePhotographer3) {
+        this.imagePhotographer3 = imagePhotographer3;
     }
 
     public String getKepala_jantan() {

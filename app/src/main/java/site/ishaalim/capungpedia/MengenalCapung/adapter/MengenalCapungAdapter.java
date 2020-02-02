@@ -2,10 +2,13 @@ package site.ishaalim.capungpedia.MengenalCapung.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +45,7 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MengenalCapungViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull final MengenalCapungViewHoder holder, final int position) {
         if(isiHalamanMengenalCapungArrayList.get(position).getImageURL() == null){
             holder.cvHeaderMengenalCapung.setVisibility(View.GONE);
             holder.ivHeaderMengenalCapung.setVisibility(View.GONE);
@@ -58,7 +61,10 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
         holder.ivHeaderMengenalCapung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImage(holder.ivHeaderMengenalCapung.getDrawable());
+                String caption, fotografer;
+                caption = isiHalamanMengenalCapungArrayList.get(position).getImageCaption();
+                fotografer = isiHalamanMengenalCapungArrayList.get(position).getImagePhotographer();
+                showImage(holder.ivHeaderMengenalCapung.getDrawable() ,caption, fotografer);
             }
         });
 
@@ -69,17 +75,33 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
         return isiHalamanMengenalCapungArrayList.size();
     }
 
-    private void showImage(Drawable drawable) {
+    private void showImage(Drawable drawable, String caption, String fotografer) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
         View mView = LayoutInflater.from(context).inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
+        TextView tvCaption = mView.findViewById(R.id.tv_caption);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
         photoView.setImageDrawable(drawable);
 
+        if(caption == null){
+            tvCaption.setVisibility(View.GONE);
+        }else {
+            tvCaption.setText(caption);
+        }
+
+        if(fotografer == null){
+            tvFotofrafer.setVisibility(View.GONE);
+        }else {
+            tvFotoby.setVisibility(View.VISIBLE);
+            tvFotofrafer.setText(fotografer);
+        }
 
         mBuilder.setView(mView);
         AlertDialog mDialog = mBuilder.create();
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
 
     }

@@ -1,6 +1,8 @@
 package site.ishaalim.capungpedia;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,13 +31,17 @@ public class DetailCapungActivity extends AppCompatActivity {
 
     RequestOptions options;
 
-    private String namaSpesies, familli, fillum, kingdom, kelas, ordo, deskripsi, image1, image2, image3, kepalaJantan, kepalaBetina, badanJantan, badanBetina, perutJantan, perutBetina, kakiJantan, kakiBetina, sayapJantan, sayapBetina, embelanJantan, embelanBetina;
+    private String namaSpesies, familli, fillum, kingdom, kelas, ordo,
+            deskripsi, imagecaption1, imagephotografer1, image1, imagecaption2, imagephotografer2, image2, imagecaption3, imagephotografer3,image3,  kepalaJantan, kepalaBetina,
+            badanJantan, badanBetina, perutJantan, perutBetina, kakiJantan, kakiBetina,
+            sayapJantan, sayapBetina, embelanJantan, embelanBetina;
     private Uri uri2, uri3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_capung);
+
         getExtras();
         options = new RequestOptions().centerCrop();
 
@@ -52,9 +58,7 @@ public class DetailCapungActivity extends AppCompatActivity {
         if (image3 != null){
             uri3 = Uri.parse(image3);
         }
-        Log.d(TAG,"Image URL : " + image1);
-        Log.d(TAG,"Image URL2 : " + image2);
-        Log.d(TAG,"Image URL3 : " + image3);
+
         loadContent();
 
         setEvents();
@@ -66,7 +70,7 @@ public class DetailCapungActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ivImage1.getDrawable() != null){
-                    showImage(ivImage1.getDrawable());
+                    showImage(ivImage1.getDrawable(), imagecaption1, imagephotografer1);
                 }
             }
         });
@@ -75,7 +79,7 @@ public class DetailCapungActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ivImage2 != null){
-                    showImageURL(image2);
+                    showImageURL(image2, imagecaption2, imagephotografer2);
                 }
             }
         });
@@ -84,7 +88,7 @@ public class DetailCapungActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ivImage3 != null){
-                    showImageURL(image3);
+                    showImageURL(image3, imagecaption2, imagephotografer2);
                 }
             }
         });
@@ -182,32 +186,64 @@ public class DetailCapungActivity extends AppCompatActivity {
 
     }
 
-    private void showImage(Drawable drawable) {
+    private void showImage(Drawable drawable, String caption, String fotografer) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
+        TextView tvCaption = mView.findViewById(R.id.tv_caption);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
         photoView.setImageDrawable(drawable);
 
+        if(caption == null){
+            tvCaption.setVisibility(View.GONE);
+        }else {
+            tvCaption.setText(caption);
+        }
+
+        if(fotografer == null){
+            tvFotofrafer.setVisibility(View.GONE);
+        }else {
+            tvFotoby.setVisibility(View.VISIBLE);
+            tvFotofrafer.setText(fotografer);
+        }
 
         mBuilder.setView(mView);
         AlertDialog mDialog = mBuilder.create();
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
 
     }
 
-    private void showImageURL(String url) {
+    private void showImageURL(String imageURL, String caption, String fotografer) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
+        TextView tvCaption = mView.findViewById(R.id.tv_caption);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
+        Glide.with(this).load(imageURL).into(photoView);
 
-        Glide.with(this).load(url).into(photoView);
+        if(caption == null){
+            tvCaption.setVisibility(View.GONE);
+        }else {
+            tvCaption.setText(caption);
+        }
+
+        if(fotografer == null){
+            tvFotofrafer.setVisibility(View.GONE);
+        }else {
+            tvFotoby.setVisibility(View.VISIBLE);
+            tvFotofrafer.setText(fotografer);
+        }
 
         mBuilder.setView(mView);
         AlertDialog mDialog = mBuilder.create();
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
 
     }

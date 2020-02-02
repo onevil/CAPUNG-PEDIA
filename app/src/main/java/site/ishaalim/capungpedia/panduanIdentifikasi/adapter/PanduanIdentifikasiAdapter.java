@@ -2,10 +2,13 @@ package site.ishaalim.capungpedia.panduanIdentifikasi.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +45,7 @@ public class PanduanIdentifikasiAdapter extends RecyclerView.Adapter<PanduanIden
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PanduanIdentifikasiViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull final PanduanIdentifikasiViewHoder holder, final int position) {
         if(isiHalamanPanduanIdentifikasiArrayList.get(position).getImageURL() == null){
             holder.cvHeaderPanduanIdentifikasi.setVisibility(View.GONE);
             holder.ivHeaderPanduanIdentifikasi.setVisibility(View.GONE);
@@ -59,7 +62,10 @@ public class PanduanIdentifikasiAdapter extends RecyclerView.Adapter<PanduanIden
         holder.ivHeaderPanduanIdentifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImage(holder.ivHeaderPanduanIdentifikasi.getDrawable());
+                String caption, fotografer;
+                caption = isiHalamanPanduanIdentifikasiArrayList.get(position).getImageCaption();
+                fotografer = isiHalamanPanduanIdentifikasiArrayList.get(position).getImagePhotographer();
+                showImage(holder.ivHeaderPanduanIdentifikasi.getDrawable() ,caption, fotografer);
             }
         });
 
@@ -71,17 +77,33 @@ public class PanduanIdentifikasiAdapter extends RecyclerView.Adapter<PanduanIden
         return isiHalamanPanduanIdentifikasiArrayList.size();
     }
 
-    private void showImage(Drawable drawable) {
+    private void showImage(Drawable drawable, String caption, String fotografer) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
         View mView = LayoutInflater.from(context).inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
+        TextView tvCaption = mView.findViewById(R.id.tv_caption);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
         photoView.setImageDrawable(drawable);
 
+        if(caption == null){
+            tvCaption.setVisibility(View.GONE);
+        }else {
+            tvCaption.setText(caption);
+        }
+
+        if(fotografer == null){
+            tvFotofrafer.setVisibility(View.GONE);
+        }else {
+            tvFotoby.setVisibility(View.VISIBLE);
+            tvFotofrafer.setText(fotografer);
+        }
 
         mBuilder.setView(mView);
         AlertDialog mDialog = mBuilder.create();
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
 
     }

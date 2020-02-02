@@ -20,6 +20,7 @@ import site.ishaalim.capungpedia.Evaluasi.IntroEvaluasiFragment;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
+import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.DetailPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.JudulPengamatanFragment;
@@ -84,6 +85,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
+            case R.id.pendahuluan:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FragmentPendahuluan()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.pendahuluan);
+                break;
             case R.id.beranda:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentBeranda()).commit();
