@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -90,10 +91,12 @@ public class LaporBugFragment extends Fragment {
     private void saveLaporan() {
         String NamaPelapor = edtNama.getText().toString();
         String Bug = edtBug.getText().toString();
+        Date tanggal = new Date();
 
         Map<String, Object> laporanBug = new HashMap<>();
         laporanBug.put("namapelapor", NamaPelapor);
         laporanBug.put("bug", Bug);
+        laporanBug.put("waktu", tanggal);
 
         firestore.collection("Bug").document(docID)
                 .set(laporanBug)

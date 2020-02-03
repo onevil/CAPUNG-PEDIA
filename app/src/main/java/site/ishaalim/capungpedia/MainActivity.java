@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 
 import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
+import site.ishaalim.capungpedia.Evaluasi.EvaluasiFragment;
 import site.ishaalim.capungpedia.Evaluasi.IntroEvaluasiFragment;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
     private ImageButton buttonNav;
+    public Fragment fragment, fragment2;
+    public String TAG;
 
     private DetailPengamatanFragment detailPengamatanFragment;
 
@@ -54,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         checktheme();
 
-
         detailPengamatanFragment = new DetailPengamatanFragment();
 
         super.onCreate(savedInstanceState);
@@ -64,101 +67,80 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setUpDrawer();
 
-
         if (savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new FragmentBeranda()).commit();
-            navigationView.setCheckedItem(R.id.beranda);
+            fragment = new FragmentBeranda();
+            TAG = "beranda";
+            goToFragment(fragment, TAG);
         }
-
-
-    }
-
-
-
-    private void setUpDrawer() {
-        navigationView.setNavigationItemSelectedListener(this);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-    }
-
-    public void openDrawer() {
-        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.pendahuluan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentPendahuluan()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.pendahuluan);
+                fragment = new FragmentPendahuluan();
+                TAG = "pendahuluan";
+                goToFragment(fragment, TAG);
                 break;
+
             case R.id.beranda:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentBeranda()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.beranda);
+                fragment = new FragmentBeranda();
+                TAG = "beranda";
+                goToFragment(fragment, TAG);
                 break;
+
             case R.id.mengenal_capung:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentMengenalCapung()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.pendahuluan);
+                fragment = new FragmentMengenalCapung();
+                TAG = "mengenal_capung";
+                goToFragment(fragment, TAG);
                 break;
+
             case R.id.mengenal_kawasan_desa:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentMengenalDesa()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.mengenal_kawasan_desa);
+                fragment = new FragmentMengenalDesa();
+                TAG = "mengenal_kawasan_desa";
+                goToFragment(fragment, TAG);
                 break;
+
             case R.id.panduan_pengamatan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentPanduanPengamatan()).commit();
-                uncheckNavItem();
+                fragment = new FragmentPanduanPengamatan();
+                TAG = "panduan_pengamatan";
+                goToFragment(fragment, TAG);
                 break;
+
             case R.id.panduan_Identifikasi:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentPanduanIdentifikasi()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.pendahuluan);
+                fragment = new FragmentPanduanIdentifikasi();
+                TAG = "panduan_Identifikasi";
+                goToFragment(fragment, TAG);
                 break;
 
             case R.id.identifikasi_capung:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new IdentifikasiCapungFragment()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.identifikasi_capung);
+                fragment = new IdentifikasiCapungFragment();
+                TAG = "identifikasi_capung";
+                goToFragment(fragment, TAG);
                 break;
 
             case R.id.ayo_pengamatan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AyoPengamatanFragment()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.ayo_pengamatan);
+                fragment = new AyoPengamatanFragment();
+                TAG = "ayo_pengamatan";
+                goToFragment(fragment, TAG);
                 break;
 
             case R.id.evaluasi:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new IntroEvaluasiFragment()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.evaluasi);
+                fragment = new EvaluasiFragment();
+                TAG = "evaluasi";
+                goToFragment(fragment, TAG);
                 break;
 
             case R.id.petunjuk_penggunaan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentPetunjukPenggunaan()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.petunjuk_penggunaan);
+                fragment = new FragmentPetunjukPenggunaan();
+                TAG = "petunjuk_penggunaan";
+                goToFragment(fragment, TAG);
                 break;
 
             case R.id.glosarium:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentGlosarium()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.glosarium);
+                fragment = new FragmentGlosarium();
+                TAG = "glosarium";
+                goToFragment(fragment, TAG);
                 break;
 
             case R.id.tentang_pengembang:
@@ -168,10 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.referensi:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FragmentReferensi()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.referensi);
+                fragment = new FragmentReferensi();
+                TAG = "referensi";
+                goToFragment(fragment, TAG);
                 break;
 
             case R.id.bagikan_aplikasi:
@@ -184,16 +165,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.laporkan_bug:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LaporBugFragment()).commit();
-                uncheckNavItem();
-                navigationView.setCheckedItem(R.id.referensi);
+                fragment = new LaporBugFragment();
+                TAG = "laporkan_bug";
+                goToFragment(fragment, TAG);
                 break;
 
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (fragment instanceof FragmentBeranda){
+            super.onBackPressed();
+        }else if (fragment instanceof JudulPengamatanFragment){
+            if (fragment2 instanceof DetailPengamatanFragment){
+                TAG = "detail_pengamatan";
+                RemoveFragment(TAG);
+                fragment2 = null;
+            }else {
+                fragment = new AyoPengamatanFragment();
+                TAG = "ayo_pengamatan";
+                goToFragment(fragment, TAG);
+            }
+
+        } else {
+            fragment = new FragmentBeranda();
+            TAG = "beranda";
+            goToFragment(fragment, TAG);
+        }
+
+    }
+
+    @Override
+    public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date) {
+        JudulPengamatanFragment judulPengamatanFragment = (JudulPengamatanFragment)getSupportFragmentManager().findFragmentByTag("judulPengamatan");
+        judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil, imageUri, date);
+    }
+
+    public void setFragment (Fragment mFragment, String tag){
+        fragment = mFragment;
+        TAG = tag;
+
+        goToFragment(fragment, TAG);
+    }
+
+    public void goToFragment(Fragment mfragment, String tag) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mfragment, tag).commit();
+    }
+
+    public void addFragment(Fragment mfragment, String tag) {
+        fragment2 = mfragment;
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mfragment, tag).commit();
+    }
+
+    public void RemoveFragment(String tag) {
+        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag(tag)).commit();
     }
 
     private void uncheckNavItem() {
@@ -224,9 +253,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         finish();
     }
 
-    @Override
-    public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date) {
-        JudulPengamatanFragment judulPengamatanFragment = (JudulPengamatanFragment)getSupportFragmentManager().findFragmentByTag("judulPengamatan");
-        judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil, imageUri, date);
+    private void setUpDrawer() {
+        navigationView.setNavigationItemSelectedListener(this);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+    }
+
+    public void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 }

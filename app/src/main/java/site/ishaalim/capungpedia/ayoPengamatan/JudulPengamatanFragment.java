@@ -49,6 +49,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.ayoPengamatan.adapter.tambahPengamatanAdapter;
 import site.ishaalim.capungpedia.ayoPengamatan.model.Pengamatan;
@@ -120,9 +121,8 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
             public void onClick(View v) {
 
                 DetailPengamatanFragment detailPengamatanFragment = new DetailPengamatanFragment();
-
-                getFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, detailPengamatanFragment).commit();
+                String TAG = "detail_pengamatan";
+                ((MainActivity) getActivity()).addFragment(detailPengamatanFragment, TAG);
             }
         });
 

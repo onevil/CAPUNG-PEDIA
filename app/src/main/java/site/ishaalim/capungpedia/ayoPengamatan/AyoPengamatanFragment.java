@@ -76,9 +76,11 @@ public class AyoPengamatanFragment extends Fragment {
         btnTambahPengamatan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String TAG = "judulPengamatan";
                 JudulPengamatanFragment judulPengamatanFragment = new JudulPengamatanFragment();
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, judulPengamatanFragment, "judulPengamatan").commit();
+                ((MainActivity) getActivity()).setFragment(judulPengamatanFragment, TAG);
+
+
             }
         });
 

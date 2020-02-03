@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -38,6 +39,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.R;
 
 /**
@@ -274,8 +276,13 @@ public class DetailPengamatanFragment extends Fragment {
         listener = null;
     }
 
+
+
     private void removeFragment(){
         getFragmentManager().beginTransaction().remove(this).commit();
+        String TAG = "detail_pengamatan";
+        Fragment fragment = this;
+        ((MainActivity) getActivity()).RemoveFragment(TAG);
     }
 
     private void back() {
