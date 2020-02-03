@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.Pendahuluan.adapter.MengenalCapungViewPagerAdapter;
 import site.ishaalim.capungpedia.Pendahuluan.model.Pendahuluan;
+import site.ishaalim.capungpedia.Pendahuluan.model.isiHalamanPendahuluan;
 import site.ishaalim.capungpedia.R;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -37,7 +38,7 @@ public class FragmentPendahuluan extends Fragment {
 
     FirebaseFirestore firestore;
 
-    ArrayList<Pendahuluan> pendahuluanArrayList;
+    ArrayList<isiHalamanPendahuluan> isiHalamanPendahuluanArrayList;
 
     private TabLayout tabLayout;
     FrameLayout flPendahuluan;
@@ -63,7 +64,7 @@ public class FragmentPendahuluan extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        pendahuluanArrayList = new ArrayList<>();
+        isiHalamanPendahuluanArrayList = new ArrayList<>();
         setUpFirestore();
         initUI();
         setupToolbar();
@@ -133,7 +134,7 @@ public class FragmentPendahuluan extends Fragment {
     }
 
     private void getTabSize() {
-        pendahuluanArrayList.clear();
+        isiHalamanPendahuluanArrayList.clear();
 
         CollectionReference firestoreref = firestore.collection("pendahuluan")
                 .document("AxY8NrrXRnslDNDxlsTP")
@@ -143,15 +144,15 @@ public class FragmentPendahuluan extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (DocumentSnapshot documentSnapshot : task.getResult()){
                     if(task.getResult() != null){
-                        Pendahuluan pendahuluan = documentSnapshot.toObject(Pendahuluan.class);
-                        pendahuluanArrayList.add(pendahuluan);
+                        isiHalamanPendahuluan pendahuluan = documentSnapshot.toObject(isiHalamanPendahuluan.class);
+                        isiHalamanPendahuluanArrayList.add(pendahuluan);
                         Log.d(TAG,"size :"+tabSize);
 
                     }else {
                         Log.d(TAG,"No such Document");
                     }
                 }
-                tabSize = pendahuluanArrayList.size();
+                tabSize = isiHalamanPendahuluanArrayList.size();
                 setupTabLayout(tabSize);
             }
         });

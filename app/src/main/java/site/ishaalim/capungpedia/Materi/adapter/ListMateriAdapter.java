@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
 import site.ishaalim.capungpedia.DetailMateriActivity;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
+import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.Materi.model.listMateri;
 import site.ishaalim.capungpedia.Materi.viewholder.ListMateriViewHolder;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
@@ -38,6 +40,8 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
     ArrayList<listMateri> listMateriArrayList;
     String idmateri;
     RequestOptions options;
+    Fragment fragment;
+    String TAG;
 
     public ListMateriAdapter(Context context, ArrayList<listMateri> listMateriArrayList) {
         this.context = context;
@@ -74,33 +78,40 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
                 FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
                 switch (position){
                     case 0:
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentPendahuluan()).commit();
+                        fragment = new FragmentPendahuluan();
+                        TAG = "pendahuluan";
+                        ((MainActivity) context).setFragment(fragment, TAG);
                         break;
                     case 1:
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentMengenalCapung()).commit();
+                        fragment = new FragmentMengenalCapung();
+                        TAG = "mengenal_capung";
+                        ((MainActivity) context).setFragment(fragment, TAG);
                         break;
                     case 2:
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentMengenalDesa()).commit();
+                        fragment = new FragmentMengenalDesa();
+                        TAG = "mengenal_kawasan_desa";
+                        ((MainActivity) context).setFragment(fragment, TAG);
                         break;
                     case 3:
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentPanduanPengamatan()).commit();
+                        fragment = new FragmentPanduanPengamatan();
+                        TAG = "panduan_pengamatan";
+                        ((MainActivity) context).setFragment(fragment, TAG);
                         break;
                     case 4:
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new FragmentPanduanIdentifikasi()).commit();
+                        fragment = new FragmentPanduanIdentifikasi();
+                        TAG = "panduan_Identifikasi";
+                        ((MainActivity) context).setFragment(fragment, TAG);
                         break;
                     case 5:
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new IdentifikasiCapungFragment()).commit();
+                        fragment = new IdentifikasiCapungFragment();
+                        TAG = "identifikasi_capung";
+                        ((MainActivity) context).setFragment(fragment, TAG);
                         break;
 
                     case 6:
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                                new AyoPengamatanFragment()).commit();
+                        fragment = new AyoPengamatanFragment();
+                        TAG = "ayo_pengamatan";
+                        ((MainActivity) context).setFragment(fragment, TAG);
                         break;
                 }
             }
