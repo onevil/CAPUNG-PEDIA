@@ -24,6 +24,7 @@ import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.DetailPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.JudulPengamatanFragment;
+import site.ishaalim.capungpedia.laporBug.LaporBugFragment;
 import site.ishaalim.capungpedia.mengenalDesa.FragmentMengenalDesa;
 import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
 import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
@@ -180,6 +181,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 shareintent.setType("text/plain");
                 startActivity(Intent.createChooser(shareintent, "Share Aplikasi Via :"));
                 CustomIntent.customType(this, "bottom-to-top");
+                break;
+
+            case R.id.laporkan_bug:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new LaporBugFragment()).commit();
+                uncheckNavItem();
+                navigationView.setCheckedItem(R.id.referensi);
                 break;
 
         }
