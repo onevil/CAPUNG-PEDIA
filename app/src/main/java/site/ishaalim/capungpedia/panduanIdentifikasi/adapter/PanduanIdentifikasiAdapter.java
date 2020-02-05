@@ -83,7 +83,7 @@ public class PanduanIdentifikasiAdapter extends RecyclerView.Adapter<PanduanIden
         View mView = LayoutInflater.from(context).inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
         TextView tvCaption = mView.findViewById(R.id.tv_caption);
-        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_terima_kasih);
         TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
         photoView.setImageDrawable(drawable);

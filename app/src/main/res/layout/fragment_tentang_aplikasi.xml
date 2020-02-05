@@ -160,7 +160,7 @@
             android:layout_marginBottom="5dp"
             android:textColor="?attr/textcolor"
             android:fontFamily="@font/montserrat_medium"
-            android:text="Aplikasi ini dikembangkan oleh \nIshadiyanto Salim"
+            android:text="Aplikasi ini dikembangkan oleh \nTim Capung Pedia"
             android:textAlignment="center" />
 
         <TextView

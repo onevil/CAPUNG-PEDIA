@@ -22,7 +22,6 @@ import com.github.chrisbanes.photoview.PhotoView;
 import java.util.ArrayList;
 
 import maes.tech.intentanim.CustomIntent;
-import site.ishaalim.capungpedia.DetailCapungActivity;
 import site.ishaalim.capungpedia.MapsActivity;
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.mengenalDesa.model.isiHalamanMengenalDesa;
@@ -104,7 +103,7 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
         View mView = LayoutInflater.from(context).inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
         TextView tvCaption = mView.findViewById(R.id.tv_caption);
-        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_terima_kasih);
         TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
         photoView.setImageDrawable(drawable);

@@ -6,8 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,11 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
 
-import java.util.zip.Inflater;
-
 import site.ishaalim.capungpedia.SharedPref.SharedPref;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class DetailCapungActivity extends AppCompatActivity {
 
@@ -236,7 +230,7 @@ public class DetailCapungActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
         TextView tvCaption = mView.findViewById(R.id.tv_caption);
-        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_terima_kasih);
         TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
         photoView.setImageDrawable(drawable);
@@ -267,7 +261,7 @@ public class DetailCapungActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
         TextView tvCaption = mView.findViewById(R.id.tv_caption);
-        TextView tvFotofrafer = mView.findViewById(R.id.tv_fotografer);
+        TextView tvFotofrafer = mView.findViewById(R.id.tv_terima_kasih);
         TextView tvFotoby = mView.findViewById(R.id.tv_photoby);
 
         Glide.with(this).load(imageURL).into(photoView);

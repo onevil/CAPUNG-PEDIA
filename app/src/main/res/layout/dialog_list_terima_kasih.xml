@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/cardbackground"
+        app:cardBackgroundColor="?attr/cardbackground"
         app:cardCornerRadius="15dp"
         app:cardElevation="2dp">
 
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tv_fotografer"
+                android:id="@+id/tv_terima_kasih"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Terima Kasih kepada : "
@@ -27,10 +27,23 @@
                 android:textColor="?attr/textcolor"
                 android:textSize="26sp"/>
 
+            <TextView
+                android:id="@+id/tv_sambutan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Segala puji hanya milik Allah subhanahu wa ta’ala, yang dengan kemudahannya sehingga aplikasi ini dapat diselesaikan. Melalui laman ini, pengembang mengucapkan terima kasih kepada:"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/tv_terima_kasih"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="?attr/textcolor"
+                android:textSize="18sp"/>
+
             <ListView
                 android:id="@+id/lv_fotografer"
-                android:layout_below="@id/tv_fotografer"
+                android:layout_below="@id/tv_sambutan"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="5dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

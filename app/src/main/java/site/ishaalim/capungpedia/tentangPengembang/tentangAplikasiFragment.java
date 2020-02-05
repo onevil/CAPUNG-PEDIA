@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.tentangPengembang.viewmodel.TPpageViewModel;
@@ -27,8 +28,16 @@ import site.ishaalim.capungpedia.tentangPengembang.viewmodel.TPpageViewModel;
  */
 public class tentangAplikasiFragment extends Fragment {
 
-    String[] fotografer = {"Ainun Rubi F.","Hening Triandika R.", "Ishadiyanto Salim", "Mariza Uthami","Prajawan Kusuma W."};
+    String[] fotografer = {"Ainun Rubi F.", "Alfian Surya F.", "Angga Nur Cahyanto","Hening Triandika R.", "Ishadiyanto Salim", "Mariza Uthami","Prajawan Kusuma W."};
     String[] penulis = {"Ishadiyanto Salim"};
+    String[] terimakasih = {"1.\tIbu, Ayah dan Adik yang selalu mendoakan dan mendukung hal-hal yang menjadi kebutuhan anak-anaknya"
+            ,"2.\tBapak Yuni Wibowo yang berkenan membmbing pembuatan aplikasi ini"
+            ,"3.\tMas Praja, Mas Hening dan Mbak Tria yang mengenalkan dunia percapungan"
+            ,"4.\tMariza Uthami, Noormalita, Nur Aini, dan Kharisma Diah yang membantu banyak dalam pengambilan data penelitian"
+            ,"5.\tAnggota Kelompok Studi Odonata yang selalu menemani dan menyemagati dalam pembuatan aplikasi ini"
+            ,"6.\tMuhammad Adi Febri Setiawan, Muhammad Ihsan Satyawan, Ananda Mukhammad Ikhsan dan tim IT lainnya atas saran, kerjasama dan bantuannya"
+            ,"7.\tMas Hening, Mas Praja, Mas Angga, Uut, Alfian, Ainun atas pinjaman foto-fotonya"
+            ,"8.\tIndonesia Dragonfly Society atas masukkan dan refrensinya"};
 
     CardView cv_fotografer, cv_penulis, cv_terimaKasih;
     ArrayAdapter<String> adapter;
@@ -97,7 +106,7 @@ public class tentangAplikasiFragment extends Fragment {
 
         ListView listFotografer = mView.findViewById(R.id.lv_fotografer);
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, fotografer);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, terimakasih);
 
         listFotografer.setAdapter(adapter);
         adapter.notifyDataSetInvalidated();
@@ -115,7 +124,9 @@ public class tentangAplikasiFragment extends Fragment {
         ListView listFotografer = mView.findViewById(R.id.lv_fotografer);
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, fotografer);
-
+        for (int i = 0; i < listFotografer.getChildCount(); i++) {
+            ((TextView)listFotografer.getChildAt(i)).setTextColor(getResources().getColor(R.color.white));
+        }
         listFotografer.setAdapter(adapter);
         adapter.notifyDataSetInvalidated();
 
