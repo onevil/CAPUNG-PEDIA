@@ -20,7 +20,7 @@
             android:fitsSystemWindows="true"
             app:title="Identifikasi Capung"
             app:layout_scrollFlags="scroll|enterAlways"
-            android:titleTextColor="?attr/textcolor"
+            app:titleTextColor="?attr/textcolor"
             />
 
         <com.google.android.material.tabs.TabLayout

@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.Beranda;
 
 
+import android.graphics.drawable.Drawable;
 import android.icu.text.Transliterator;
 import android.os.Bundle;
 
@@ -90,27 +91,15 @@ public class FragmentBeranda extends Fragment {
 
         loadlistMateriRV();
 
+
+
+
         buttonNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).openDrawer();
             }
         });
-        /*if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-            DarkModeswitch.setChecked(true);
-        }
-        DarkModeswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    recreate();
-                }else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    recreate();
-                }
-            }
-        });*/
 
     }
 

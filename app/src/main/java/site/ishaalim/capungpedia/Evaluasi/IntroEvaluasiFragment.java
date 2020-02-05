@@ -47,6 +47,8 @@ public class IntroEvaluasiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 EvaluasiFragment evaluasiFragment = new EvaluasiFragment();
+                String TAG = "Evaluasi";
+                ((MainActivity) getActivity()).setFragment(evaluasiFragment, TAG);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, evaluasiFragment, "Evaluasi").commit();
             }

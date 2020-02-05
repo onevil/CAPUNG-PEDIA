@@ -14,12 +14,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.zip.Inflater;
+
+import site.ishaalim.capungpedia.SharedPref.SharedPref;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -28,6 +31,7 @@ public class DetailCapungActivity extends AppCompatActivity {
     private TextView tvnamaSpesies, tvfamilli, tvfillum, tvkingdom, tvkelas, tvordo, tvdeskripsi, tvkepalaJantan, tvkepalaBetina, tvbadanJantan, tvbadanBetina, tvperutJantan, tvperutBetina, tvkakiJantan, tvkakiBetina, tvsayapJantan, tvsayapBetina, tvembelanJantan, tvembelanBetina;
     private ImageView ivImage1, ivImage2, ivImage3;
     Toolbar toolbar;
+    private SharedPref sharedpref;
 
     RequestOptions options;
 
@@ -37,8 +41,12 @@ public class DetailCapungActivity extends AppCompatActivity {
             sayapJantan, sayapBetina, embelanJantan, embelanBetina;
     private Uri uri2, uri3;
 
+    Drawable backIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedpref = new SharedPref(this);
+        checkTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_capung);
 
@@ -64,6 +72,7 @@ public class DetailCapungActivity extends AppCompatActivity {
         setEvents();
 
     }
+
 
     private void setEvents() {
         ivImage1.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +101,41 @@ public class DetailCapungActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void checkTheme(){
+
+        if(sharedpref.loadNightModeState()==true) {
+            setTheme(R.style.DarkTheme);
+        }
+        else  {
+            sharedpref.setNightModeState(false);
+            setTheme(R.style.AppTheme);
+        }
+
+        setUpIcons();
+
+    }
+
+    private void setUpIcons(){
+        backIcon = getDrawable(R.drawable.ic_back);
+
+        if (sharedpref.loadNightModeState() == true){
+            setTintWhite(backIcon);
+        }else {
+            setTintBlack(backIcon);
+
+        }
+    }
+
+    private void setTintBlack(Drawable drawable){
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, getResources().getColor(R.color.black));
+    }
+
+    private void setTintWhite(Drawable drawable){
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, getResources().getColor(R.color.white));
     }
 
     private void setUpToolbar() {

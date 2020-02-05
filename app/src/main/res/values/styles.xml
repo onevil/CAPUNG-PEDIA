@@ -11,6 +11,8 @@
         <item name="textcolor">#000000</item>
         <item name="tintcolor">#000000</item>
         <item name="buttoncolor">#41f5b2</item>
+        <item name="android:textColorSecondary">#8D8C8C</item>
+        <item name="android:textColorHint">#8D8C8C</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
@@ -24,6 +26,8 @@
         <item name="textcolor">#ffffff</item>
         <item name="tintcolor">#ffffff</item>
         <item name="buttoncolor">#41f5b2</item>
+        <item name="android:textColorSecondary">#FFFFFF</item>
+        <item name="android:textColorHint">#FFFFFF</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 

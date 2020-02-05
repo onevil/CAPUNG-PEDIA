@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:background="?attr/backgroundcolor"
             android:layout_gravity="start|left"
-            app:itemIconTint="#000000"
+            app:itemIconTint="?attr/textcolor"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             app:headerLayout="@layout/header_drawer_navigation"
             app:itemTextColor="?attr/textcolor"

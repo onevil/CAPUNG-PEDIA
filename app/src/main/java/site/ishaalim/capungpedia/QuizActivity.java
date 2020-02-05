@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import site.ishaalim.capungpedia.Evaluasi.model.isiSoal;
+import site.ishaalim.capungpedia.SharedPref.SharedPref;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -45,8 +48,14 @@ public class QuizActivity extends AppCompatActivity {
     String paket, btn1, btn2, btn3, btn4, btn5, idsoal, jawabanbenar;
     int jumlahsoal, score, posisisoal, nilaiakhir;
 
+    SharedPref sharedpref;
+
+    Drawable backIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedpref = new SharedPref(this);
+        checkTheme();
         super.onCreate(savedInstanceState);
 
         getExtra();
@@ -213,6 +222,41 @@ public class QuizActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void checkTheme(){
+
+        if(sharedpref.loadNightModeState()==true) {
+            setTheme(R.style.DarkTheme);
+        }
+        else  {
+            sharedpref.setNightModeState(false);
+            setTheme(R.style.AppTheme);
+        }
+
+        setUpIcons();
+
+    }
+
+    private void setUpIcons(){
+        backIcon = getDrawable(R.drawable.ic_back);
+
+        if (sharedpref.loadNightModeState() == true){
+            setTintWhite(backIcon);
+        }else {
+            setTintBlack(backIcon);
+
+        }
+    }
+
+    private void setTintBlack(Drawable drawable){
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, getResources().getColor(R.color.black));
+    }
+
+    private void setTintWhite(Drawable drawable){
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, getResources().getColor(R.color.white));
     }
 
     private void showHasilAkhirDialog() {

@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -23,6 +25,7 @@ import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
+import site.ishaalim.capungpedia.SharedPref.SharedPref;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.DetailPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.JudulPengamatanFragment;
@@ -46,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageButton buttonNav;
     public Fragment fragment, fragment2;
     public String TAG;
+    private SharedPref sharedpref;
+
+    Drawable Drawericon, Notificon, SearchIcon;
 
     private DetailPengamatanFragment detailPengamatanFragment;
 
@@ -56,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
 
-        checktheme();
+        sharedpref = new SharedPref(this);
+        checkTheme();
 
         detailPengamatanFragment = new DetailPengamatanFragment();
 
@@ -126,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.evaluasi:
-                fragment = new EvaluasiFragment();
-                TAG = "evaluasi";
+                fragment = new IntroEvaluasiFragment();
+                TAG = "introevaluasi";
                 goToFragment(fragment, TAG);
                 break;
 
@@ -154,6 +161,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 TAG = "referensi";
                 goToFragment(fragment, TAG);
                 break;
+
+            case R.id.pengaturan:
+                Intent intenPengaturan = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(intenPengaturan);
+                CustomIntent.customType(this, "left-to-right");
+                break;
+
 
             case R.id.bagikan_aplikasi:
                 final Intent shareintent = new Intent(android.content.Intent.ACTION_SEND);
@@ -200,6 +214,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (sharedpref.loadNightModeState() != sharedpref.loadCurrentModeState()){
+            recreate();
+            setUpIcons();
+            sharedpref.setCurrentModeState(sharedpref.loadNightModeState());
+        }
+    }
+
+    @Override
     public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date) {
         JudulPengamatanFragment judulPengamatanFragment = (JudulPengamatanFragment)getSupportFragmentManager().findFragmentByTag("judulPengamatan");
         judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil, imageUri, date);
@@ -239,18 +263,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         buttonNav = findViewById(R.id.btn_drawer);
     }
 
-    public void checktheme() {
-        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.DarkTheme);
-        }else {
-            setTheme(R.style.AppTheme);
-        }
-    }
+//    public void checktheme() {
+//        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+//            setTheme(R.style.DarkTheme);
+//        }else {
+//            setTheme(R.style.AppTheme);
+//        }
+//    }
 
     public void restartApp() {
         Intent i = new Intent(getApplicationContext(), Settings.class);
         startActivity(i);
         finish();
+    }
+
+    private void setUpIcons(){
+
+        Drawericon = getDrawable(R.drawable.ic_drawer);
+        Notificon  = getDrawable(R.drawable.ic_notif);
+        SearchIcon  = getDrawable(R.drawable.ic_search);
+
+        if (sharedpref.loadNightModeState() == true){
+            setTintWhite(Drawericon);
+            setTintWhite(Notificon);
+            setTintWhite(SearchIcon);
+
+        }else {
+            setTintBlack(Drawericon);
+            setTintBlack(Notificon);
+            setTintBlack(SearchIcon);
+        }
+    }
+
+    private void setTintBlack(Drawable drawable){
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, getResources().getColor(R.color.black));
+    }
+
+    private void setTintWhite(Drawable drawable){
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, getResources().getColor(R.color.white));
     }
 
     private void setUpDrawer() {
@@ -262,5 +314,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void openDrawer() {
         drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    private void checkTheme(){
+
+        if(sharedpref.loadNightModeState()==true) {
+            setTheme(R.style.DarkTheme);
+        }
+        else  {
+            sharedpref.setNightModeState(false);
+            setTheme(R.style.AppTheme);
+        }
+
+        setUpIcons();
+
     }
 }

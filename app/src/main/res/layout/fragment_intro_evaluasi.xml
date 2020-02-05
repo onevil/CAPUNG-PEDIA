@@ -10,6 +10,8 @@
         android:id="@+id/toolbar_intro_evaluasi"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        app:title="Evaluasi"
+        app:titleTextColor="?attr/textcolor"
         android:background="?attr/cardbackground"
         android:elevation="2dp">
 
@@ -22,6 +24,7 @@
         android:layout_below="@+id/toolbar_intro_evaluasi"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="25dp"
+        app:cardBackgroundColor="?attr/cardbackground"
         android:padding="15dp"
         app:cardCornerRadius="15dp">
 

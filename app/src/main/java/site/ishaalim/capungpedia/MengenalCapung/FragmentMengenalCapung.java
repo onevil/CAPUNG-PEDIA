@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.MengenalCapung;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +12,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.DrawableUtils;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -31,6 +34,7 @@ import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.MengenalCapung.adapter.MengenalCapungViewPagerAdapter;
 import site.ishaalim.capungpedia.MengenalCapung.model.mengenalCapung;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.SharedPref.SharedPref;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -40,6 +44,8 @@ public class FragmentMengenalCapung extends Fragment {
     FirebaseFirestore firestore;
 
     ArrayList<mengenalCapung> mengenalCapungArrayList;
+
+    SharedPref sharedPref;
 
     private TabLayout tabLayout;
     FrameLayout flMengenalCapung;
@@ -66,6 +72,7 @@ public class FragmentMengenalCapung extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mengenalCapungArrayList = new ArrayList<>();
+        sharedPref = new SharedPref(getContext());
         setUpFirestore();
         initUI();
         setupToolbar();
@@ -76,6 +83,7 @@ public class FragmentMengenalCapung extends Fragment {
     }
 
     private void setupToolbar() {
+
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_drawer));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

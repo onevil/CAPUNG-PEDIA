@@ -10,6 +10,8 @@
         android:id="@+id/toolbar_ayo_pengamatan"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        app:titleTextColor="?attr/textcolor"
+        android:foregroundTint="?attr/textcolor"
         app:title="Ayo Pengamatan!"
         android:background="?attr/cardbackground"
         android:elevation="2dp">
