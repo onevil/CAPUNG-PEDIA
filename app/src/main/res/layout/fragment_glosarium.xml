@@ -50,15 +50,16 @@
 
                     <EditText
                         android:id="@+id/edt_glosarium"
-                        android:layout_width="250dp"
+                        android:layout_width="0dp"
                         android:layout_height="25dp"
                         android:background="?attr/cardbackground"
                         android:hint="Cari kata kunci..."
+                        android:layout_marginHorizontal="15dp"
                         android:textColor="?attr/textcolor"
                         android:fontFamily="@font/montserrat_semibold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btn_search_glosarium"
+                        app:layout_constraintStart_toEndOf="@id/btn_drawer_glosarium"
                         app:layout_constraintTop_toTopOf="parent" />
 
 

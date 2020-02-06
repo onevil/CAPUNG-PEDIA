@@ -43,6 +43,8 @@ import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.Materi.adapter.ListMateriAdapter;
 import site.ishaalim.capungpedia.Materi.model.listMateri;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
+import site.ishaalim.capungpedia.petunjukPenggunaan.adapter.PetunjukPenggunaanAdapter;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -51,6 +53,7 @@ public class FragmentBeranda extends Fragment {
 
     private Switch DarkModeswitch;
     private ImageButton buttonNav;
+    private LinearLayout llPetunjukPenggunaan;
 
     FirebaseFirestore firestore;
 
@@ -91,9 +94,12 @@ public class FragmentBeranda extends Fragment {
 
         loadlistMateriRV();
 
+        setEvents();
 
 
+    }
 
+    private void setEvents(){
         buttonNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +107,14 @@ public class FragmentBeranda extends Fragment {
             }
         });
 
+        llPetunjukPenggunaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentPetunjukPenggunaan fragmentPetunjukPenggunaan = new FragmentPetunjukPenggunaan();
+                String TAG = "petunjuk_penggunaan";
+                ((MainActivity)getActivity()).setFragment(fragmentPetunjukPenggunaan, TAG);
+            }
+        });
     }
 
     private void loadlistMateriRV() {
@@ -161,6 +175,7 @@ public class FragmentBeranda extends Fragment {
     private void initUI() {
         DarkModeswitch = getView().findViewById(R.id.myswitch);
         buttonNav = getView().findViewById(R.id.btn_drawer);
+        llPetunjukPenggunaan = getView().findViewById(R.id.ll_petunjuk_penggunaan);
     }
 
 
