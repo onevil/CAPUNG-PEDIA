@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -99,6 +101,13 @@ public class FragmentBeranda extends Fragment {
 
     }
 
+    private void initUI() {
+        DarkModeswitch = getView().findViewById(R.id.myswitch);
+        buttonNav = getView().findViewById(R.id.btn_drawer);
+        llPetunjukPenggunaan = getView().findViewById(R.id.ll_petunjuk_penggunaan);
+    }
+
+
     private void setEvents(){
         buttonNav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +124,8 @@ public class FragmentBeranda extends Fragment {
                 ((MainActivity)getActivity()).setFragment(fragmentPetunjukPenggunaan, TAG);
             }
         });
+
+
     }
 
     private void loadlistMateriRV() {
@@ -160,7 +171,7 @@ public class FragmentBeranda extends Fragment {
     }
 
     private void setUpSliderView() {
-        SliderView sliderView = getView().findViewById(R.id.imageSlider_Header);
+        final SliderView sliderView = getView().findViewById(R.id.imageSlider_Header);
         sliderAdapter = new  SliderAdapter(getContext(), links);
         sliderView.setSliderAdapter(sliderAdapter);
 
@@ -170,14 +181,8 @@ public class FragmentBeranda extends Fragment {
 
         sliderView.setScrollTimeInSec(5);
         sliderView.startAutoCycle();
-    }
 
-    private void initUI() {
-        DarkModeswitch = getView().findViewById(R.id.myswitch);
-        buttonNav = getView().findViewById(R.id.btn_drawer);
-        llPetunjukPenggunaan = getView().findViewById(R.id.ll_petunjuk_penggunaan);
     }
-
 
 }
 

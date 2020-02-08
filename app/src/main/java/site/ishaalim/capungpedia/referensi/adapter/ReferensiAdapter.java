@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.referensi.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,8 @@ public class ReferensiAdapter extends RecyclerView.Adapter<ReferensiViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ReferensiViewHolder holder, int position) {
-        holder.tvReferensi.setText(referensiArrayList.get(position).getReferensi());
+        String referensi = referensiArrayList.get(position).getReferensi();
+        holder.tvReferensi.setText(Html.fromHtml(referensi));
     }
 
     @Override

@@ -3,7 +3,6 @@ package site.ishaalim.capungpedia;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -13,13 +12,11 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
 import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
-import site.ishaalim.capungpedia.Evaluasi.EvaluasiFragment;
 import site.ishaalim.capungpedia.Evaluasi.IntroEvaluasiFragment;
 import site.ishaalim.capungpedia.Glosarium.FragmentGlosarium;
 import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public String TAG;
     private SharedPref sharedpref;
 
-    Drawable Drawericon, Notificon, SearchIcon;
+    Drawable Drawericon, Notificon, SearchIcon, CloseIcon, BackIcon;
 
     private DetailPengamatanFragment detailPengamatanFragment;
 
@@ -263,35 +260,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         buttonNav = findViewById(R.id.btn_drawer);
     }
 
-//    public void checktheme() {
-//        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-//            setTheme(R.style.DarkTheme);
-//        }else {
-//            setTheme(R.style.AppTheme);
-//        }
-//    }
-
-    public void restartApp() {
-        Intent i = new Intent(getApplicationContext(), Settings.class);
-        startActivity(i);
-        finish();
-    }
-
     private void setUpIcons(){
 
         Drawericon = getDrawable(R.drawable.ic_drawer);
         Notificon  = getDrawable(R.drawable.ic_notif);
         SearchIcon  = getDrawable(R.drawable.ic_search);
+        CloseIcon = getDrawable(R.drawable.ic_delete);
+        BackIcon = getDrawable(R.drawable.ic_back);
 
         if (sharedpref.loadNightModeState() == true){
             setTintWhite(Drawericon);
             setTintWhite(Notificon);
             setTintWhite(SearchIcon);
+            setTintWhite(CloseIcon);
+            setTintWhite(BackIcon);
 
         }else {
             setTintBlack(Drawericon);
             setTintBlack(Notificon);
             setTintBlack(SearchIcon);
+            setTintBlack(CloseIcon);
+            setTintBlack(BackIcon);
         }
     }
 

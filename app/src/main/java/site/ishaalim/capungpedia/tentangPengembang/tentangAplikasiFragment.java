@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,32 +19,30 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import site.ishaalim.capungpedia.R;
-import site.ishaalim.capungpedia.tentangPengembang.viewmodel.TPpageViewModel;
+import site.ishaalim.capungpedia.tentangPengembang.adapter.ContributorAdapter;
+import site.ishaalim.capungpedia.tentangPengembang.model.Contributor;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class tentangAplikasiFragment extends Fragment {
 
-    String[] fotografer = {"Ainun Rubi F.", "Alfian Surya F.", "Angga Nur Cahyanto","Hening Triandika R.", "Ishadiyanto Salim", "Mariza Uthami","Prajawan Kusuma W."};
+
     String[] penulis = {"Ishadiyanto Salim"};
-    String[] terimakasih = {"1.\tIbu, Ayah dan Adik yang selalu mendoakan dan mendukung hal-hal yang menjadi kebutuhan anak-anaknya"
-            ,"2.\tBapak Yuni Wibowo yang berkenan membmbing pembuatan aplikasi ini"
-            ,"3.\tMas Praja, Mas Hening dan Mbak Tria yang mengenalkan dunia percapungan"
-            ,"4.\tMariza Uthami, Noormalita, Nur Aini, dan Kharisma Diah yang membantu banyak dalam pengambilan data penelitian"
-            ,"5.\tAnggota Kelompok Studi Odonata yang selalu menemani dan menyemagati dalam pembuatan aplikasi ini"
-            ,"6.\tMuhammad Adi Febri Setiawan, Muhammad Ihsan Satyawan, Ananda Mukhammad Ikhsan dan tim IT lainnya atas saran, kerjasama dan bantuannya"
-            ,"7.\tMas Hening, Mas Praja, Mas Angga, Uut, Alfian, Ainun atas pinjaman foto-fotonya"
-            ,"8.\tIndonesia Dragonfly Society atas masukkan dan refrensinya"};
+    ArrayList<Contributor> terimakasihArrayList, fotograferArrayList, penulisArrayList;
+
+    RecyclerView RVterimakasih, RVpenulis, RVfotografer;
 
     CardView cv_fotografer, cv_penulis, cv_terimaKasih;
     ArrayAdapter<String> adapter;
 
 
     public tentangAplikasiFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -65,8 +63,78 @@ public class tentangAplikasiFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initUI();
+        setTerimaKasihArray();
+        setFotograferArray();
+        setPenulisArray();
         setEvents();
 
+    }
+
+    private void setTerimaKasihArray() {
+        terimakasihArrayList = new ArrayList<>();
+        String c1 = "1.\tIbu, Ayah dan Adik yang selalu mendoakan dan mendukung hal-hal yang menjadi kebutuhan anak-anaknya";
+        String c2 = "2.\tBapak Yuni Wibowo yang berkenan membmbing pembuatan aplikasi ini";
+        String c3 = "3.\tMas Praja, Mas Hening dan Mbak Tria yang mengenalkan dunia percapungan";
+        String c4 = "4.\tMariza Uthami, Noormalita, Nur Aini, dan Kharisma Diah yang membantu banyak dalam pengambilan data penelitian";
+        String c5 = "5.\tAnggota Kelompok Studi Odonata yang selalu menemani dan menyemagati dalam pembuatan aplikasi ini";
+        String c6 = "6.\tMuhammad Adi Febri Setiawan, Muhammad Ihsan Satyawan, Ananda Mukhammad Ikhsan dan tim IT lainnya atas saran, kerjasama dan bantuannya";
+        String c7 = "7.\tMas Hening, Mas Praja, Mas Angga, Uut, Alfian, Ainun atas pinjaman foto-fotonya";
+        String c8 = "8.\tIndonesia Dragonfly Society atas masukkan dan refrensinya";
+
+        addTerimaKasihArray(c1);
+        addTerimaKasihArray(c2);
+        addTerimaKasihArray(c3);
+        addTerimaKasihArray(c4);
+        addTerimaKasihArray(c5);
+        addTerimaKasihArray(c6);
+        addTerimaKasihArray(c7);
+        addTerimaKasihArray(c8);
+
+    }
+
+    private void addTerimaKasihArray(String nama){
+        Contributor contributor = new Contributor();
+        contributor.setNama(nama);
+        terimakasihArrayList.add(contributor);
+    }
+
+    public void setFotograferArray(){
+        fotograferArrayList = new ArrayList<>();
+        String c1 = "Ainun Rubi F.";
+        String c2 = "Alfian Surya F.";
+        String c3 = "Angga Nur Cahyanto";
+        String c4 = "Hening Triandika R.";
+        String c5 = "Ishadiyanto Salim";
+        String c6 = "Mariza Uthami";
+        String c7 = "Prajawan Kusuma W.";
+
+        addfotograferArray(c1);
+        addfotograferArray(c2);
+        addfotograferArray(c3);
+        addfotograferArray(c4);
+        addfotograferArray(c5);
+        addfotograferArray(c6);
+        addfotograferArray(c7);
+
+    }
+
+    private void addfotograferArray(String nama){
+        Contributor contributor = new Contributor();
+        contributor.setNama(nama);
+        fotograferArrayList.add(contributor);
+    }
+
+    public void setPenulisArray(){
+        penulisArrayList = new ArrayList<>();
+        String c1 = "Ishadiyanto Salim";
+
+        addPenulisArray(c1);
+    }
+
+    private void addPenulisArray(String nama){
+        Contributor contributor = new Contributor();
+        contributor.setNama(nama);
+        penulisArrayList.add(contributor);
     }
 
 
@@ -104,12 +172,12 @@ public class tentangAplikasiFragment extends Fragment {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_list_terima_kasih, null);
 
-        ListView listFotografer = mView.findViewById(R.id.lv_fotografer);
+        ContributorAdapter contributorAdapter = new ContributorAdapter(terimakasihArrayList, getContext());
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, terimakasih);
-
-        listFotografer.setAdapter(adapter);
-        adapter.notifyDataSetInvalidated();
+        RVterimakasih = mView.findViewById(R.id.rv_contributor);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        RVterimakasih.setLayoutManager(layoutManager);
+        RVterimakasih.setAdapter(contributorAdapter);
 
         dialog.setView(mView);
         AlertDialog dialogFotografer = dialog.create();
@@ -121,14 +189,12 @@ public class tentangAplikasiFragment extends Fragment {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_list_fotografer, null);
 
-        ListView listFotografer = mView.findViewById(R.id.lv_fotografer);
+        ContributorAdapter contributorAdapter = new ContributorAdapter(fotograferArrayList, getContext());
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, fotografer);
-        for (int i = 0; i < listFotografer.getChildCount(); i++) {
-            ((TextView)listFotografer.getChildAt(i)).setTextColor(getResources().getColor(R.color.white));
-        }
-        listFotografer.setAdapter(adapter);
-        adapter.notifyDataSetInvalidated();
+        RVfotografer = mView.findViewById(R.id.rv_contributor);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        RVfotografer.setLayoutManager(layoutManager);
+        RVfotografer.setAdapter(contributorAdapter);
 
         dialog.setView(mView);
         AlertDialog dialogFotografer = dialog.create();
@@ -140,12 +206,12 @@ public class tentangAplikasiFragment extends Fragment {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_list_penulis, null);
 
-        ListView listFotografer = mView.findViewById(R.id.lv_fotografer);
+        ContributorAdapter contributorAdapter = new ContributorAdapter(penulisArrayList, getContext());
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, penulis);
-
-        listFotografer.setAdapter(adapter);
-        adapter.notifyDataSetInvalidated();
+        RVpenulis = mView.findViewById(R.id.rv_contributor);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        RVpenulis.setLayoutManager(layoutManager);
+        RVpenulis.setAdapter(contributorAdapter);
 
         dialog.setView(mView);
         AlertDialog dialogFotografer = dialog.create();
