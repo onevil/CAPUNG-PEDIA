@@ -11,6 +11,11 @@ public class SharedPref {
         mySharedPref = context.getSharedPreferences("filename",Context.MODE_PRIVATE);
     }
 
+    public Boolean loadNotification(){
+        Boolean state = mySharedPref.getBoolean("notification", true);
+        return state;
+    }
+
     public void setNightModeState(Boolean state) {
         SharedPreferences.Editor editor = mySharedPref.edit();
         editor.putBoolean("NightMode",state);

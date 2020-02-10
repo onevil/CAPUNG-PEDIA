@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1032101318345-g66800mah4cfr39bide32ef82994vlsi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "site.ishaalim.capungpedia",
+            "certificate_hash": "807cf5ffa605e7abdafb40e57a1cec6d2029216c"
+          }
+        },
+        {
           "client_id": "1032101318345-ahsl93lvragusc4a54sjq9fks2b9tbn0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

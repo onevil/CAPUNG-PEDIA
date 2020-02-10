@@ -34,6 +34,8 @@ import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
 import site.ishaalim.capungpedia.referensi.FragmentReferensi;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.Date;
 
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         sharedpref = new SharedPref(this);
         checkTheme();
+        sharedpref.loadNotification();
+        FirebaseMessaging.getInstance().subscribeToTopic("pengamatan");
 
         detailPengamatanFragment = new DetailPengamatanFragment();
 

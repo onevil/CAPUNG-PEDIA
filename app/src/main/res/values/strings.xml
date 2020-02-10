@@ -18,4 +18,5 @@
     <string name="biodata_pengembang">Mahasiswa Program Studi Pendidikan Biologi, Jurusan Pendidikan Biologi, Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Negeri Yogyakarta \n\nAktivis Pemerhati Capung Kelompok Studi Odonata UNY</string>
     <string name="tentang_pembimbing">\t\tDosen Program Studi Pendidikan Biologi, Jurusan Pendidikan Biologi, Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Negeri Yogyakarta.</string>
     <string name="title_activity_maps">Map</string>
+    <string name="default_notification_channel_id">1</string>
 </resources>
