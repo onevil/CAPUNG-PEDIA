@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".notification.NotificationActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -53,8 +53,8 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".tentangPengembangActivity" />
-        <activity android:name=".DetailCapungActivity" />
-        <activity android:name=".QuizActivity" />
+        <activity android:name=".IdentifikasiCapung.DetailCapungActivity" />
+        <activity android:name=".Evaluasi.QuizActivity" />
         <activity android:name=".DetailMateriActivity" />
         <activity android:name=".SettingActivity" />
         <activity

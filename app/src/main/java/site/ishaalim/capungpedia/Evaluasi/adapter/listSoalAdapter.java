@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.Evaluasi.model.listSoal;
 import site.ishaalim.capungpedia.Evaluasi.viewholder.listSoalViewHolder;
-import site.ishaalim.capungpedia.QuizActivity;
+import site.ishaalim.capungpedia.Evaluasi.QuizActivity;
 import site.ishaalim.capungpedia.R;
 
 public class listSoalAdapter extends RecyclerView.Adapter<listSoalViewHolder> {

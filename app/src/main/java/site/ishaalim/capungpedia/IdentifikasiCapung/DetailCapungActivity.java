@@ -1,4 +1,4 @@
-package site.ishaalim.capungpedia;
+package site.ishaalim.capungpedia.IdentifikasiCapung;
 
 import android.app.AlertDialog;
 import android.graphics.Color;
@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,21 +19,21 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.SharedPref.SharedPref;
 
 public class DetailCapungActivity extends AppCompatActivity {
 
-    private TextView tvnamaSpesies, tvfamilli, tvfillum, tvkingdom, tvkelas, tvordo, tvdeskripsi, tvkepalaJantan, tvkepalaBetina, tvbadanJantan, tvbadanBetina, tvperutJantan, tvperutBetina, tvkakiJantan, tvkakiBetina, tvsayapJantan, tvsayapBetina, tvembelanJantan, tvembelanBetina;
-    private ImageView ivImage1, ivImage2, ivImage3;
+    private TextView tvnamaSpesies, tvnamaIndonesia, tvnamaInggris, tvfamilli, tvDeskripsi, tvKebiasaan, tvSosial, tvInformasiLain;
+    private ImageView ivImage1, ivUkuran;
     Toolbar toolbar;
     private SharedPref sharedpref;
 
-    RequestOptions options;
+    RequestOptions options, options2;
 
-    private String namaSpesies, familli, fillum, kingdom, kelas, ordo,
-            deskripsi, imagecaption1, imagephotografer1, image1, imagecaption2, imagephotografer2, image2, imagecaption3, imagephotografer3,image3,  kepalaJantan, kepalaBetina,
-            badanJantan, badanBetina, perutJantan, perutBetina, kakiJantan, kakiBetina,
-            sayapJantan, sayapBetina, embelanJantan, embelanBetina;
+    private String namaSpesies, namaIndonesia, namaInggris,
+            deskripsi, imagecaption1, imagephotografer1, image1,
+            familli, kebiasaan, sosial, informasiLain, ukuran ;
     private Uri uri2, uri3;
 
     Drawable backIcon;
@@ -43,26 +44,13 @@ public class DetailCapungActivity extends AppCompatActivity {
         checkTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_capung);
-
         getExtras();
+        initUI();
         options = new RequestOptions().centerCrop();
-
-        toolbar = findViewById(R.id.toolbar_detail_capung);
+        options2 = new RequestOptions().fitCenter();
         setSupportActionBar(toolbar);
         setUpToolbar();
-
-
-        initUI();
-        if (image2 != null){
-            uri2 = Uri.parse(image2);
-        }
-
-        if (image3 != null){
-            uri3 = Uri.parse(image3);
-        }
-
         loadContent();
-
         setEvents();
 
     }
@@ -78,23 +66,6 @@ public class DetailCapungActivity extends AppCompatActivity {
             }
         });
 
-        ivImage2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ivImage2 != null){
-                    showImageURL(image2, imagecaption2, imagephotografer2);
-                }
-            }
-        });
-
-        ivImage3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ivImage3 != null){
-                    showImageURL(image3, imagecaption2, imagephotografer2);
-                }
-            }
-        });
     }
 
     private void checkTheme(){
@@ -140,92 +111,52 @@ public class DetailCapungActivity extends AppCompatActivity {
                 finish();
             }
         });
+        toolbar.setTitle(Html.fromHtml(namaSpesies));
     }
 
 
         private void loadContent() {
-        tvnamaSpesies.setText(namaSpesies);
-        tvfamilli.setText(familli);
-        tvkingdom.setText(kingdom);
-        tvfillum.setText(fillum);
-        tvkelas.setText(kelas);
-        tvordo.setText(ordo);
-        tvdeskripsi.setText(deskripsi);
-        tvkepalaJantan.setText(kepalaJantan);
-        tvkepalaBetina.setText(kepalaBetina);
-        tvbadanJantan.setText(badanJantan);
-        tvbadanBetina.setText(badanBetina);
-        tvperutJantan.setText(perutJantan);
-        tvperutBetina.setText(perutBetina);
-        tvkakiJantan.setText(kakiJantan);
-        tvkakiBetina.setText(kakiBetina);
-        tvsayapJantan.setText(sayapJantan);
-        tvsayapBetina.setText(sayapBetina);
-        tvembelanJantan.setText(embelanJantan);
-        tvembelanBetina.setText(embelanBetina);
+        tvnamaSpesies.setText(Html.fromHtml(namaSpesies));
+        tvnamaIndonesia.setText(Html.fromHtml(namaIndonesia));
+        tvnamaInggris.setText(Html.fromHtml(namaInggris));
+        tvfamilli.setText(Html.fromHtml(familli));
+        tvDeskripsi.setText(Html.fromHtml(deskripsi));
+        tvKebiasaan.setText(Html.fromHtml(kebiasaan));
+        tvSosial.setText(Html.fromHtml(sosial));
+        tvInformasiLain.setText(Html.fromHtml(informasiLain));
 
         Glide.with(getApplicationContext()).load(image1).apply(options).into(ivImage1);
-        Glide.with(getApplicationContext()).load(image2).apply(options).into(ivImage2);
-        Glide.with(getApplicationContext()).load(image3).apply(options).into(ivImage3);
-
+        Glide.with(getApplicationContext()).load(ukuran).into(ivUkuran);
     }
 
     private void getExtras() {
         namaSpesies = getIntent().getExtras().getString("namaSpesies");
+        namaIndonesia = getIntent().getExtras().getString("namaIndonesia");
+        namaInggris = getIntent().getExtras().getString("namaInggris");
         familli = getIntent().getExtras().getString("familli");
-        fillum = getIntent().getExtras().getString("fillum");
-        kingdom = getIntent().getExtras().getString("kingdom");
-        kelas = getIntent().getExtras().getString("kelas");
-        ordo = getIntent().getExtras().getString("ordo");
         deskripsi = getIntent().getExtras().getString("deskripsi");
+        kebiasaan = getIntent().getExtras().getString("kebiasaan");
+        sosial = getIntent().getExtras().getString("sosial");
+        informasiLain = getIntent().getExtras().getString("informasiLain");
         image1 = getIntent().getExtras().getString("image1");
-        image2 = getIntent().getExtras().getString("image2");
-        image3 = getIntent().getExtras().getString("image3");
-        kepalaJantan = getIntent().getExtras().getString("kepalaJantan");
-        kepalaBetina = getIntent().getExtras().getString("kepalaBetina");
-        badanJantan = getIntent().getExtras().getString("badanJantan");
-        badanBetina = getIntent().getExtras().getString("badanBetina");
-        perutJantan = getIntent().getExtras().getString("perutJantan");
-        perutBetina = getIntent().getExtras().getString("perutBetina");
-        kakiJantan = getIntent().getExtras().getString("kakiJantan");
-        kakiBetina = getIntent().getExtras().getString("kakiBetina");
-        sayapJantan = getIntent().getExtras().getString("sayapJantan");
-        sayapBetina = getIntent().getExtras().getString("sayapBetina");
-        embelanJantan = getIntent().getExtras().getString("embelanJantan");
-        embelanBetina = getIntent().getExtras().getString("embelanBetina");
-
-
+        ukuran = getIntent().getExtras().getString("ukuran");
     }
 
     private void initUI() {
         tvnamaSpesies = findViewById(R.id.tv_nama_spesies);
-        tvfamilli = findViewById(R.id.tv_nama_famili);
-        tvkingdom = findViewById(R.id.tv_isi_kingdom);
-        tvfillum = findViewById(R.id.tv_isi_fillum);
-        tvkelas = findViewById(R.id.tv_isi_kelas);
-        tvordo = findViewById(R.id.tv_isi_ordo);
-        tvdeskripsi = findViewById(R.id.tv_isi_deskripsi);
-        tvkepalaJantan = findViewById(R.id.tv_kepala_jantan);
-        tvkepalaBetina = findViewById(R.id.tv_kepala_betina);
-        tvbadanJantan = findViewById(R.id.tv_badan_jantan);
-        tvbadanBetina = findViewById(R.id.tv_badan_betina);
-        tvperutJantan = findViewById(R.id.tv_perut_jantan);
-        tvperutBetina = findViewById(R.id.tv_perut_betina);
-        tvkakiJantan = findViewById(R.id.tv_kaki_jantan);
-        tvkakiBetina = findViewById(R.id.tv_kaki_betina);
-        tvsayapJantan = findViewById(R.id.tv_sayap_jantan);
-        tvsayapBetina = findViewById(R.id.tv_sayap_betina);
-        tvembelanJantan = findViewById(R.id.tv_embelan_jantan);
-        tvembelanBetina = findViewById(R.id.tv_embelan_betina);
-
+        tvnamaIndonesia = findViewById(R.id.tv_nama_indonesia);
+        tvnamaInggris = findViewById(R.id.tv_nama_inggris);
+        tvfamilli = findViewById(R.id.tv_famili);
+        tvDeskripsi = findViewById(R.id.tv_deskripsi);
+        tvKebiasaan = findViewById(R.id.tv_kebiasaan);
+        tvSosial = findViewById(R.id.tv_sosial);
+        tvInformasiLain = findViewById(R.id.tv_informasi_lain);
         ivImage1 = findViewById(R.id.iv_detail_capung);
-        ivImage2 = findViewById(R.id.iv_capung1);
-        ivImage3 = findViewById(R.id.iv_capung2);
-
+        toolbar = findViewById(R.id.toolbar_detail_capung);
+        ivUkuran = findViewById(R.id.iv_ukuran);
     }
 
     private void showImage(Drawable drawable, String caption, String fotografer) {
-
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
@@ -252,7 +183,6 @@ public class DetailCapungActivity extends AppCompatActivity {
         AlertDialog mDialog = mBuilder.create();
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
-
     }
 
     private void showImageURL(String imageURL, String caption, String fotografer) {

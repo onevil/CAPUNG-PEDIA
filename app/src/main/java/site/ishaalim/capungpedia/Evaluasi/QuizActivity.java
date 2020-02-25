@@ -1,4 +1,4 @@
-package site.ishaalim.capungpedia;
+package site.ishaalim.capungpedia.Evaluasi;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import site.ishaalim.capungpedia.Evaluasi.model.isiSoal;
+import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.SharedPref.SharedPref;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;

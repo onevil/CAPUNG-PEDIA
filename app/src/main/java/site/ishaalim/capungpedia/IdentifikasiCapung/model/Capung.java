@@ -2,68 +2,40 @@ package site.ishaalim.capungpedia.IdentifikasiCapung.model;
 
 public class Capung {
     String namaSpesies;
+    String namaIndo;
+    String namaIng;
     String famili;
-    String subOrdo;
-    String fillum;
-    String kelas;
-    String kingdom;
-    String ordo;
     String deskripsi;
+    String kebiasaan;
+    String sosial;
+    String infoLain;
     String imageURL;
     String imageCaption;
     String imagePhotographer;
-    String imageURL2;
-    String imageCaption2;
-    String imagePhotographer2;
-    String imageURL3;
-    String imageCaption3;
-    String imagePhotographer3;
-    String kepala_jantan;
-    String kepala_betina;
-    String badan_jantan;
-    String badan_betina;
-    String perut_jantan;
-    String perut_betina;
-    String kaki_jantan;
-    String kaki_betina;
-    String sayap_jantan;
-    String sayap_betina;
-    String embelan_jantan;
-    String embelan_betina;
+    String ukuran;
+
 
     public Capung() {
     }
 
-    public Capung(String namaSpesies, String famili, String subOrdo, String fillum, String kelas, String kingdom, String ordo, String deskripsi, String imageURL, String imageCaption, String imagePhotographer, String imageURL2, String imageCaption2, String imagePhotographer2, String imageURL3, String imageCaption3, String imagePhotographer3, String kepala_jantan, String kepala_betina, String badan_jantan, String badan_betina, String perut_jantan, String perut_betina, String kaki_jantan, String kaki_betina, String sayap_jantan, String sayap_betina, String embelan_jantan, String embelan_betina) {
+    public Capung(String namaSpesies, String namaIndo,
+                  String namaIng, String famili,
+                  String deskripsi, String kebiasaan,
+                  String sosial, String infoLain,
+                  String imageURL, String imageCaption,
+                  String imagePhotographer, String ukuran) {
         this.namaSpesies = namaSpesies;
+        this.namaIndo = namaIndo;
+        this.namaIng = namaIng;
         this.famili = famili;
-        this.subOrdo = subOrdo;
-        this.fillum = fillum;
-        this.kelas = kelas;
-        this.kingdom = kingdom;
-        this.ordo = ordo;
         this.deskripsi = deskripsi;
+        this.kebiasaan = kebiasaan;
+        this.sosial = sosial;
+        this.infoLain = infoLain;
         this.imageURL = imageURL;
         this.imageCaption = imageCaption;
         this.imagePhotographer = imagePhotographer;
-        this.imageURL2 = imageURL2;
-        this.imageCaption2 = imageCaption2;
-        this.imagePhotographer2 = imagePhotographer2;
-        this.imageURL3 = imageURL3;
-        this.imageCaption3 = imageCaption3;
-        this.imagePhotographer3 = imagePhotographer3;
-        this.kepala_jantan = kepala_jantan;
-        this.kepala_betina = kepala_betina;
-        this.badan_jantan = badan_jantan;
-        this.badan_betina = badan_betina;
-        this.perut_jantan = perut_jantan;
-        this.perut_betina = perut_betina;
-        this.kaki_jantan = kaki_jantan;
-        this.kaki_betina = kaki_betina;
-        this.sayap_jantan = sayap_jantan;
-        this.sayap_betina = sayap_betina;
-        this.embelan_jantan = embelan_jantan;
-        this.embelan_betina = embelan_betina;
+        this.ukuran = ukuran;
     }
 
     public String getNamaSpesies() {
@@ -74,6 +46,22 @@ public class Capung {
         this.namaSpesies = namaSpesies;
     }
 
+    public String getNamaIndo() {
+        return namaIndo;
+    }
+
+    public void setNamaIndo(String namaIndo) {
+        this.namaIndo = namaIndo;
+    }
+
+    public String getNamaIng() {
+        return namaIng;
+    }
+
+    public void setNamaIng(String namaIng) {
+        this.namaIng = namaIng;
+    }
+
     public String getFamili() {
         return famili;
     }
@@ -82,52 +70,36 @@ public class Capung {
         this.famili = famili;
     }
 
-    public String getSubOrdo() {
-        return subOrdo;
-    }
-
-    public void setSubOrdo(String subOrdo) {
-        this.subOrdo = subOrdo;
-    }
-
-    public String getFillum() {
-        return fillum;
-    }
-
-    public void setFillum(String fillum) {
-        this.fillum = fillum;
-    }
-
-    public String getKelas() {
-        return kelas;
-    }
-
-    public void setKelas(String kelas) {
-        this.kelas = kelas;
-    }
-
-    public String getKingdom() {
-        return kingdom;
-    }
-
-    public void setKingdom(String kingdom) {
-        this.kingdom = kingdom;
-    }
-
-    public String getOrdo() {
-        return ordo;
-    }
-
-    public void setOrdo(String ordo) {
-        this.ordo = ordo;
-    }
-
     public String getDeskripsi() {
         return deskripsi;
     }
 
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
+    }
+
+    public String getKebiasaan() {
+        return kebiasaan;
+    }
+
+    public void setKebiasaan(String kebiasaan) {
+        this.kebiasaan = kebiasaan;
+    }
+
+    public String getSosial() {
+        return sosial;
+    }
+
+    public void setSosial(String sosial) {
+        this.sosial = sosial;
+    }
+
+    public String getInfoLain() {
+        return infoLain;
+    }
+
+    public void setInfoLain(String infoLain) {
+        this.infoLain = infoLain;
     }
 
     public String getImageURL() {
@@ -154,147 +126,11 @@ public class Capung {
         this.imagePhotographer = imagePhotographer;
     }
 
-    public String getImageURL2() {
-        return imageURL2;
+    public String getUkuran() {
+        return ukuran;
     }
 
-    public void setImageURL2(String imageURL2) {
-        this.imageURL2 = imageURL2;
-    }
-
-    public String getImageCaption2() {
-        return imageCaption2;
-    }
-
-    public void setImageCaption2(String imageCaption2) {
-        this.imageCaption2 = imageCaption2;
-    }
-
-    public String getImagePhotographer2() {
-        return imagePhotographer2;
-    }
-
-    public void setImagePhotographer2(String imagePhotographer2) {
-        this.imagePhotographer2 = imagePhotographer2;
-    }
-
-    public String getImageURL3() {
-        return imageURL3;
-    }
-
-    public void setImageURL3(String imageURL3) {
-        this.imageURL3 = imageURL3;
-    }
-
-    public String getImageCaption3() {
-        return imageCaption3;
-    }
-
-    public void setImageCaption3(String imageCaption3) {
-        this.imageCaption3 = imageCaption3;
-    }
-
-    public String getImagePhotographer3() {
-        return imagePhotographer3;
-    }
-
-    public void setImagePhotographer3(String imagePhotographer3) {
-        this.imagePhotographer3 = imagePhotographer3;
-    }
-
-    public String getKepala_jantan() {
-        return kepala_jantan;
-    }
-
-    public void setKepala_jantan(String kepala_jantan) {
-        this.kepala_jantan = kepala_jantan;
-    }
-
-    public String getKepala_betina() {
-        return kepala_betina;
-    }
-
-    public void setKepala_betina(String kepala_betina) {
-        this.kepala_betina = kepala_betina;
-    }
-
-    public String getBadan_jantan() {
-        return badan_jantan;
-    }
-
-    public void setBadan_jantan(String badan_jantan) {
-        this.badan_jantan = badan_jantan;
-    }
-
-    public String getBadan_betina() {
-        return badan_betina;
-    }
-
-    public void setBadan_betina(String badan_betina) {
-        this.badan_betina = badan_betina;
-    }
-
-    public String getPerut_jantan() {
-        return perut_jantan;
-    }
-
-    public void setPerut_jantan(String perut_jantan) {
-        this.perut_jantan = perut_jantan;
-    }
-
-    public String getPerut_betina() {
-        return perut_betina;
-    }
-
-    public void setPerut_betina(String perut_betina) {
-        this.perut_betina = perut_betina;
-    }
-
-    public String getKaki_jantan() {
-        return kaki_jantan;
-    }
-
-    public void setKaki_jantan(String kaki_jantan) {
-        this.kaki_jantan = kaki_jantan;
-    }
-
-    public String getKaki_betina() {
-        return kaki_betina;
-    }
-
-    public void setKaki_betina(String kaki_betina) {
-        this.kaki_betina = kaki_betina;
-    }
-
-    public String getSayap_jantan() {
-        return sayap_jantan;
-    }
-
-    public void setSayap_jantan(String sayap_jantan) {
-        this.sayap_jantan = sayap_jantan;
-    }
-
-    public String getSayap_betina() {
-        return sayap_betina;
-    }
-
-    public void setSayap_betina(String sayap_betina) {
-        this.sayap_betina = sayap_betina;
-    }
-
-    public String getEmbelan_jantan() {
-        return embelan_jantan;
-    }
-
-    public void setEmbelan_jantan(String embelan_jantan) {
-        this.embelan_jantan = embelan_jantan;
-    }
-
-    public String getEmbelan_betina() {
-        return embelan_betina;
-    }
-
-    public void setEmbelan_betina(String embelan_betina) {
-        this.embelan_betina = embelan_betina;
+    public void setUkuran(String ukuran) {
+        this.ukuran = ukuran;
     }
 }
