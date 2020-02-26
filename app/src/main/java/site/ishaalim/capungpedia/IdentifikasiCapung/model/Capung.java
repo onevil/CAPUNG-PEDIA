@@ -1,5 +1,7 @@
 package site.ishaalim.capungpedia.IdentifikasiCapung.model;
 
+import java.util.ArrayList;
+
 public class Capung {
     String namaSpesies;
     String namaIndo;
@@ -13,6 +15,11 @@ public class Capung {
     String imageCaption;
     String imagePhotographer;
     String ukuran;
+    ArrayList<String> habitat;
+    ArrayList<String> images;
+    ArrayList<String> fotoOleh;
+    ArrayList<String> captions;
+
 
 
     public Capung() {
@@ -23,7 +30,9 @@ public class Capung {
                   String deskripsi, String kebiasaan,
                   String sosial, String infoLain,
                   String imageURL, String imageCaption,
-                  String imagePhotographer, String ukuran) {
+                  String imagePhotographer, String ukuran,
+                  ArrayList habitat, ArrayList images,
+                  ArrayList fotoOleh, ArrayList captions) {
         this.namaSpesies = namaSpesies;
         this.namaIndo = namaIndo;
         this.namaIng = namaIng;
@@ -36,6 +45,10 @@ public class Capung {
         this.imageCaption = imageCaption;
         this.imagePhotographer = imagePhotographer;
         this.ukuran = ukuran;
+        this.habitat = habitat;
+        this.images = images;
+        this.fotoOleh = fotoOleh;
+        this.captions = captions;
     }
 
     public String getNamaSpesies() {
@@ -132,5 +145,37 @@ public class Capung {
 
     public void setUkuran(String ukuran) {
         this.ukuran = ukuran;
+    }
+
+    public ArrayList<String> getHabitat() {
+        return habitat;
+    }
+
+    public void setHabitat(ArrayList<String> habitat) {
+        this.habitat = habitat;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
+
+    public ArrayList<String> getFotoOleh() {
+        return fotoOleh;
+    }
+
+    public void setFotoOleh(ArrayList<String> fotoOleh) {
+        this.fotoOleh = fotoOleh;
+    }
+
+    public ArrayList<String> getCaptions() {
+        return captions;
+    }
+
+    public void setCaptions(ArrayList<String> captions) {
+        this.captions = captions;
     }
 }

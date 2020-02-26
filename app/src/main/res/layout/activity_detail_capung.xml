@@ -103,10 +103,10 @@
                 app:layout_constraintTop_toBottomOf="@id/cv_iv_detail_capung">
 
                 <ImageView
-                    android:id="@+id/iv_capung1"
+                    android:id="@+id/iv_capung"
                     android:layout_width="80dp"
-                    android:layout_height="80dp" />
-
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"/>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -305,11 +305,23 @@
 
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/tv_ukuran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ukuran"
+                android:textColor="?attr/textcolor"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_bold"
+                app:layout_constraintStart_toStartOf="@+id/cv_ukuran"
+                app:layout_constraintTop_toBottomOf="@id/cv_informasi_lain"/>
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_ukuran"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cv_informasi_lain"
+                app:layout_constraintTop_toBottomOf="@id/tv_ukuran"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="25dp"
@@ -325,11 +337,23 @@
                     android:scaleType="fitXY"/>
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/tv_hbt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Habitat"
+                android:textColor="?attr/textcolor"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_bold"
+                app:layout_constraintStart_toStartOf="@+id/cv_habitat"
+                app:layout_constraintTop_toBottomOf="@id/cv_informasi_lain"/>
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_habitat"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cv_informasi_lain"
+                app:layout_constraintTop_toBottomOf="@id/tv_hbt"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="25dp"

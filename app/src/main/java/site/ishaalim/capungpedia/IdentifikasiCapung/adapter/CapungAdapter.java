@@ -67,6 +67,10 @@ public class CapungAdapter extends RecyclerView.Adapter<CapungViewHolder> {
                 intent.putExtra("image1Caption", capungArrayList.get(position).getImageCaption());
                 intent.putExtra("image1Photographer", capungArrayList.get(position).getImagePhotographer());
                 intent.putExtra("ukuran", capungArrayList.get(position).getUkuran());
+                intent.putExtra("habitat", capungArrayList.get(position).getHabitat());
+                intent.putExtra("images", capungArrayList.get(position).getImages());
+                intent.putExtra("fotoOleh", capungArrayList.get(position).getFotoOleh());
+                intent.putExtra("captions", capungArrayList.get(position).getCaptions());
                 context.startActivity(intent);
                 CustomIntent.customType(context, "left-to-right");
 

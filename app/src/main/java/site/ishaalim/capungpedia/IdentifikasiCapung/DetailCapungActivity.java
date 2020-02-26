@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,13 +20,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
 
+import java.util.ArrayList;
+
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.SharedPref.SharedPref;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class DetailCapungActivity extends AppCompatActivity {
 
     private TextView tvnamaSpesies, tvnamaIndonesia, tvnamaInggris, tvfamilli, tvDeskripsi, tvKebiasaan, tvSosial, tvInformasiLain;
-    private ImageView ivImage1, ivUkuran;
+    private ImageView ivImage1, ivImage2, ivUkuran, ivHabitat1, ivHabitat2, ivHabitat3, ivHabitat4;
     Toolbar toolbar;
     private SharedPref sharedpref;
 
@@ -36,6 +41,8 @@ public class DetailCapungActivity extends AppCompatActivity {
             familli, kebiasaan, sosial, informasiLain, ukuran ;
     private Uri uri2, uri3;
 
+    private ArrayList<String>habitat, images, fotoOleh, captions;
+
     Drawable backIcon;
 
     @Override
@@ -44,6 +51,7 @@ public class DetailCapungActivity extends AppCompatActivity {
         checkTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_capung);
+        habitat = new ArrayList<>();
         getExtras();
         initUI();
         options = new RequestOptions().centerCrop();
@@ -63,6 +71,13 @@ public class DetailCapungActivity extends AppCompatActivity {
                 if (ivImage1.getDrawable() != null){
                     showImage(ivImage1.getDrawable(), imagecaption1, imagephotografer1);
                 }
+            }
+        });
+
+        ivHabitat1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Gambar 1");
             }
         });
 
@@ -114,7 +129,6 @@ public class DetailCapungActivity extends AppCompatActivity {
         toolbar.setTitle(Html.fromHtml(namaSpesies));
     }
 
-
         private void loadContent() {
         tvnamaSpesies.setText(Html.fromHtml(namaSpesies));
         tvnamaIndonesia.setText(Html.fromHtml(namaIndonesia));
@@ -127,6 +141,25 @@ public class DetailCapungActivity extends AppCompatActivity {
 
         Glide.with(getApplicationContext()).load(image1).apply(options).into(ivImage1);
         Glide.with(getApplicationContext()).load(ukuran).into(ivUkuran);
+
+        Glide.with(getApplicationContext()).load(images.get(0)).into(ivImage2);
+
+        if (habitat.size() == 1){
+            loadHabitat1(habitat.get(0));
+        } else if (habitat.size() == 2){
+            loadHabitat1(habitat.get(0));
+            loadHabitat2(habitat.get(1));
+        } else if (habitat.size() == 3){
+            loadHabitat1(habitat.get(0));
+            loadHabitat2(habitat.get(1));
+            loadHabitat3(habitat.get(2));
+        } else if (habitat.size() == 4){
+            loadHabitat1(habitat.get(0));
+            loadHabitat2(habitat.get(1));
+            loadHabitat3(habitat.get(2));
+            loadHabitat4(habitat.get(3));
+        }
+
     }
 
     private void getExtras() {
@@ -140,6 +173,15 @@ public class DetailCapungActivity extends AppCompatActivity {
         informasiLain = getIntent().getExtras().getString("informasiLain");
         image1 = getIntent().getExtras().getString("image1");
         ukuran = getIntent().getExtras().getString("ukuran");
+        habitat = getIntent().getExtras().getStringArrayList("habitat");
+        images = getIntent().getExtras().getStringArrayList("images");
+        fotoOleh = getIntent().getExtras().getStringArrayList("fotoOleh");
+        captions = getIntent().getExtras().getStringArrayList("captions");
+        Log.d(TAG, "Habitat : " + habitat);
+        Log.d(TAG, "Images : " + images);
+        Log.d(TAG, "fotoOleh : " + fotoOleh);
+        Log.d(TAG, "captions : " + captions);
+
     }
 
     private void initUI() {
@@ -152,8 +194,13 @@ public class DetailCapungActivity extends AppCompatActivity {
         tvSosial = findViewById(R.id.tv_sosial);
         tvInformasiLain = findViewById(R.id.tv_informasi_lain);
         ivImage1 = findViewById(R.id.iv_detail_capung);
+        ivImage2 = findViewById(R.id.iv_capung);
         toolbar = findViewById(R.id.toolbar_detail_capung);
         ivUkuran = findViewById(R.id.iv_ukuran);
+        ivHabitat1 = findViewById(R.id.iv_hbt1);
+        ivHabitat2 = findViewById(R.id.iv_hbt2);
+        ivHabitat3 = findViewById(R.id.iv_hbt3);
+        ivHabitat4 = findViewById(R.id.iv_hbt4);
     }
 
     private void showImage(Drawable drawable, String caption, String fotografer) {
@@ -214,6 +261,75 @@ public class DetailCapungActivity extends AppCompatActivity {
         mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
 
+    }
+
+    private void loadHabitat1(String hbt){
+        Log.d(TAG, "Load Habitat1 ");
+            if (hbt.equals("home")){
+                Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fhome.png?alt=media&token=e31df86d-abf7-4633-8c9c-061699115a96")
+                        .into(ivHabitat1);
+                Log.d(TAG, "Habitat 1 ");
+            }else if (hbt.equals("river")){
+                Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Friver.png?alt=media&token=910521a4-7526-4e3d-9a2b-86e5db2fbdd6")
+                        .into(ivHabitat1);
+                Log.d(TAG, "Habitat 2 ");
+            }else if (hbt.equals("fishpond")){
+                Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Ffishpond.png?alt=media&token=6b1aa841-c719-483a-b6b3-a8d6c063092c")
+                        .into(ivHabitat1);
+                Log.d(TAG, "Habitat 3 ");
+            }else if (hbt.equals("ricefields")){
+                Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fricefields.png?alt=media&token=69a8669c-36fd-4c0c-a8c9-c1c3476e7093")
+                        .into(ivHabitat1);
+                Log.d(TAG, "Habitat 4 ");
+            }
+    }
+
+    private void loadHabitat2(String hbt){
+        if (hbt.equals("home")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fhome.png?alt=media&token=e31df86d-abf7-4633-8c9c-061699115a96")
+                    .into(ivHabitat2);
+        }else if (hbt.equals("river")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Friver.png?alt=media&token=910521a4-7526-4e3d-9a2b-86e5db2fbdd6")
+                    .into(ivHabitat2);
+        }else if (hbt.equals("fishpond")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Ffishpond.png?alt=media&token=6b1aa841-c719-483a-b6b3-a8d6c063092c")
+                    .into(ivHabitat2);
+        }else if (hbt.equals("ricefields")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fricefields.png?alt=media&token=69a8669c-36fd-4c0c-a8c9-c1c3476e7093")
+                    .into(ivHabitat2);
+        }
+    }
+
+    private void loadHabitat3(String hbt){
+        if (hbt.equals("home")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fhome.png?alt=media&token=e31df86d-abf7-4633-8c9c-061699115a96")
+                    .into(ivHabitat3);
+        }else if (hbt.equals("river")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Friver.png?alt=media&token=910521a4-7526-4e3d-9a2b-86e5db2fbdd6")
+                    .into(ivHabitat3);
+        }else if (hbt.equals("fishpond")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Ffishpond.png?alt=media&token=6b1aa841-c719-483a-b6b3-a8d6c063092c")
+                    .into(ivHabitat3);
+        }else if (hbt.equals("ricefields")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fricefields.png?alt=media&token=69a8669c-36fd-4c0c-a8c9-c1c3476e7093")
+                    .into(ivHabitat3);
+        }
+    }
+
+    private void loadHabitat4(String hbt){
+        if (hbt.equals("home")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fhome.png?alt=media&token=e31df86d-abf7-4633-8c9c-061699115a96")
+                    .into(ivHabitat4);
+        }else if (hbt.equals("river")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Friver.png?alt=media&token=910521a4-7526-4e3d-9a2b-86e5db2fbdd6")
+                    .into(ivHabitat4);
+        }else if (hbt.equals("fishpond")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Ffishpond.png?alt=media&token=6b1aa841-c719-483a-b6b3-a8d6c063092c")
+                    .into(ivHabitat4);
+        }else if (hbt.equals("ricefields")){
+            Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fricefields.png?alt=media&token=69a8669c-36fd-4c0c-a8c9-c1c3476e7093")
+                    .into(ivHabitat4);
+        }
     }
 
 }
