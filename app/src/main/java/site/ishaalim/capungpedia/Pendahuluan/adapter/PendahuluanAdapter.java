@@ -55,6 +55,8 @@ public class PendahuluanAdapter extends RecyclerView.Adapter<PendahuluanViewHold
             Glide.with(holder.itemView).load(isiHalamanPendahuluanArrayList.get(position).getImageURL()).apply(options).into(holder.ivHeaderPendahuluan);
         }
 
+        holder.tvCaptions.setText(isiHalamanPendahuluanArrayList.get(position).getImageCaption());
+
         if(isiHalamanPendahuluanArrayList.get(position).getHeader() == null){
             holder.tvHeaderPendahuluan.setVisibility(View.GONE);
         }else {

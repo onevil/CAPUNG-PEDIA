@@ -12,7 +12,7 @@ import site.ishaalim.capungpedia.R;
 
 public class MengenalCapungViewHoder extends RecyclerView.ViewHolder {
     public ImageView ivHeaderMengenalCapung;
-    public TextView tvHeaderMengenalCapung, tvIsiMengenalCapung;
+    public TextView tvHeaderMengenalCapung, tvIsiMengenalCapung, tvCaption;
     public CardView cvHeaderMengenalCapung;
     public MengenalCapungViewHoder(@NonNull View itemView) {
         super(itemView);
@@ -20,6 +20,7 @@ public class MengenalCapungViewHoder extends RecyclerView.ViewHolder {
         ivHeaderMengenalCapung = itemView.findViewById(R.id.iv_header_mengenal_capung);
         tvHeaderMengenalCapung = itemView.findViewById(R.id.tv_header_mengenal_capung);
         tvIsiMengenalCapung = itemView.findViewById(R.id.tv_isi_mengenal_capung);
+        tvCaption = itemView.findViewById(R.id.tv_caption);
         cvHeaderMengenalCapung = itemView.findViewById(R.id.cv_iv_header_mengenal_capung);
 
         cvHeaderMengenalCapung.setVisibility(View.GONE);

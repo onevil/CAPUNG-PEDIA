@@ -59,6 +59,8 @@ public class PanduanPengamatanAdapter extends RecyclerView.Adapter<PanduanPengam
         String isi = isiHalamanPanduanPengamatanArrayList.get(position).getIsi();
         holder.tvIsiPanduanPengamatan.setText(isi);
 
+        holder.tvCaptions.setText(isiHalamanPanduanPengamatanArrayList.get(position).getImageCaption());
+
         holder.ivHeaderPanduanPengamatan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

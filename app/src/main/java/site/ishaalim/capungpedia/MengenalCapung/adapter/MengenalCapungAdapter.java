@@ -57,6 +57,7 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
 
         holder.tvHeaderMengenalCapung.setText(isiHalamanMengenalCapungArrayList.get(position).getHeader());
         holder.tvIsiMengenalCapung.setText(isiHalamanMengenalCapungArrayList.get(position).getIsi());
+        holder.tvCaption.setText(isiHalamanMengenalCapungArrayList.get(position).getImageCaption());
 
         holder.ivHeaderMengenalCapung.setOnClickListener(new View.OnClickListener() {
             @Override

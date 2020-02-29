@@ -58,7 +58,7 @@ public class PanduanIdentifikasiAdapter extends RecyclerView.Adapter<PanduanIden
         holder.tvHeaderPanduanIdentifikasi.setText(isiHalamanPanduanIdentifikasiArrayList.get(position).getHeader());
         String isi = isiHalamanPanduanIdentifikasiArrayList.get(position).getIsi();
         holder.tvIsiPanduanIdentifikasi.setText(isi);
-
+        holder.tvCaptions.setText(isiHalamanPanduanIdentifikasiArrayList.get(position).getImageCaption());
         holder.ivHeaderPanduanIdentifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

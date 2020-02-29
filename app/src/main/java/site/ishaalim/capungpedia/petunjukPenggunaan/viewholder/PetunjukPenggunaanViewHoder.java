@@ -12,7 +12,7 @@ import site.ishaalim.capungpedia.R;
 
 public class PetunjukPenggunaanViewHoder extends RecyclerView.ViewHolder {
     public ImageView ivHeaderPetunjukPenggunaan;
-    public TextView tvHeaderPetunjukPenggunaan, tvIsiPetunjukPenggunaan;
+    public TextView tvHeaderPetunjukPenggunaan, tvIsiPetunjukPenggunaan, tvCaptions;
     public CardView cvHeaderPetunjukPenggunaan;
     public PetunjukPenggunaanViewHoder(@NonNull View itemView) {
         super(itemView);
@@ -20,6 +20,7 @@ public class PetunjukPenggunaanViewHoder extends RecyclerView.ViewHolder {
         ivHeaderPetunjukPenggunaan = itemView.findViewById(R.id.iv_header_petunjuk_penggunaan);
         tvHeaderPetunjukPenggunaan = itemView.findViewById(R.id.tv_header_petunjuk_penggunaan);
         tvIsiPetunjukPenggunaan = itemView.findViewById(R.id.tv_isi_petunjuk_penggunaan);
+        tvCaptions = itemView.findViewById(R.id.tv_caption);
         cvHeaderPetunjukPenggunaan = itemView.findViewById(R.id.cv_iv_header_petunjuk_penggunaan);
 
         cvHeaderPetunjukPenggunaan.setVisibility(View.GONE);

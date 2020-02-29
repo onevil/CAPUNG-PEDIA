@@ -12,7 +12,7 @@ import site.ishaalim.capungpedia.R;
 
 public class PanduanPengamatanViewHoder extends RecyclerView.ViewHolder {
     public ImageView ivHeaderPanduanPengamatan;
-    public TextView tvHeaderPanduanPengamatan, tvIsiPanduanPengamatan;
+    public TextView tvHeaderPanduanPengamatan, tvIsiPanduanPengamatan, tvCaptions;
     public CardView cvHeaderPanduanPengamatan;
     public PanduanPengamatanViewHoder(@NonNull View itemView) {
         super(itemView);
@@ -20,6 +20,7 @@ public class PanduanPengamatanViewHoder extends RecyclerView.ViewHolder {
         ivHeaderPanduanPengamatan = itemView.findViewById(R.id.iv_header_panduan_pengamatan);
         tvHeaderPanduanPengamatan = itemView.findViewById(R.id.tv_header_panduan_pengamatan);
         tvIsiPanduanPengamatan = itemView.findViewById(R.id.tv_isi_panduan_pengamatan);
+        tvCaptions = itemView.findViewById(R.id.tv_caption);
         cvHeaderPanduanPengamatan = itemView.findViewById(R.id.cv_iv_header_panduan_pengamatan);
 
         cvHeaderPanduanPengamatan.setVisibility(View.GONE);

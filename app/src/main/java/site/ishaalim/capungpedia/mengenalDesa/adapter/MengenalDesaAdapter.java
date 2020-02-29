@@ -63,6 +63,8 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
         String isi = isiHalamanMengenalDesaArrayList.get(position).getIsi();
         holder.tvIsiMengenalDesa.setText(isi);
 
+        holder.tvCaptions.setText(isiHalamanMengenalDesaArrayList.get(position).getImageCaption());
+
         if (isiHalamanMengenalDesaArrayList.get(position).getLokasi() != null){
             holder.cvLihatLokasi.setVisibility(View.VISIBLE);
             holder.btnLihatLokasi.setOnClickListener(new View.OnClickListener() {
