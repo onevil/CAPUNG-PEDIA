@@ -19,6 +19,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderViewHolder> {
 
     private Context context;
     ArrayList<String> linkimage;
+    int size;
     RequestOptions options;
 
     public SliderAdapter(Context context, ArrayList<String> linkimage) {

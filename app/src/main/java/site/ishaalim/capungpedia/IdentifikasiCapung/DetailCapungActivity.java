@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -22,6 +23,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
+import site.ishaalim.capungpedia.IdentifikasiCapung.adapter.ImageSlideAdapter;
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.SharedPref.SharedPref;
 
@@ -30,8 +32,9 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class DetailCapungActivity extends AppCompatActivity {
 
     private TextView tvnamaSpesies, tvnamaIndonesia, tvnamaInggris, tvfamilli, tvDeskripsi, tvKebiasaan, tvSosial, tvInformasiLain;
-    private ImageView ivImage1, ivImage2, ivUkuran, ivHabitat1, ivHabitat2, ivHabitat3, ivHabitat4;
+    private ImageView ivImage1, ivImage2, ivUkuran, ivHabitat1, ivHabitat2, ivHabitat3, ivHabitat4, ivCapung;
     Toolbar toolbar;
+
     private SharedPref sharedpref;
 
     RequestOptions options, options2;
@@ -65,22 +68,12 @@ public class DetailCapungActivity extends AppCompatActivity {
 
 
     private void setEvents() {
-        ivImage1.setOnClickListener(new View.OnClickListener() {
+        ivCapung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ivImage1.getDrawable() != null){
-                    showImage(ivImage1.getDrawable(), imagecaption1, imagephotografer1);
-                }
+                showImageDialog();
             }
         });
-
-        ivHabitat1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Gambar 1");
-            }
-        });
-
     }
 
     private void checkTheme(){
@@ -142,7 +135,9 @@ public class DetailCapungActivity extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(image1).apply(options).into(ivImage1);
         Glide.with(getApplicationContext()).load(ukuran).into(ivUkuran);
 
-        Glide.with(getApplicationContext()).load(images.get(0)).into(ivImage2);
+        if (images != null){
+            Glide.with(getApplicationContext()).load(images.get(0)).into(ivImage2);
+        }
 
         if (habitat.size() == 1){
             loadHabitat1(habitat.get(0));
@@ -201,6 +196,7 @@ public class DetailCapungActivity extends AppCompatActivity {
         ivHabitat2 = findViewById(R.id.iv_hbt2);
         ivHabitat3 = findViewById(R.id.iv_hbt3);
         ivHabitat4 = findViewById(R.id.iv_hbt4);
+        ivCapung = findViewById(R.id.iv_capung);
     }
 
     private void showImage(Drawable drawable, String caption, String fotografer) {
@@ -330,6 +326,18 @@ public class DetailCapungActivity extends AppCompatActivity {
             Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Habitat%2Fricefields.png?alt=media&token=69a8669c-36fd-4c0c-a8c9-c1c3476e7093")
                     .into(ivHabitat4);
         }
+    }
+
+    private void showImageDialog(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_photoview_capung, null);
+        ViewPager2 viewPager2 = mView.findViewById(R.id.VP_Capung);
+
+        viewPager2.setAdapter(new ImageSlideAdapter(images, captions, fotoOleh, namaIndonesia, namaInggris, this));
+        mBuilder.setView(mView);
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mDialog.show();
     }
 
 }
