@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -71,7 +72,11 @@ public class DetailCapungActivity extends AppCompatActivity {
         ivCapung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImageDialog();
+                if (images != null){
+                    showImageDialog();
+                }else {
+                    Toast.makeText(getApplicationContext(),"Belum ada gambar", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -123,14 +128,37 @@ public class DetailCapungActivity extends AppCompatActivity {
     }
 
         private void loadContent() {
-        tvnamaSpesies.setText(Html.fromHtml(namaSpesies));
-        tvnamaIndonesia.setText(Html.fromHtml(namaIndonesia));
-        tvnamaInggris.setText(Html.fromHtml(namaInggris));
-        tvfamilli.setText(Html.fromHtml(familli));
-        tvDeskripsi.setText(Html.fromHtml(deskripsi));
-        tvKebiasaan.setText(Html.fromHtml(kebiasaan));
-        tvSosial.setText(Html.fromHtml(sosial));
-        tvInformasiLain.setText(Html.fromHtml(informasiLain));
+        if (namaSpesies != null){
+            tvnamaSpesies.setText(Html.fromHtml(namaSpesies));
+        }
+
+        if (namaIndonesia != null){
+            tvnamaIndonesia.setText(Html.fromHtml(namaIndonesia));
+        }
+
+        if (namaInggris != null){
+            tvnamaInggris.setText(Html.fromHtml(namaInggris));
+        }
+
+        if (familli != null){
+            tvfamilli.setText(Html.fromHtml(familli));
+        }
+
+        if (deskripsi != null){
+            tvDeskripsi.setText(Html.fromHtml(deskripsi));
+        }
+
+        if (kebiasaan != null){
+            tvKebiasaan.setText(Html.fromHtml(kebiasaan));
+        }
+
+        if (sosial != null){
+            tvSosial.setText(Html.fromHtml(sosial));
+        }
+
+        if (informasiLain != null){
+            tvInformasiLain.setText(Html.fromHtml(informasiLain));
+        }
 
         Glide.with(getApplicationContext()).load(image1).apply(options).into(ivImage1);
         Glide.with(getApplicationContext()).load(ukuran).into(ivUkuran);
