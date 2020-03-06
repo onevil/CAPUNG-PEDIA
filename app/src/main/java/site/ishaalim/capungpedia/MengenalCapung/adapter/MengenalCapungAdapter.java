@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,9 +56,23 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
             Glide.with(holder.itemView).load(isiHalamanMengenalCapungArrayList.get(position).getImageURL()).apply(options).into(holder.ivHeaderMengenalCapung);
         }
 
-        holder.tvHeaderMengenalCapung.setText(isiHalamanMengenalCapungArrayList.get(position).getHeader());
-        holder.tvIsiMengenalCapung.setText(isiHalamanMengenalCapungArrayList.get(position).getIsi());
-        holder.tvCaption.setText(isiHalamanMengenalCapungArrayList.get(position).getImageCaption());
+        if (isiHalamanMengenalCapungArrayList.get(position).getHeader() != null){
+            holder.tvHeaderMengenalCapung.setText(Html.fromHtml(isiHalamanMengenalCapungArrayList.get(position).getHeader()));
+        }else {
+            holder.tvHeaderMengenalCapung.setVisibility(View.GONE);
+        }
+
+        if (isiHalamanMengenalCapungArrayList.get(position).getIsi() != null){
+            holder.tvIsiMengenalCapung.setText(Html.fromHtml(isiHalamanMengenalCapungArrayList.get(position).getIsi()));
+        }else {
+            holder.tvIsiMengenalCapung.setVisibility(View.GONE);
+        }
+
+        if (isiHalamanMengenalCapungArrayList.get(position).getImageCaption() != null){
+            holder.tvCaption.setText(Html.fromHtml(isiHalamanMengenalCapungArrayList.get(position).getImageCaption()));
+        }else {
+            holder.tvCaption.setVisibility(View.GONE);
+        }
 
         holder.ivHeaderMengenalCapung.setOnClickListener(new View.OnClickListener() {
             @Override

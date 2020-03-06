@@ -33,7 +33,7 @@
                android:title="Identifikasi Capung"/>
            <item android:id="@+id/ayo_pengamatan"
                android:icon="@drawable/ic_camera"
-               android:title="Ayo Pengamatan!"/>
+               android:title="Catatan Pengamatan"/>
            <item android:id="@+id/evaluasi"
                android:icon="@drawable/ic_clipboard"
                android:title="Evaluasi"
@@ -51,7 +51,7 @@
                 android:title="Petunjuk Penggunaan"/>
             <item android:id="@+id/tentang_pengembang"
                 android:icon="@drawable/ic_avatar"
-                android:title="Tentang Pengembang"/>
+                android:title="Tentang"/>
             <item android:id="@+id/glosarium"
                 android:icon="@drawable/ic_glosarium"
                 android:title="Glosarium"/>

@@ -19,7 +19,7 @@
             android:fitsSystemWindows="true"
             app:titleTextColor="?attr/textcolor"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:title="Mengenal Desa" />
+            app:title="Mengenal Desa Wisata Jatimulyo" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_mengenal_desa"

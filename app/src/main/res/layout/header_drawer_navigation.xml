@@ -9,6 +9,6 @@
         android:layout_height="200dp"
         android:layout_centerInParent="true"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_header"/>
+        android:src="@drawable/header_nav_drawer"/>
 
 </RelativeLayout>

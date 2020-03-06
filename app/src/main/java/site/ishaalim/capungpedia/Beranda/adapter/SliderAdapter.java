@@ -44,21 +44,21 @@ public class SliderAdapter extends SliderViewAdapter<SliderViewHolder> {
             case 0:
                 viewHolder.tvHeader.setText("Capung-hutan pita-tunggal (Drepanosticta gazella) capung endemik Pulau Jawa");
                 Glide.with(viewHolder.itemView)
-                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%201.jpg?alt=media&token=e45befe3-6bd6-4ff1-a395-ee0e0c8061ad")
+                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%201.jpg?alt=media&token=bc30d17d-5093-4c03-b829-d05e4b0d4493")
                         .apply(options)
                         .into(viewHolder.imageViewBackGround);
                 break;
             case 1:
                 viewHolder.tvHeader.setText("Salah satu habitat capung di kawasan Desa Wisata Jatimulyo");
                 Glide.with(viewHolder.itemView)
-                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%202.jpg?alt=media&token=ac4c48e0-0db5-4595-b2ce-c49c82bd3031")
+                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%202.jpg?alt=media&token=4e2d03fe-34e5-489d-b4ee-f7e5aa1f59cc")
                         .apply(options)
                         .into(viewHolder.imageViewBackGround);
                 break;
             case 2:
                 viewHolder.tvHeader.setText("Capung-jarum gelap (Prodasineura autumnalis) pada posisi kopulasi");
                 Glide.with(viewHolder.itemView)
-                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%203.jpg?alt=media&token=d530c794-fa98-465e-82f5-4db61cb6b685")
+                        .load("https://firebasestorage.googleapis.com/v0/b/capung-pedia-cb932.appspot.com/o/Beranda_Header%203.jpg?alt=media&token=fff9c7b9-d905-46d9-b6d4-34a92eacc003")
                         .apply(options)
                         .into(viewHolder.imageViewBackGround);
                 break;

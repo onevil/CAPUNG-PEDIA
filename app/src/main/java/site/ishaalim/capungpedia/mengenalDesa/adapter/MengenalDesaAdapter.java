@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,11 +60,22 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
             Glide.with(holder.itemView).load(isiHalamanMengenalDesaArrayList.get(position).getImageURL()).apply(options).into(holder.ivHeaderMengenalDesa);
         }
 
-        holder.tvHeaderMengenalDesa.setText(isiHalamanMengenalDesaArrayList.get(position).getHeader());
-        String isi = isiHalamanMengenalDesaArrayList.get(position).getIsi();
-        holder.tvIsiMengenalDesa.setText(isi);
+        if (isiHalamanMengenalDesaArrayList.get(position).getHeader() != null){
+            holder.tvHeaderMengenalDesa.setText(Html.fromHtml(isiHalamanMengenalDesaArrayList.get(position).getHeader()));
+        }else {
+            holder.tvHeaderMengenalDesa.setVisibility(View.GONE);
+        }
 
-        holder.tvCaptions.setText(isiHalamanMengenalDesaArrayList.get(position).getImageCaption());
+        if (isiHalamanMengenalDesaArrayList.get(position).getIsi() != null){
+            holder.tvIsiMengenalDesa.setText(Html.fromHtml(isiHalamanMengenalDesaArrayList.get(position).getIsi()));
+        }else {
+            holder.tvIsiMengenalDesa.setVisibility(View.GONE);
+        }
+        if (isiHalamanMengenalDesaArrayList.get(position).getImageCaption() != null){
+            holder.tvCaptions.setText(Html.fromHtml(isiHalamanMengenalDesaArrayList.get(position).getImageCaption()));
+        }else {
+            holder.tvCaptions.setVisibility(View.GONE);
+        }
 
         if (isiHalamanMengenalDesaArrayList.get(position).getLokasi() != null){
             holder.cvLihatLokasi.setVisibility(View.VISIBLE);

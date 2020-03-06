@@ -29,6 +29,7 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideViewHolder
     private ArrayList<String> photographers;
     private String namaIndo;
     private String namaIng;
+    RequestOptions options;
     Context context;
 
     public ImageSlideAdapter(ArrayList<String> imageURL, ArrayList<String> captions, ArrayList<String> photographers, String namaIndo, String namaIng, Context context) {
@@ -38,6 +39,7 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideViewHolder
         this.namaIndo = namaIndo;
         this.namaIng = namaIng;
         this.context = context;
+        options = new RequestOptions().fitCenter();
     }
 
     @NonNull
@@ -51,7 +53,7 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ImageSlideViewHolder holder, int position) {
-        Glide.with(context).load(ImageURL.get(position)).into(holder.CapungPV);
+        Glide.with(context).load(ImageURL.get(position)).apply(options).into(holder.CapungPV);
         holder.CaptionTV.setText(Html.fromHtml(captions.get(position)));
         holder.PhotoGraferTV.setText(photographers.get(position));
         holder.namaIndo.setText(Html.fromHtml(namaIndo));

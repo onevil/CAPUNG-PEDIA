@@ -5,8 +5,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="selamat_datang_di_laman_evaluasi">Setelah melakukan pengamatan dan diskusi dengan pengamat yang lain, untuk menambah pengetahuan dan pemahaman kamu tentang capung di kawasan Desa Wisata Jatimulyo cobalah kerjakan tes formatif di halaman ini. Cermatilah petunjuk pengerjaannya.</string>
-    <string name="Petunjuk_Pengerjaan_Soal">Soal tes formatif ini akan tersediah dalam dua paket (Paket A dan Paket B) dengan tipe soal pilihan ganda berjumlah 10 soal pada masing-masing paket. Pilihlah jawaban yang benar dengan menekan tombol jawaban. Jika kamu sudah sampai pada nomor terakhir maka nilaimu akan muncul. Selamat mengerjakan!</string>
+    <string name="selamat_datang_di_laman_evaluasi">Setelah melakukan pengamatan dan diskusi dengan pengamat yang lain, untuk menambah pengetahuan dan pemahaman kamu tentang capung di kawasan Desa Wisata Jatimulyo, cobalah kerjakan tes formatif di halaman ini. Cermatilah petunjuk pengerjaannya dibawah ini!</string>
+    <string name="Petunjuk_Pengerjaan_Soal">Soal tes formatif ini akan tersedia dalam dua paket (Paket A dan Paket B) dengan tipe soal pilihan ganda berjumlah 10 soal pada masing-masing paket. Pilihlah jawaban yang benar dengan menekan tombol jawaban. Jika kamu sudah sampai pada nomor terakhir maka nilaimu akan muncul. Selamat mengerjakan!</string>
 
     <string name="tab_text_1">APLIKASI</string>
     <string name="tab_text_2">PENGEMBANG</string>
@@ -19,4 +19,5 @@
     <string name="tentang_pembimbing">\t\tDosen Program Studi Pendidikan Biologi, Jurusan Pendidikan Biologi, Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Negeri Yogyakarta.</string>
     <string name="title_activity_maps">Map</string>
     <string name="default_notification_channel_id">1</string>
+    <string name="sambutan_capung">CAPUNG PEDIA merupakan aplikasi pintar untuk mengenal lebih dekat dengan capung, berisi materi-materi yang dikemas secara menarik dan dilengkapi dengan fitur identifikasi spesies capung, fitur evaluasi/kuis dan fitur Catatan Pengamatan</string>
 </resources>

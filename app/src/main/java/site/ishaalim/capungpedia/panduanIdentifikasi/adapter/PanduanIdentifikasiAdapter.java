@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,10 +56,24 @@ public class PanduanIdentifikasiAdapter extends RecyclerView.Adapter<PanduanIden
             Glide.with(holder.itemView).load(isiHalamanPanduanIdentifikasiArrayList.get(position).getImageURL()).apply(options).into(holder.ivHeaderPanduanIdentifikasi);
         }
 
-        holder.tvHeaderPanduanIdentifikasi.setText(isiHalamanPanduanIdentifikasiArrayList.get(position).getHeader());
-        String isi = isiHalamanPanduanIdentifikasiArrayList.get(position).getIsi();
-        holder.tvIsiPanduanIdentifikasi.setText(isi);
-        holder.tvCaptions.setText(isiHalamanPanduanIdentifikasiArrayList.get(position).getImageCaption());
+        if (isiHalamanPanduanIdentifikasiArrayList.get(position).getHeader() != null){
+            holder.tvHeaderPanduanIdentifikasi.setText(Html.fromHtml(isiHalamanPanduanIdentifikasiArrayList.get(position).getHeader()));
+        }else {
+            holder.tvHeaderPanduanIdentifikasi.setVisibility(View.GONE);
+        }
+
+        if (isiHalamanPanduanIdentifikasiArrayList.get(position).getIsi() != null){
+            holder.tvIsiPanduanIdentifikasi.setText(Html.fromHtml(isiHalamanPanduanIdentifikasiArrayList.get(position).getIsi()));
+        }else {
+            holder.tvIsiPanduanIdentifikasi.setVisibility(View.GONE);
+        }
+
+        if (isiHalamanPanduanIdentifikasiArrayList.get(position).getImageCaption() != null){
+            holder.tvCaptions.setText(Html.fromHtml(isiHalamanPanduanIdentifikasiArrayList.get(position).getImageCaption()));
+        }else {
+            holder.tvCaptions.setVisibility(View.GONE);
+        }
+
         holder.ivHeaderPanduanIdentifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
