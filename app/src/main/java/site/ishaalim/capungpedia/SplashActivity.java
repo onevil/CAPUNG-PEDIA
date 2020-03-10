@@ -13,19 +13,34 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.ProgressBar;
 
+import site.ishaalim.capungpedia.SharedPref.SharedPref;
+
 public class SplashActivity extends AppCompatActivity {
     private Runnable runnable;
     private Handler handler;
     ProgressBar progressBar;
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        setThemes();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         changestatusbarColor();
         initUI();
         runProgressbar();
         runSplash();
+    }
+
+    private void setThemes(){
+        if(sharedPref.loadNightModeState()) {
+            setTheme(R.style.DarkTheme);
+        }
+        else  {
+            sharedPref.setNightModeState(false);
+            setTheme(R.style.AppTheme);
+        }
     }
 
     private void changestatusbarColor(){

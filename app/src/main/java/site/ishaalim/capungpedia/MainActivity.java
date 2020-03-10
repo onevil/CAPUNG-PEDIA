@@ -230,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil, imageUri, date);
     }
 
+
     public void setFragment (Fragment mFragment, String tag){
         fragment = mFragment;
         TAG = tag;

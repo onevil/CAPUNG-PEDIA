@@ -13,24 +13,41 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import site.ishaalim.capungpedia.R;
 
 public class FirebaseCloudMessagingService extends FirebaseMessagingService {
+    FirebaseFirestore firestore;
     public String TAG = "FIREBASE MESSAGING";
+    String body, NotifUrl;
+    String Characters = "ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
+    String docID = "";
+    int IDLength = 20;
+    Date date;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        setupFirestore();
+        generateID();
 
         if (remoteMessage.getData().size() > 0){
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-            showNotification(remoteMessage.getData().get("body"), remoteMessage.getData().get("URL"));
+            body = remoteMessage.getData().get("body");
+            NotifUrl = remoteMessage.getData().get("URL");
+            date = new Date();
+            saveNotification(body, NotifUrl, date);
+            showNotification(body, NotifUrl);
         }
 
         Log.d(TAG, "From: " + remoteMessage.getFrom());
-//        showNotification(remoteMessage.getNotification().getBody());
         if (remoteMessage.getNotification() != null){
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
@@ -44,6 +61,35 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 
     private void sendRegistrationToServer(String s) {
 
+    }
+
+    private void setupFirestore(){
+        firestore = FirebaseFirestore.getInstance();
+    }
+
+    private void generateID(){
+        Random random = new Random();
+
+        char[] chars = new char[IDLength];
+
+        for (int i = 0; i < IDLength; i++){
+            chars[i] = Characters.charAt(random.nextInt(Characters.length()));
+        }
+
+        for (int i = 0; i < chars.length; i++){
+            docID += chars[i];
+        }
+    }
+
+    private void saveNotification(String messageBody, String notifUrl, Date date){
+        Map<String, Object> notification = new HashMap<>();
+        notification.put("messageBody", messageBody);
+        notification.put("notifUrl", notifUrl);
+        notification.put("notifDate", date);
+
+        firestore.collection("notification")
+                .document(docID)
+                .set(notification);
     }
 
     private void showNotification(String messageBody, String notifUrl) {
@@ -66,9 +112,6 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
-//        NotificationManager notificationManager =
-//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
         NotificationManager notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel notificationChannel=new NotificationChannel(channel_id,"pengamatan",NotificationManager.IMPORTANCE_HIGH);
@@ -78,11 +121,5 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
 
         notificationManager.notify(0,builder.build());
 
-
-
-//        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getApplicationContext());
-//        managerCompat.notify(0, notification);
-//        Log.d(TAG, "NOTIF!");
-//        notificationManager.notify(0, notificationBuilder.build());
     }
 }

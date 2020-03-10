@@ -45,6 +45,7 @@ import site.ishaalim.capungpedia.MainActivity;
 import site.ishaalim.capungpedia.Materi.adapter.ListMateriAdapter;
 import site.ishaalim.capungpedia.Materi.model.listMateri;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.notification.NotifListFragment;
 import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
 import site.ishaalim.capungpedia.petunjukPenggunaan.adapter.PetunjukPenggunaanAdapter;
 
@@ -54,7 +55,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class FragmentBeranda extends Fragment {
 
     private Switch DarkModeswitch;
-    private ImageButton buttonNav;
+    private ImageButton buttonNav, buttonNotif;
     private LinearLayout llPetunjukPenggunaan;
 
     FirebaseFirestore firestore;
@@ -104,7 +105,9 @@ public class FragmentBeranda extends Fragment {
     private void initUI() {
         DarkModeswitch = getView().findViewById(R.id.myswitch);
         buttonNav = getView().findViewById(R.id.btn_drawer);
+        buttonNotif = getView().findViewById(R.id.btn_notification);
         llPetunjukPenggunaan = getView().findViewById(R.id.ll_petunjuk_penggunaan);
+
     }
 
 
@@ -125,6 +128,14 @@ public class FragmentBeranda extends Fragment {
             }
         });
 
+        buttonNotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotifListFragment notifListFragment = new NotifListFragment();
+                String TAG = "notification";
+                ((MainActivity)getActivity()).setFragment(notifListFragment, TAG);
+            }
+        });
 
     }
 
