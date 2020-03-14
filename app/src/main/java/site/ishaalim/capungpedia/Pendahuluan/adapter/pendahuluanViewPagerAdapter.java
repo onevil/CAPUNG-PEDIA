@@ -35,9 +35,9 @@ public class pendahuluanViewPagerAdapter extends FragmentStateAdapter {
         Bundle bundle = new Bundle();
         int halaman = 1 + position;
         bundle.putInt("halaman", halaman);
-        ChildFragmentPanduanPengamatan childFragmentPanduanPengamatan = new ChildFragmentPanduanPengamatan();
-        childFragmentPanduanPengamatan.setArguments(bundle);
-        return childFragmentPanduanPengamatan;
+        ChildFragmentPendahuluan pendahuluan = new ChildFragmentPendahuluan();
+        pendahuluan.setArguments(bundle);
+        return pendahuluan;
     }
 
     @Override
