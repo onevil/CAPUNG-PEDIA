@@ -6,14 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".IdentifikasiCapung.ZygopteraFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/toolbar_zygoptera"
                 android:layout_width="match_parent"
@@ -29,8 +24,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="15dp">
-
-
                     <EditText
                         android:id="@+id/edt_zygoptera"
                         android:layout_width="280dp"
@@ -56,9 +49,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -72,10 +63,5 @@
                 tools:listitem="@layout/item_rv_capung">
 
             </androidx.recyclerview.widget.RecyclerView>
-
         </RelativeLayout>
-
-
-    </ScrollView>
-
 </RelativeLayout>
