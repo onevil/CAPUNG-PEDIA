@@ -1,13 +1,17 @@
 package site.ishaalim.capungpedia.mengenalDesa.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -18,73 +22,24 @@ import site.ishaalim.capungpedia.mengenalDesa.ChildFragmentMengenalDesa;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class MengenalDesaViewPagerAdapter extends FragmentStatePagerAdapter {
-
-    private final ArrayList<Fragment> FragmentList = new ArrayList<>();
-    private final ArrayList<String> FragmentTitleList = new ArrayList<>();
-    
-
-    private  final ChildFragmentMengenalDesa cf1 = new ChildFragmentMengenalDesa();
-    private  final FragmentBeranda cf2 = new FragmentBeranda();
-    private  final ChildFragmentMengenalDesa cf3 = new ChildFragmentMengenalDesa();
-
-    Context context;
-    ViewPager viewPager;
-    TabLayout tabLayout;
-    String nama = "nama";
-
-    public MengenalDesaViewPagerAdapter(FragmentManager fm, Context context, ViewPager viewPager, TabLayout tabLayout) {
-        super(fm);
-        this.context = context;
-        this.viewPager = viewPager;
-        this.tabLayout = tabLayout;
+public class MengenalDesaViewPagerAdapter extends FragmentStateAdapter {
+    public MengenalDesaViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
     }
 
-    public void addPage(Fragment fragment) {
-        FragmentList.add(fragment);
-        String sizee = Integer.toString(FragmentList.size());
-        Log.d(TAG, "size array :" + sizee);
-    }
-
+    @NonNull
     @Override
     public Fragment getItem(int position) {
-//        return FragmentList.get(position);
-        if (position == 0) {
-            return cf1;
-        } else if (position == 1) {
-            return cf2;
-        } else if (position == 2) {
-            return cf3;
-        } else {
-            return cf2;
-        }
+        Bundle bundle = new Bundle();
+        int halaman = 1 + position;
+        bundle.putInt("halaman", halaman);
+        ChildFragmentMengenalDesa mengenalDesa = new ChildFragmentMengenalDesa();
+        mengenalDesa.setArguments(bundle);
+        return mengenalDesa;
     }
 
     @Override
-    public int getCount() {
-        return 3;
+    public int getItemCount() {
+        return 2;
     }
-
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-
-        switch (position) {
-            case 0:
-                return nama;
-            case 1:
-                return nama;
-            case 2:
-                return nama;
-            default:
-                return null;
-        }
-
-        //    @Override
-//    public int getItemPosition(@NonNull Object object) {
-//        return POSITION_NONE;
-//    }
-    }
-
-
 }

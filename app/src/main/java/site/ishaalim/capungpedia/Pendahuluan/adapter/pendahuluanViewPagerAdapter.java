@@ -1,4 +1,4 @@
-package site.ishaalim.capungpedia.petunjukPenggunaan.adapter;
+package site.ishaalim.capungpedia.Pendahuluan.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,13 +18,14 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 import site.ishaalim.capungpedia.Beranda.FragmentBeranda;
-import site.ishaalim.capungpedia.petunjukPenggunaan.ChildFragmentPetunjukPenggunaan;
+import site.ishaalim.capungpedia.Pendahuluan.ChildFragmentPendahuluan;
+import site.ishaalim.capungpedia.panduanPengamatan.ChildFragmentPanduanPengamatan;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class PentunjukPengunaanViewPagerAdapter extends FragmentStateAdapter {
+public class pendahuluanViewPagerAdapter extends FragmentStateAdapter {
 
-    public PentunjukPengunaanViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public pendahuluanViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
@@ -34,13 +35,13 @@ public class PentunjukPengunaanViewPagerAdapter extends FragmentStateAdapter {
         Bundle bundle = new Bundle();
         int halaman = 1 + position;
         bundle.putInt("halaman", halaman);
-        ChildFragmentPetunjukPenggunaan petunjukPenggunaan = new ChildFragmentPetunjukPenggunaan();
-        petunjukPenggunaan.setArguments(bundle);
-        return petunjukPenggunaan;
+        ChildFragmentPanduanPengamatan childFragmentPanduanPengamatan = new ChildFragmentPanduanPengamatan();
+        childFragmentPanduanPengamatan.setArguments(bundle);
+        return childFragmentPanduanPengamatan;
     }
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 3;
     }
 }

@@ -1,4 +1,4 @@
-package site.ishaalim.capungpedia;
+package site.ishaalim.capungpedia.tentangPengembang;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.SharedPref.SharedPref;
 import site.ishaalim.capungpedia.tentangPengembang.adapter.TPpagerAdapter;
 
@@ -36,9 +37,7 @@ public class tentangPengembangActivity extends AppCompatActivity {
 
         getSupportActionBar();
         initUI();
-
         setupViewPager();
-
         setupTabLayout();
     }
 
@@ -113,8 +112,6 @@ public class tentangPengembangActivity extends AppCompatActivity {
     }
 
     private void setupViewPager() {
-
-
         viewPager.setAdapter(adapter);
     }
 }

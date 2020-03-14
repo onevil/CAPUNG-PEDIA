@@ -5,16 +5,9 @@
     android:layout_height="match_parent"
     android:background="?attr/backgroundcolor"
     tools:context=".MengenalCapung.ChildFragmentMengenalCapung">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pendahuluan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_rv_pendahuluan"/>
-    </ScrollView>
-
-
 </LinearLayout>

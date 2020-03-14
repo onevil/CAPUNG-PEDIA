@@ -6,15 +6,9 @@
     android:background="?attr/backgroundcolor"
     tools:context=".MengenalCapung.ChildFragmentMengenalCapung">
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_mengenal_capung"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_mengenal_capung"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_rv_mengenal_capung"/>
-    </ScrollView>
-
-
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_rv_mengenal_capung"/>
 </LinearLayout>

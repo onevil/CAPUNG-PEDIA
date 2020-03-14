@@ -32,10 +32,10 @@ import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi
 import site.ishaalim.capungpedia.panduanPengamatan.FragmentPanduanPengamatan;
 import site.ishaalim.capungpedia.petunjukPenggunaan.FragmentPetunjukPenggunaan;
 import site.ishaalim.capungpedia.referensi.FragmentReferensi;
+import site.ishaalim.capungpedia.tentangPengembang.tentangPengembangActivity;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.Date;
 

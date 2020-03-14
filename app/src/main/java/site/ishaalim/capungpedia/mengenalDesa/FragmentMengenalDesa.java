@@ -13,10 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,22 +35,12 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class FragmentMengenalDesa extends Fragment {
-
     FirebaseFirestore firestore;
-
     ArrayList<MengenalDesa> mengenalDesaArrayList;
-
     private TabLayout tabLayout;
-    FrameLayout flmengenalDesa;
-    private ViewPager viewPager;
-    private MengenalDesaViewPagerAdapter mengenalDesaViewPagerAdapter;
-
+    private ViewPager2 viewPager2;
+    private MengenalDesaViewPagerAdapter viewPagerAdapter;
     private Toolbar toolbar;
-
-    int tabSize;
-    int selectedTabPosition;
-    int halaman;
-
 
     public FragmentMengenalDesa() {
     }
@@ -66,10 +58,18 @@ public class FragmentMengenalDesa extends Fragment {
         setUpFirestore();
         initUI();
         setupToolbar();
-        getTabSize();
-        setEvents();
+        setupViewPager();
+    }
 
+    private void setUpFirestore() {
+        firestore = FirebaseFirestore.getInstance();
+    }
 
+    public void initUI() {
+        tabLayout = getView().findViewById(R.id.tl_mengenal_desa);
+        toolbar = getView().findViewById(R.id.toolbar_mengenal_desa);
+        viewPager2 = getView().findViewById(R.id.vp_mengenal_desa);
+        viewPagerAdapter = new MengenalDesaViewPagerAdapter(getActivity());
     }
 
     private void setupToolbar() {
@@ -82,78 +82,18 @@ public class FragmentMengenalDesa extends Fragment {
         });
     }
 
+    private void setupViewPager(){
+        viewPager2.setAdapter(viewPagerAdapter);
+        setupTabLayout();
+    }
 
-    private void setEvents() {
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+    private void setupTabLayout() {
+        TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.OnConfigureTabCallback() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Bundle bundle = new Bundle();
-                halaman = 1 + tab.getPosition();
-                bundle.putInt("halaman", halaman);
-                Log.d(TAG,"halaman :"+halaman);
-                ChildFragmentMengenalDesa childFragmentMengenalDesa = new ChildFragmentMengenalDesa();
-                childFragmentMengenalDesa.setArguments(bundle);
-                tab.getPosition();
-                getFragmentManager().beginTransaction().replace(R.id.fl_mengenal_desa, childFragmentMengenalDesa, "MengenalDesa").commit();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText("Hal " + (position+1));
             }
         });
-
-    }
-
-
-    private void getTabSize() {
-        mengenalDesaArrayList.clear();
-
-        CollectionReference firestoreref = firestore.collection("mengenalDesa")
-                .document("hXyIcy9qlbdbDfh1zbOC")
-                .collection("halaman");
-        firestoreref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (DocumentSnapshot documentSnapshot : task.getResult()){
-                    if(task.getResult() != null){
-                        MengenalDesa petunjukPenggunaan = documentSnapshot.toObject(MengenalDesa.class);
-                        mengenalDesaArrayList.add(petunjukPenggunaan);
-                        Log.d(TAG,"size :"+tabSize);
-
-                    }else {
-                        Log.d(TAG,"No such Document");
-                    }
-                }
-                tabSize = mengenalDesaArrayList.size();
-                setupTabLayout(tabSize);
-            }
-        });
-    }
-
-    private void setupTabLayout(int size) {
-        tabSize = size;
-        for (int i = 1; i<=tabSize; i++ ){
-            tabLayout.addTab(tabLayout.newTab().setText("Hal " + i));
-
-        }
-    }
-
-    public void initUI() {
-        tabLayout = getView().findViewById(R.id.tl_mengenal_desa);
-        flmengenalDesa = getView().findViewById(R.id.fl_mengenal_desa);
-        toolbar = getView().findViewById(R.id.toolbar_mengenal_desa);
-
-
-    }
-
-
-    private void setUpFirestore() {
-        firestore = FirebaseFirestore.getInstance();
+        mediator.attach();
     }
 }
