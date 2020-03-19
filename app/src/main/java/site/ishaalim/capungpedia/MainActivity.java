@@ -23,6 +23,7 @@ import site.ishaalim.capungpedia.IdentifikasiCapung.IdentifikasiCapungFragment;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
 import site.ishaalim.capungpedia.SharedPref.SharedPref;
+import site.ishaalim.capungpedia.authentication.LoginFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.DetailPengamatanFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.JudulPengamatanFragment;
@@ -35,6 +36,7 @@ import site.ishaalim.capungpedia.referensi.FragmentReferensi;
 import site.ishaalim.capungpedia.tentangPengembang.tentangPengembangActivity;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Date;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String share = "Yuk identifikasi Capung melalui Capung Pedia!!";
     String link = "https://play.google.com/store/apps/details?id=site.ishaalim.capungpedia";
 
-
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
 
@@ -70,9 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setUpFirebase();
         initUI();
-
         setUpDrawer();
 
         if (savedInstanceState == null){
@@ -80,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TAG = "beranda";
             goToFragment(fragment, TAG);
         }
+    }
+
+    private void setUpFirebase(){
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -128,9 +133,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.ayo_pengamatan:
-                fragment = new AyoPengamatanFragment();
-                TAG = "ayo_pengamatan";
-                goToFragment(fragment, TAG);
+                if (firebaseAuth.getCurrentUser() != null){
+                    fragment = new AyoPengamatanFragment();
+                    TAG = "ayo_pengamatan";
+                    goToFragment(fragment, TAG);
+                }else {
+                    fragment = new LoginFragment();
+                    TAG = "login";
+                    goToFragment(fragment, TAG);
+                }
                 break;
 
             case R.id.evaluasi:
