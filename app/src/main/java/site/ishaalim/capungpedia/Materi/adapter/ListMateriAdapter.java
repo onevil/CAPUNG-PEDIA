@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ import site.ishaalim.capungpedia.Materi.viewholder.ListMateriViewHolder;
 import site.ishaalim.capungpedia.MengenalCapung.FragmentMengenalCapung;
 import site.ishaalim.capungpedia.Pendahuluan.FragmentPendahuluan;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.authentication.LoginFragment;
 import site.ishaalim.capungpedia.ayoPengamatan.AyoPengamatanFragment;
 import site.ishaalim.capungpedia.mengenalDesa.FragmentMengenalDesa;
 import site.ishaalim.capungpedia.panduanIdentifikasi.FragmentPanduanIdentifikasi;
@@ -43,10 +45,13 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
     Fragment fragment;
     String TAG;
 
+    FirebaseAuth firebaseAuth;
+
     public ListMateriAdapter(Context context, ArrayList<listMateri> listMateriArrayList) {
         this.context = context;
         this.listMateriArrayList = listMateriArrayList;
         options = new RequestOptions().centerCrop();
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -109,9 +114,15 @@ public class ListMateriAdapter extends RecyclerView.Adapter<ListMateriViewHolder
                         break;
 
                     case 6:
-                        fragment = new AyoPengamatanFragment();
-                        TAG = "ayo_pengamatan";
-                        ((MainActivity) context).setFragment(fragment, TAG);
+                        if (firebaseAuth.getCurrentUser() != null){
+                            fragment = new AyoPengamatanFragment();
+                            TAG = "ayo_pengamatan";
+                            ((MainActivity) context).setFragment(fragment, TAG);
+                        }else {
+                            fragment = new LoginFragment();
+                            TAG = "login";
+                            ((MainActivity) context).setFragment(fragment, TAG);
+                        }
                         break;
                 }
             }
