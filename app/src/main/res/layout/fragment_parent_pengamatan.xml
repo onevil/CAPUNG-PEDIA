@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UI.ayoPengamatan.ParentPengamatanFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_ayo_pengamatan"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:titleTextColor="?attr/textcolor"
+        android:foregroundTint="?attr/textcolor"
+        app:title="Ayo Pengamatan!"
+        android:background="?attr/cardbackground"
+        android:elevation="2dp">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_pengamatan"
+        android:layout_below="@id/toolbar_ayo_pengamatan"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/cardbackground"
+        app:tabTextColor="?attr/textcolor"
+        android:elevation="2dp"
+        app:tabSelectedTextColor="?attr/buttoncolor">
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabPengamatan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengamatan"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="profile"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_listPengamatan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tl_pengamatan">
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+
+
+</RelativeLayout>

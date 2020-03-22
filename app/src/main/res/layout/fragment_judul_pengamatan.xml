@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/backgroundcolor"
     android:orientation="vertical"
-    tools:context=".ayoPengamatan.JudulPengamatanFragment">
+    tools:context=".UI.ayoPengamatan.JudulPengamatanFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_judul_pengamatan"
