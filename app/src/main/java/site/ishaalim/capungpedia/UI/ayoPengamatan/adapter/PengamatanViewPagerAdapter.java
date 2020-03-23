@@ -1,14 +1,12 @@
 package site.ishaalim.capungpedia.UI.ayoPengamatan.adapter;
 
-import android.widget.Switch;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import site.ishaalim.capungpedia.UI.ayoPengamatan.ListPengamatanFragment;
-import site.ishaalim.capungpedia.UI.ayoPengamatan.ProfileFragment;
+import site.ishaalim.capungpedia.UI.profile.ProfileFragment;
 
 public class PengamatanViewPagerAdapter extends FragmentStateAdapter {
     public PengamatanViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {

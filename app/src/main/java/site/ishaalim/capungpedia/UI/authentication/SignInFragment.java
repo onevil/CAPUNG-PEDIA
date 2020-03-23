@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.UI.authentication;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,17 +26,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Random;
 
+import site.ishaalim.capungpedia.SharedPref.usersPref;
 import site.ishaalim.capungpedia.UI.MainActivity;
 import site.ishaalim.capungpedia.R;
-import site.ishaalim.capungpedia.UI.ayoPengamatan.ListPengamatanFragment;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.ParentPengamatanFragment;
 
 public class SignInFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
+    usersPref usersPref;
 
     EditText edtNama, edtEmail, edtPassword, edtTelpon, edtOrganisasi;
     Button btnSignIn;
+    ProgressDialog progressDialog;
 
     String nama, email, password, telpon, organisasi;
     String Characters = "ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
@@ -58,6 +61,7 @@ public class SignInFragment extends Fragment {
 
         setupFirebase();
         initUI();
+        setupProgressDialog();
         setEvents();
     }
 
@@ -73,12 +77,22 @@ public class SignInFragment extends Fragment {
         edtTelpon = getView().findViewById(R.id.edt_telp);
         edtOrganisasi = getView().findViewById(R.id.edt_organisasi);
         btnSignIn = getView().findViewById(R.id.btn_signIn);
+        usersPref = new usersPref(getContext());
+    }
+
+    private void setupProgressDialog(){
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Membuat Akun");
+        progressDialog.setMessage("Mohon tunggu...");
+        progressDialog.setCancelable(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     private void setEvents(){
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 generateID();
                 getData();
             }
@@ -124,14 +138,14 @@ public class SignInFragment extends Fragment {
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     assert firebaseUser != null;
                     String userID = firebaseUser.getUid();
-                    saveUserData(userID);
+                    uploadUserData(userID);
                 }
 
             }
         });
     }
 
-    private void saveUserData(String userID){
+    private void uploadUserData(String userID){
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("nama", nama);
         hashMap.put("email", email);
@@ -145,12 +159,19 @@ public class SignInFragment extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getContext(),"Akun berhasil dibuat", Toast.LENGTH_SHORT).show();
+                            saveUserData(nama, organisasi, email, telpon);
+                            progressDialog.dismiss();
                             String TAG = "parent_pengamatan";
                             ParentPengamatanFragment fragment = new ParentPengamatanFragment();
                             changeFragment(fragment, TAG);
                         }
                     }
                 });
+    }
+
+    private void saveUserData(String userNama, String userOrganisasi, String userEmail, String userTelpon){
+        usersPref.setUserProfile(userNama, userOrganisasi, userEmail, userTelpon);
+        usersPref.setUsersLoaded(true);
     }
 
     private  void changeFragment(Fragment fragment, String TAG){

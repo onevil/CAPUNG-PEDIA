@@ -71,14 +71,12 @@ public class DetailPengamatanFragment extends Fragment {
 
 
     public DetailPengamatanFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_pengamatan, container, false);
     }
 
@@ -161,7 +159,6 @@ public class DetailPengamatanFragment extends Fragment {
         pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 switch (which){
                     case 0:
                         showImage();
@@ -175,13 +172,11 @@ public class DetailPengamatanFragment extends Fragment {
                         {
                             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
                             break;
-
                         }else {
                             takePhotoFromCamera();
                         }
                         break;
                 }
-
             }
         });
         pictureDialog.show();
@@ -195,7 +190,6 @@ public class DetailPengamatanFragment extends Fragment {
         Intent cameraintent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraintent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(cameraintent, MY_CAMERA_REQUEST_CODE);
-
     }
 
     @Override
@@ -213,7 +207,6 @@ public class DetailPengamatanFragment extends Fragment {
         }
 
     }
-
 
     private void setViewImageURI(Uri imageUri) {
         viewImageURI = imageUri;
@@ -236,18 +229,13 @@ public class DetailPengamatanFragment extends Fragment {
     }
 
     private void showImage() {
-
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
         View mView = getLayoutInflater().inflate(R.layout.dialog_photoview, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
-
         photoView.setImageURI(viewImageURI);
-
-
         mBuilder.setView(mView);
         AlertDialog mDialog = mBuilder.create();
         mDialog.show();
-
     }
 
     @Override
@@ -267,8 +255,6 @@ public class DetailPengamatanFragment extends Fragment {
         super.onDetach();
         listener = null;
     }
-
-
 
     private void removeFragment(){
         getFragmentManager().beginTransaction().remove(this).commit();
