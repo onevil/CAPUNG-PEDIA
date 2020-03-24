@@ -27,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import site.ishaalim.capungpedia.SharedPref.usersPref;
 import site.ishaalim.capungpedia.UI.MainActivity;
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.adapter.ayoPengamatanAdapter;
@@ -45,6 +46,7 @@ public class ListPengamatanFragment extends Fragment {
 
     ayoPengamatanAdapter ayoPengamatanAdapter;
     private ArrayList<ayoPengamatan> ayoPengamatanArrayList;
+    usersPref usersPref;
 
 
     public ListPengamatanFragment() {
@@ -79,6 +81,7 @@ public class ListPengamatanFragment extends Fragment {
     private void initUI() {
         toolbar = getView().findViewById(R.id.toolbar_ayo_pengamatan);
         btnTambahPengamatan = getView().findViewById(R.id.btn_add_pengamatan);
+        usersPref = new usersPref(getContext());
     }
 
     private void setEvents(){
@@ -111,9 +114,14 @@ public class ListPengamatanFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         for (DocumentSnapshot querySnapshotListMateri : task.getResult()) {
                             if (task.getResult() != null) {
+                                String keyword = querySnapshotListMateri.getString("email");
 
-                                        ayoPengamatan pengamatan = querySnapshotListMateri.toObject(ayoPengamatan.class);
-                                        ayoPengamatanArrayList.add(pengamatan);
+                                if (keyword.equals(usersPref.getUserEmail())){
+                                    ayoPengamatan pengamatan = querySnapshotListMateri.toObject(ayoPengamatan.class);
+                                    ayoPengamatanArrayList.add(pengamatan);
+                                }else {
+                                    Log.d(TAG, "No Pengamatan");
+                                }
 
                             } else {
                                 Log.d(TAG, "No such Document");

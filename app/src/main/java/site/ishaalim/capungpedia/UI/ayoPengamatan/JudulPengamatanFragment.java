@@ -48,6 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import site.ishaalim.capungpedia.SharedPref.usersPref;
 import site.ishaalim.capungpedia.UI.MainActivity;
 import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.adapter.tambahPengamatanAdapter;
@@ -65,21 +66,17 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     private ProgressDialog progressDialog;
 
     private StorageTask uploadTask;
-
     private StorageReference storageReference;
-
-    ArrayList<Pengamatan> pengamatanArrayList;
-
+    FirebaseFirestore firestore;
     tambahPengamatanAdapter adapter;
 
-
+    ArrayList<Pengamatan> pengamatanArrayList;
     String Characters = "ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
     String docID = "";
     String tanggal;
-
     Date date;
 
-    FirebaseFirestore firestore;
+    usersPref usersPref;
 
     int IDLength = 20;
 
@@ -136,6 +133,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         edtTanggal = getView().findViewById(R.id.edt_tanggal_pengamatan);
         pengamatanRV = getView().findViewById(R.id.rv_tambah_pengamatan);
         adapter = new tambahPengamatanAdapter(getContext(), pengamatanArrayList, this);
+        usersPref = new usersPref(getContext());
     }
 
     private void setEvents(){
@@ -253,6 +251,8 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
         Map<String, Object> pengamatan = new HashMap<>();
         pengamatan.put("judulPengamatan" , edtJudulPengamatan.getText().toString());
+        pengamatan.put("email" , usersPref.getUserEmail());
+        pengamatan.put("nama" , usersPref.getUserNama());
         pengamatan.put("lokasiPengamatan" , edtLokasi.getText().toString());
         pengamatan.put("tanggalPengamatan" , new Timestamp(date));
 

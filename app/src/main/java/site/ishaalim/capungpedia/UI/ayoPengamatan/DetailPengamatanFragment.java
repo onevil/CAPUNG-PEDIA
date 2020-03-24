@@ -38,6 +38,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import site.ishaalim.capungpedia.SharedPref.usersPref;
 import site.ishaalim.capungpedia.UI.MainActivity;
 import site.ishaalim.capungpedia.R;
 
@@ -46,20 +47,18 @@ import site.ishaalim.capungpedia.R;
  */
 public class DetailPengamatanFragment extends Fragment {
     Toolbar toolbar;
-    String namaPengamat, Habitat, Cuaca, Aktifiktas, Deskripsi, Hasil, imageFilePath;
+    String namaPengamat, Habitat, Lokasi, Aktifiktas, Deskripsi, Jumlah, imageFilePath;
     Button btnSimpan;
     ImageView ivDetailPengamatan;
 
     Date date;
-
     String pukul;
-
-
     RequestOptions options;
+    usersPref usersPref;
 
     Uri imageUri, viewImageURI;
 
-    EditText edtNamaPengamat, edtHabitat, edtPukul, edtCuaca, edtAktifitas, edtDeskripsi, edtHasil;
+    EditText edtNamaPengamat, edtHabitat, edtPukul, edtLokasi, edtAktifitas, edtDeskripsi, edtJumlah;
 
     private DetailPengamatanListener listener;
     private static final int MY_CAMERA_REQUEST_CODE = 1;
@@ -106,35 +105,33 @@ public class DetailPengamatanFragment extends Fragment {
     private void initUI() {
         toolbar = getView().findViewById(R.id.toolbar_detail_pengamatan);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
-
-        edtNamaPengamat = getView().findViewById(R.id.edt_nama_pengamat);
         edtAktifitas = getView().findViewById(R.id.edt_aktifitas);
         edtHabitat = getView().findViewById(R.id.edt_habitat);
-        edtCuaca = getView().findViewById(R.id.edt_cuaca);
+        edtLokasi = getView().findViewById(R.id.edt_lokasi);
         edtDeskripsi = getView().findViewById(R.id.edt_deskripsi);
-        edtHasil = getView().findViewById(R.id.edt_hasil_identifikasi);
+        edtJumlah = getView().findViewById(R.id.edt_jumlah);
         edtPukul = getView().findViewById(R.id.edt_pukul_pengamatan);
         btnSimpan = getView().findViewById(R.id.btn_simpan);
         ivDetailPengamatan = getView().findViewById(R.id.iv_detail_pengamatan);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 back();
             }
         });
+        usersPref = new usersPref(getContext());
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                namaPengamat = edtNamaPengamat.getText().toString();
+                namaPengamat = usersPref.getUserNama();
                 Aktifiktas = edtAktifitas.getText().toString();
                 Habitat = edtHabitat.getText().toString();
-                Cuaca = edtCuaca.getText().toString();
+                Lokasi = edtLokasi.getText().toString();
                 Deskripsi = edtDeskripsi.getText().toString();
-                Hasil = edtHasil.getText().toString();
+                Jumlah = edtJumlah.getText().toString();
 
-                listener.addArraylist(namaPengamat, Habitat, Cuaca, Aktifiktas, Deskripsi, Hasil, imageUri, date);
+                listener.addArraylist(namaPengamat, Habitat, Lokasi, Aktifiktas, Deskripsi, Jumlah, imageUri, date);
 
                 removeFragment();
             }
