@@ -67,11 +67,14 @@ public class MengenalDesaAdapter extends RecyclerView.Adapter<MengenalDesaViewHo
         }
 
         if (isiHalamanMengenalDesaArrayList.get(position).getIsi() != null){
+            holder.tvIsiMengenalDesa.setVisibility(View.VISIBLE);
             holder.tvIsiMengenalDesa.setText(Html.fromHtml(isiHalamanMengenalDesaArrayList.get(position).getIsi()));
         }else {
             holder.tvIsiMengenalDesa.setVisibility(View.GONE);
         }
+
         if (isiHalamanMengenalDesaArrayList.get(position).getImageCaption() != null){
+            holder.tvCaptions.setVisibility(View.VISIBLE);
             holder.tvCaptions.setText(Html.fromHtml(isiHalamanMengenalDesaArrayList.get(position).getImageCaption()));
         }else {
             holder.tvCaptions.setVisibility(View.GONE);

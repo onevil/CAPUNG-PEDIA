@@ -57,18 +57,21 @@ public class PanduanIdentifikasiAdapter extends RecyclerView.Adapter<PanduanIden
         }
 
         if (isiHalamanPanduanIdentifikasiArrayList.get(position).getHeader() != null){
+            holder.tvHeaderPanduanIdentifikasi.setVisibility(View.VISIBLE);
             holder.tvHeaderPanduanIdentifikasi.setText(Html.fromHtml(isiHalamanPanduanIdentifikasiArrayList.get(position).getHeader()));
         }else {
             holder.tvHeaderPanduanIdentifikasi.setVisibility(View.GONE);
         }
 
         if (isiHalamanPanduanIdentifikasiArrayList.get(position).getIsi() != null){
+            holder.tvIsiPanduanIdentifikasi.setVisibility(View.VISIBLE);
             holder.tvIsiPanduanIdentifikasi.setText(Html.fromHtml(isiHalamanPanduanIdentifikasiArrayList.get(position).getIsi()));
         }else {
             holder.tvIsiPanduanIdentifikasi.setVisibility(View.GONE);
         }
 
         if (isiHalamanPanduanIdentifikasiArrayList.get(position).getImageCaption() != null){
+            holder.tvCaptions.setVisibility(View.VISIBLE);
             holder.tvCaptions.setText(Html.fromHtml(isiHalamanPanduanIdentifikasiArrayList.get(position).getImageCaption()));
         }else {
             holder.tvCaptions.setVisibility(View.GONE);

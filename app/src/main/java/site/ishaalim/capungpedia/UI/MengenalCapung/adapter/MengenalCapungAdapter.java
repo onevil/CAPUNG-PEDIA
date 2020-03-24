@@ -47,6 +47,14 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
 
     @Override
     public void onBindViewHolder(@NonNull final MengenalCapungViewHoder holder, final int position) {
+        String header = "";
+        String isi = "";
+        String imageCaption = "";
+
+        header = isiHalamanMengenalCapungArrayList.get(position).getHeader();
+        isi = isiHalamanMengenalCapungArrayList.get(position).getIsi();
+        imageCaption = isiHalamanMengenalCapungArrayList.get(position).getImageCaption();
+
         if(isiHalamanMengenalCapungArrayList.get(position).getImageURL() == null){
             holder.cvHeaderMengenalCapung.setVisibility(View.GONE);
             holder.ivHeaderMengenalCapung.setVisibility(View.GONE);
@@ -56,20 +64,23 @@ public class MengenalCapungAdapter extends RecyclerView.Adapter<MengenalCapungVi
             Glide.with(holder.itemView).load(isiHalamanMengenalCapungArrayList.get(position).getImageURL()).apply(options).into(holder.ivHeaderMengenalCapung);
         }
 
-        if (isiHalamanMengenalCapungArrayList.get(position).getHeader() != null){
-            holder.tvHeaderMengenalCapung.setText(Html.fromHtml(isiHalamanMengenalCapungArrayList.get(position).getHeader()));
+        if (header != null){
+            holder.tvHeaderMengenalCapung.setVisibility(View.VISIBLE);
+            holder.tvHeaderMengenalCapung.setText(Html.fromHtml(header));
         }else {
             holder.tvHeaderMengenalCapung.setVisibility(View.GONE);
         }
 
-        if (isiHalamanMengenalCapungArrayList.get(position).getIsi() != null){
-            holder.tvIsiMengenalCapung.setText(Html.fromHtml(isiHalamanMengenalCapungArrayList.get(position).getIsi()));
+        if (isi != null){
+            holder.tvIsiMengenalCapung.setVisibility(View.VISIBLE);
+            holder.tvIsiMengenalCapung.setText(Html.fromHtml(isi));
         }else {
             holder.tvIsiMengenalCapung.setVisibility(View.GONE);
         }
 
-        if (isiHalamanMengenalCapungArrayList.get(position).getImageCaption() != null){
-            holder.tvCaption.setText(Html.fromHtml(isiHalamanMengenalCapungArrayList.get(position).getImageCaption()));
+        if (imageCaption != null){
+            holder.tvCaption.setVisibility(View.VISIBLE);
+            holder.tvCaption.setText(Html.fromHtml(imageCaption));
         }else {
             holder.tvCaption.setVisibility(View.GONE);
         }
