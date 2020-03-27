@@ -212,7 +212,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (fragment2 instanceof DetailPengamatanFragment){
                 TAG = "detail_pengamatan";
                 RemoveFragment(TAG);
-                fragment2 = null;
             }else {
                 fragment = new ParentPengamatanFragment();
                 TAG = "parent_pengamatan";
@@ -262,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void RemoveFragment(String tag) {
         getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag(tag)).commit();
+        fragment2 = null;
     }
 
     private void uncheckNavItem() {
