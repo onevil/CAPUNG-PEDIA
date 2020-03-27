@@ -211,12 +211,12 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
     public void insertArray(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date) {
         Pengamatan pengamatan = new Pengamatan();
-        pengamatan.setNamaPengamat(namapengamat);
+        pengamatan.setNamaSpesies(namapengamat);
         pengamatan.setHabitat(habitat);
-        pengamatan.setCuaca(cuaca);
+        pengamatan.setLokasi(cuaca);
         pengamatan.setAktifiktas(aktifiktas);
         pengamatan.setDeskripsi(deskripsi);
-        pengamatan.setHasil(hasil);
+        pengamatan.setJumlah(hasil);
         pengamatan.setImageUri(imageUri);
         pengamatan.setPukul(date);
         pengamatanArrayList.add(pengamatan);
@@ -294,13 +294,13 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                     Uri downloadUri = task.getResult();
 
                     Map<String, Object> spesies = new HashMap<>();
-                    spesies.put("namaPengamat", pengamatanArrayList.get(position).getNamaPengamat());
+                    spesies.put("namaSpesies", pengamatanArrayList.get(position).getNamaSpesies());
                     spesies.put("pukul", pengamatanArrayList.get(position).getPukul());
                     spesies.put("habitat", pengamatanArrayList.get(position).getHabitat());
-                    spesies.put("cuaca", pengamatanArrayList.get(position).getCuaca());
+                    spesies.put("lokasi", pengamatanArrayList.get(position).getLokasi());
                     spesies.put("aktifiktas", pengamatanArrayList.get(position).getAktifiktas());
                     spesies.put("deskripsi", pengamatanArrayList.get(position).getDeskripsi());
-                    spesies.put("hasil", pengamatanArrayList.get(position).getHasil());
+                    spesies.put("jumlah", pengamatanArrayList.get(position).getJumlah());
                     spesies.put("imageURL", downloadUri.toString());
 
                     Map<String, Object> imageHeader = new HashMap<>();

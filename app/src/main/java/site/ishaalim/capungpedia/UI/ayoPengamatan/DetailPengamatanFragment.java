@@ -58,7 +58,7 @@ public class DetailPengamatanFragment extends Fragment {
 
     Uri imageUri, viewImageURI;
 
-    EditText edtNamaPengamat, edtHabitat, edtPukul, edtLokasi, edtAktifitas, edtDeskripsi, edtJumlah;
+    EditText edtNamaSpesies, edtHabitat, edtPukul, edtLokasi, edtAktifitas, edtDeskripsi, edtJumlah;
 
     private DetailPengamatanListener listener;
     private static final int MY_CAMERA_REQUEST_CODE = 1;
@@ -110,6 +110,7 @@ public class DetailPengamatanFragment extends Fragment {
         edtLokasi = getView().findViewById(R.id.edt_lokasi);
         edtDeskripsi = getView().findViewById(R.id.edt_deskripsi);
         edtJumlah = getView().findViewById(R.id.edt_jumlah);
+        edtNamaSpesies = getView().findViewById(R.id.edt_nama_spesies);
         edtPukul = getView().findViewById(R.id.edt_pukul_pengamatan);
         btnSimpan = getView().findViewById(R.id.btn_simpan);
         ivDetailPengamatan = getView().findViewById(R.id.iv_detail_pengamatan);
@@ -124,7 +125,7 @@ public class DetailPengamatanFragment extends Fragment {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                namaPengamat = usersPref.getUserNama();
+                namaPengamat = edtNamaSpesies.getText().toString();
                 Aktifiktas = edtAktifitas.getText().toString();
                 Habitat = edtHabitat.getText().toString();
                 Lokasi = edtLokasi.getText().toString();

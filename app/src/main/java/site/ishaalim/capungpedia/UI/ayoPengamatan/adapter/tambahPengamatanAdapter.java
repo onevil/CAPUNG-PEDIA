@@ -52,7 +52,7 @@ public class tambahPengamatanAdapter extends RecyclerView.Adapter<tambahPengamat
 
     @Override
     public void onBindViewHolder(@NonNull final tambahPengamatanVH holder, final int position) {
-        holder.tvTambahNamaPengamat.setText(pengamatanArrayList.get(position).getNamaPengamat());
+        holder.tvTambahNamaPengamat.setText(pengamatanArrayList.get(position).getNamaSpesies());
         holder.tvTambahDeskripsi.setText(pengamatanArrayList.get(position).getDeskripsi());
 //        holder.ivTambahPengamtan.setImageURI(pengamatanArrayList.get(position).getImageUri());
         Glide.with(holder.itemView)

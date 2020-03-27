@@ -5,30 +5,30 @@ import android.net.Uri;
 import java.util.Date;
 
 public class Pengamatan {
-    String namaPengamat, habitat, cuaca, aktifiktas, deskripsi, hasil;
+    String namaSpesies, habitat, lokasi, aktifiktas, deskripsi, jumlah;
     Uri imageUri;
     Date pukul;
 
     public Pengamatan() {
     }
 
-    public Pengamatan(String namaPengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date pukul) {
-        this.namaPengamat = namaPengamat;
+    public Pengamatan(String namaSpesies, String habitat, String lokasi, String aktifiktas, String deskripsi, String jumlah, Uri imageUri, Date pukul) {
+        this.namaSpesies = namaSpesies;
         this.habitat = habitat;
-        this.cuaca = cuaca;
+        this.lokasi = lokasi;
         this.aktifiktas = aktifiktas;
         this.deskripsi = deskripsi;
-        this.hasil = hasil;
+        this.jumlah = jumlah;
         this.imageUri = imageUri;
         this.pukul = pukul;
     }
 
-    public String getNamaPengamat() {
-        return namaPengamat;
+    public String getNamaSpesies() {
+        return namaSpesies;
     }
 
-    public void setNamaPengamat(String namaPengamat) {
-        this.namaPengamat = namaPengamat;
+    public void setNamaSpesies(String namaSpesies) {
+        this.namaSpesies = namaSpesies;
     }
 
     public String getHabitat() {
@@ -39,12 +39,12 @@ public class Pengamatan {
         this.habitat = habitat;
     }
 
-    public String getCuaca() {
-        return cuaca;
+    public String getLokasi() {
+        return lokasi;
     }
 
-    public void setCuaca(String cuaca) {
-        this.cuaca = cuaca;
+    public void setLokasi(String lokasi) {
+        this.lokasi = lokasi;
     }
 
     public String getAktifiktas() {
@@ -63,12 +63,12 @@ public class Pengamatan {
         this.deskripsi = deskripsi;
     }
 
-    public String getHasil() {
-        return hasil;
+    public String getJumlah() {
+        return jumlah;
     }
 
-    public void setHasil(String hasil) {
-        this.hasil = hasil;
+    public void setJumlah(String jumlah) {
+        this.jumlah = jumlah;
     }
 
     public Uri getImageUri() {
