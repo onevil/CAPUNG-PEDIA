@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import site.ishaalim.capungpedia.R;
 
 public class ayoPengamatanVH extends RecyclerView.ViewHolder {
-    public TextView tvnamaPengamatan, tvTanggalPengamatan, tvTempatPengamatan;
+    public TextView tvnamaPengamatan, tvnamaPengamat, tvTanggalPengamatan, tvTempatPengamatan;
     public ImageView ivAyoPengamatan;
 
 
@@ -19,11 +19,8 @@ public class ayoPengamatanVH extends RecyclerView.ViewHolder {
         super(itemView);
 
         tvnamaPengamatan = itemView.findViewById(R.id.tv_namaPengamatan);
+        tvnamaPengamat = itemView.findViewById(R.id.tv_namaPengamat);
         tvTanggalPengamatan = itemView.findViewById(R.id.tv_tanggalPengamatan);
         tvTempatPengamatan = itemView.findViewById(R.id.tv_tempatPengamatan);
-        ivAyoPengamatan = itemView.findViewById(R.id.iv_ayo_pengamatan);
-
-
-
     }
 }

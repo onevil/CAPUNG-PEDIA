@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="180dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="5dp"
@@ -17,40 +17,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
             android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
-                app:cardCornerRadius="10dp">
-
-                <ImageView
-                    android:id="@+id/iv_ayo_pengamatan"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp" />
-
-            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/tv_namaPengamatan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="2dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Nama Pengamatan"
                 android:textColor="?attr/textcolor"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_tanggalPengamatan"
+                android:id="@+id/tv_namaPengamat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Tanggal Pengamatan"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Nama Pengamat"
                 android:textColor="?attr/textcolor"
                 />
 
@@ -59,9 +47,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat_regular"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="Tempat Pengamatan"
+                android:textColor="?attr/textcolor"
+                />
+
+            <TextView
+                android:id="@+id/tv_tanggalPengamatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Tanggal Pengamatan"
                 android:textColor="?attr/textcolor"
                 />
 

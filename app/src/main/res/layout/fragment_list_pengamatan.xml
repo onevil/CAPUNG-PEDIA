@@ -9,7 +9,7 @@
         android:id="@+id/rv_ayo_pengamatan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_rv_ayo_pengamatan"
+        tools:listitem="@layout/item_rv_list_pengamatan"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

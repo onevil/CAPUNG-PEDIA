@@ -41,7 +41,7 @@ public class ayoPengamatanAdapter extends RecyclerView.Adapter<ayoPengamatanVH> 
     public ayoPengamatanVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater inflater = LayoutInflater.from(context);
-        view = inflater.inflate(R.layout.item_rv_ayo_pengamatan, parent,false);
+        view = inflater.inflate(R.layout.item_rv_list_pengamatan, parent,false);
 
         return new  ayoPengamatanVH(view);
     }
@@ -55,12 +55,9 @@ public class ayoPengamatanAdapter extends RecyclerView.Adapter<ayoPengamatanVH> 
         tanggal = pengamatanArrayList.get(position).getTanggalPengamatan();
 
         holder.tvnamaPengamatan.setText(pengamatanArrayList.get(position).getJudulPengamatan());
+        holder.tvnamaPengamat.setText(pengamatanArrayList.get(position).getNama());
         holder.tvTanggalPengamatan.setText(sdf.format(tanggal));
         holder.tvTempatPengamatan.setText(pengamatanArrayList.get(position).getLokasiPengamatan());
-
-        Glide.with(holder.itemView).load(pengamatanArrayList.get(position).getImageURL())
-                .apply(options).into(holder.ivAyoPengamatan);
-
     }
 
     @Override

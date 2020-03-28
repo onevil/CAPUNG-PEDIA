@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.protobuf.StringValue;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,13 +49,14 @@ import site.ishaalim.capungpedia.R;
 public class DetailPengamatanFragment extends Fragment {
     Toolbar toolbar;
     String namaPengamat, Habitat, Lokasi, Aktifiktas, Deskripsi, Jumlah, imageFilePath;
-    Button btnSimpan;
+    Button btnSimpan, btnPlus, btnMinus;
     ImageView ivDetailPengamatan;
 
     Date date;
     String pukul;
     RequestOptions options;
     usersPref usersPref;
+    int jumlah = 0;
 
     Uri imageUri, viewImageURI;
 
@@ -84,6 +86,7 @@ public class DetailPengamatanFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         options = new RequestOptions().centerCrop();
         initUI();
+        setEvents();
         setHasOptionsMenu(true);
         setupToolbar();
         getPukul();
@@ -113,6 +116,8 @@ public class DetailPengamatanFragment extends Fragment {
         edtNamaSpesies = getView().findViewById(R.id.edt_nama_spesies);
         edtPukul = getView().findViewById(R.id.edt_pukul_pengamatan);
         btnSimpan = getView().findViewById(R.id.btn_simpan);
+        btnPlus = getView().findViewById(R.id.btn_plus);
+        btnMinus = getView().findViewById(R.id.btn_minus);
         ivDetailPengamatan = getView().findViewById(R.id.iv_detail_pengamatan);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +126,9 @@ public class DetailPengamatanFragment extends Fragment {
             }
         });
         usersPref = new usersPref(getContext());
+    }
 
+    private void setEvents(){
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,9 +138,7 @@ public class DetailPengamatanFragment extends Fragment {
                 Lokasi = edtLokasi.getText().toString();
                 Deskripsi = edtDeskripsi.getText().toString();
                 Jumlah = edtJumlah.getText().toString();
-
                 listener.addArraylist(namaPengamat, Habitat, Lokasi, Aktifiktas, Deskripsi, Jumlah, imageUri, date);
-
                 removeFragment();
             }
         });
@@ -142,6 +147,22 @@ public class DetailPengamatanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showPictureDialog();
+            }
+        });
+
+        btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jumlah += 1;
+                edtJumlah.setText(Integer.toString(jumlah));
+            }
+        });
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jumlah -= 1;
+                edtJumlah.setText(Integer.toString(jumlah));
             }
         });
     }

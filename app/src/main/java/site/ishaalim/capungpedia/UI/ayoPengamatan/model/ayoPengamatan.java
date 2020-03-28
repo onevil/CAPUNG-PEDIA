@@ -4,15 +4,16 @@ package site.ishaalim.capungpedia.UI.ayoPengamatan.model;
 import java.util.Date;
 
 public class ayoPengamatan {
-    String judulPengamatan,lokasiPengamatan,imageURL;
+    String judulPengamatan, nama, lokasiPengamatan,imageURL;
     Date tanggalPengamatan;
 
 
     public ayoPengamatan() {
     }
 
-    public ayoPengamatan(String judulPengamatan, String lokasiPengamatan, String imageURL, Date tanggalPengamatan) {
+    public ayoPengamatan(String judulPengamatan, String nama, String lokasiPengamatan, String imageURL, Date tanggalPengamatan) {
         this.judulPengamatan = judulPengamatan;
+        this.nama = nama;
         this.lokasiPengamatan = lokasiPengamatan;
         this.imageURL = imageURL;
         this.tanggalPengamatan = tanggalPengamatan;
@@ -24,6 +25,14 @@ public class ayoPengamatan {
 
     public void setJudulPengamatan(String judulPengamatan) {
         this.judulPengamatan = judulPengamatan;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public String getLokasiPengamatan() {
