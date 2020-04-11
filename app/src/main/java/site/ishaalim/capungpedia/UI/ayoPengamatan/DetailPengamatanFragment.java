@@ -3,11 +3,13 @@ package site.ishaalim.capungpedia.UI.ayoPengamatan;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -57,6 +59,7 @@ public class DetailPengamatanFragment extends Fragment {
     RequestOptions options;
     usersPref usersPref;
     int jumlah = 0;
+    private int GALERY = 2;
 
     Uri imageUri, viewImageURI;
 
@@ -92,19 +95,6 @@ public class DetailPengamatanFragment extends Fragment {
         getPukul();
     }
 
-    private void getPukul() {
-        date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh : mm ");
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+7"));
-        pukul = simpleDateFormat.format(date) + "WIB";
-        edtPukul.setText(pukul);
-        edtPukul.setClickable(false);
-        edtPukul.setFocusable(false);
-    }
-
-    private void setupToolbar() {
-    }
-
     private void initUI() {
         toolbar = getView().findViewById(R.id.toolbar_detail_pengamatan);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back));
@@ -119,16 +109,17 @@ public class DetailPengamatanFragment extends Fragment {
         btnPlus = getView().findViewById(R.id.btn_plus);
         btnMinus = getView().findViewById(R.id.btn_minus);
         ivDetailPengamatan = getView().findViewById(R.id.iv_detail_pengamatan);
+        usersPref = new usersPref(getContext());
+    }
+
+    private void setEvents(){
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 back();
             }
         });
-        usersPref = new usersPref(getContext());
-    }
 
-    private void setEvents(){
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,12 +158,26 @@ public class DetailPengamatanFragment extends Fragment {
         });
     }
 
+    private void setupToolbar() {
+    }
+
+    private void getPukul() {
+        date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh : mm ");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+7"));
+        pukul = simpleDateFormat.format(date) + "WIB";
+        edtPukul.setText(pukul);
+        edtPukul.setClickable(false);
+        edtPukul.setFocusable(false);
+    }
+
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getContext());
         pictureDialog.setTitle("Pilih Aksi : ");
         String[] pictureDialogItems = {
                 "Lihat Gambar",
-                "Ambil Gambar"
+                "Ambil Gambar",
+                "Ambil dari Galeri"
         };
 
         pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
@@ -195,6 +200,8 @@ public class DetailPengamatanFragment extends Fragment {
                             takePhotoFromCamera();
                         }
                         break;
+                    case 2:
+                        takePhotoFromGalerry();
                 }
             }
         });
@@ -211,6 +218,11 @@ public class DetailPengamatanFragment extends Fragment {
         startActivityForResult(cameraintent, MY_CAMERA_REQUEST_CODE);
     }
 
+    private void takePhotoFromGalerry(){
+        Intent galleryIntent =  new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, STORAGE_REQUEST_CODE);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -222,6 +234,21 @@ public class DetailPengamatanFragment extends Fragment {
 
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 Toast.makeText(getContext(), "Cancelled", Toast.LENGTH_LONG).show();
+            }
+        }else if (requestCode == STORAGE_REQUEST_CODE){
+            if (resultCode == getActivity().RESULT_OK){
+                if (data != null){
+                    imageUri = data.getData();
+                    ContentResolver contentResolver = getContext().getContentResolver();
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Glide.with(getView()).load(bitmap).apply(options).into(ivDetailPengamatan);
+                    setViewImageURI(imageUri);
+                }
             }
         }
 
