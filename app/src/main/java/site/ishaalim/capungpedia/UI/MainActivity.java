@@ -29,6 +29,7 @@ import site.ishaalim.capungpedia.UI.ayoPengamatan.ListPengamatanFragment;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.DetailPengamatanFragment;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.JudulPengamatanFragment;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.ParentPengamatanFragment;
+import site.ishaalim.capungpedia.UI.ayoPengamatan.adapter.RekomendasiAdapter;
 import site.ishaalim.capungpedia.UI.laporBug.LaporBugFragment;
 import site.ishaalim.capungpedia.UI.mengenalDesa.FragmentMengenalDesa;
 import site.ishaalim.capungpedia.UI.panduanIdentifikasi.FragmentPanduanIdentifikasi;
@@ -43,7 +44,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DetailPengamatanFragment.DetailPengamatanListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DetailPengamatanFragment.DetailPengamatanListener, RekomendasiAdapter.setnama {
 
 
     private DrawerLayout drawerLayout;
@@ -240,6 +241,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date) {
         JudulPengamatanFragment judulPengamatanFragment = (JudulPengamatanFragment)getSupportFragmentManager().findFragmentByTag("judulPengamatan");
         judulPengamatanFragment.insertArray(namapengamat, habitat, cuaca, aktifiktas, deskripsi, hasil, imageUri, date);
+    }
+
+    @Override
+    public void setEditText(String nama) {
+        DetailPengamatanFragment fragment = (DetailPengamatanFragment)getSupportFragmentManager().findFragmentByTag("detail_pengamatan");
+        fragment.setEditText(nama);
     }
 
 

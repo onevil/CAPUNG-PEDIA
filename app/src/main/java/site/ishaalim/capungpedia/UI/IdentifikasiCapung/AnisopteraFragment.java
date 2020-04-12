@@ -139,8 +139,7 @@ public class AnisopteraFragment extends Fragment {
             public void onFailure(@NonNull Exception e) {
 
             }
-        });
-    }
+        });    }
 
     public void loadcapungRV() {
         capungArrayList.clear();
