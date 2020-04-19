@@ -32,6 +32,8 @@ import site.ishaalim.capungpedia.UI.ayoPengamatan.ParentPengamatanFragment;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.adapter.RekomendasiAdapter;
 import site.ishaalim.capungpedia.UI.laporBug.LaporBugFragment;
 import site.ishaalim.capungpedia.UI.mengenalDesa.FragmentMengenalDesa;
+import site.ishaalim.capungpedia.UI.notification.NotifListFragment;
+import site.ishaalim.capungpedia.UI.notification.adapter.notificationAdapter;
 import site.ishaalim.capungpedia.UI.panduanIdentifikasi.FragmentPanduanIdentifikasi;
 import site.ishaalim.capungpedia.UI.panduanPengamatan.FragmentPanduanPengamatan;
 import site.ishaalim.capungpedia.UI.petunjukPenggunaan.FragmentPetunjukPenggunaan;
@@ -44,7 +46,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DetailPengamatanFragment.DetailPengamatanListener, RekomendasiAdapter.setnama {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        DetailPengamatanFragment.DetailPengamatanListener, RekomendasiAdapter.setnama, notificationAdapter.onDeleteListener {
 
 
     private DrawerLayout drawerLayout;
@@ -247,6 +250,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setEditText(String nama) {
         DetailPengamatanFragment fragment = (DetailPengamatanFragment)getSupportFragmentManager().findFragmentByTag("detail_pengamatan");
         fragment.setEditText(nama);
+    }
+
+    @Override
+    public void onDelete() {
+        NotifListFragment fragment = (NotifListFragment)getSupportFragmentManager().findFragmentByTag("notification");
+        fragment.loadNotification();
     }
 
 

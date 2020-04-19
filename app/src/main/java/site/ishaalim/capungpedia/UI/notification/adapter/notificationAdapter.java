@@ -1,6 +1,7 @@
 package site.ishaalim.capungpedia.UI.notification.adapter;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,6 +26,9 @@ import java.util.TimeZone;
 
 import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.SharedPref.usersPref;
+import site.ishaalim.capungpedia.UI.ayoPengamatan.ListPengamatanFragment;
+import site.ishaalim.capungpedia.UI.notification.NotifListFragment;
 import site.ishaalim.capungpedia.UI.notification.NotificationActivity;
 import site.ishaalim.capungpedia.UI.notification.model.notification;
 import site.ishaalim.capungpedia.UI.notification.viewHolder.notificationViewHolder;
@@ -36,6 +40,13 @@ public class notificationAdapter extends RecyclerView.Adapter<notificationViewHo
     String body, URL, id;
     FirebaseFirestore firestore;
     ProgressDialog progressDialog;
+    usersPref usersPref;
+    onDeleteListener listener;
+
+    public interface onDeleteListener{
+        void onDelete();
+    }
+
 
     public notificationAdapter(ArrayList<notification> notificationArrayList, Context context) {
         this.notificationArrayList = notificationArrayList;
@@ -70,6 +81,23 @@ public class notificationAdapter extends RecyclerView.Adapter<notificationViewHo
     @Override
     public int getItemCount() {
         return notificationArrayList.size();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        if (context instanceof onDeleteListener){
+            listener = (onDeleteListener) context;
+        }else {
+            throw new RuntimeException(context.toString()
+                    + " must implement FragmentAListener");
+        }
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        listener = null;
     }
 
     private void setEvents(View itemView, ImageView ivDelete, final String id, final String url) {
@@ -119,7 +147,8 @@ public class notificationAdapter extends RecyclerView.Adapter<notificationViewHo
     }
 
     private void deleteNotification(String id) {
-        firestore.collection("notification").document(id).delete()
+        usersPref = new usersPref(context);
+        firestore.collection("notification").document(usersPref.getUserEmail()).collection("notifications").document(id).delete()
         .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -127,6 +156,8 @@ public class notificationAdapter extends RecyclerView.Adapter<notificationViewHo
                 Toast.makeText(context, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
             }
         });
+
+        listener.onDelete();
     }
 }
 

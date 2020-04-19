@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.SharedPref.usersPref;
 import site.ishaalim.capungpedia.UI.notification.adapter.notificationAdapter;
 import site.ishaalim.capungpedia.UI.notification.model.notification;
 
@@ -36,6 +37,7 @@ public class NotifListFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseFirestore firestore;
     Toolbar toolbar;
+    usersPref usersPref;
 
     private ArrayList<notification> notificationArrayList;
     notificationAdapter notificationAdapter;
@@ -59,7 +61,13 @@ public class NotifListFragment extends Fragment {
         initUI();
         setUpToolbar();
         setUpRecyclerView();
-        loadNotification();
+
+        if (usersPref.getUserEmail() != null){
+            loadNotification();
+        }else {
+            Toast.makeText(getContext(), "Perlu Login untuk mendapatkan Notifikasi.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void setupArraylist(){
@@ -73,6 +81,7 @@ public class NotifListFragment extends Fragment {
     private void initUI(){
         recyclerView = getView().findViewById(R.id.rv_notif);
         toolbar = getView().findViewById(R.id.toolbar);
+        usersPref = new usersPref(getContext());
     }
 
     private void setUpToolbar(){
@@ -92,9 +101,11 @@ public class NotifListFragment extends Fragment {
 
     }
 
-    private void loadNotification(){
+    public void loadNotification(){
         notificationArrayList.clear();
-        CollectionReference reference = firestore.collection("notification");
+        CollectionReference reference = firestore.collection("notification")
+                .document(usersPref.getUserEmail()).collection("notifications");
+
         final Query queryNotif = reference.orderBy("notifDate", Query.Direction.DESCENDING);
         queryNotif.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -110,10 +121,13 @@ public class NotifListFragment extends Fragment {
                             }
                         }
                         notificationAdapter = new notificationAdapter(notificationArrayList, getContext());
-                        notificationAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(notificationAdapter);
                         recyclerView.smoothScrollToPosition(notificationAdapter.getItemCount());
                     }
                 });
+    }
+
+    public void notifyAdapter(){
+        notificationAdapter.notifyDataSetChanged();
     }
 }

@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Random;
 
 import site.ishaalim.capungpedia.R;
+import site.ishaalim.capungpedia.SharedPref.usersPref;
 
 public class FirebaseCloudMessagingService extends FirebaseMessagingService {
     FirebaseFirestore firestore;
@@ -82,6 +83,8 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
     }
 
     private void saveNotification(String messageBody, String notifUrl, Date date, String messageId){
+        usersPref pref;
+        pref = new usersPref(getApplicationContext());
         Map<String, Object> notification = new HashMap<>();
         notification.put("id", messageId);
         notification.put("messageBody", messageBody);
@@ -89,8 +92,11 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
         notification.put("notifDate", date);
 
         firestore.collection("notification")
-                .document(messageId)
+                .document(pref.getUserEmail()).collection("notifications").document(messageId)
                 .set(notification);
+
+//        firestore.collection("notification").document(messageId)
+//                .set(notification);
     }
 
     private void showNotification(String messageBody, String notifUrl) {
