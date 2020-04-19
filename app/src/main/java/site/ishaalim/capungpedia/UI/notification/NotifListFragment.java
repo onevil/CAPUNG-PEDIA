@@ -110,6 +110,7 @@ public class NotifListFragment extends Fragment {
                             }
                         }
                         notificationAdapter = new notificationAdapter(notificationArrayList, getContext());
+                        notificationAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(notificationAdapter);
                         recyclerView.smoothScrollToPosition(notificationAdapter.getItemCount());
                     }

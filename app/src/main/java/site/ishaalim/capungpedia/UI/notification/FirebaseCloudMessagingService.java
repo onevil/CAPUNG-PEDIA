@@ -43,7 +43,7 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
             body = remoteMessage.getData().get("body");
             NotifUrl = remoteMessage.getData().get("URL");
             date = new Date();
-            saveNotification(body, NotifUrl, date);
+            saveNotification(body, NotifUrl, date, remoteMessage.getMessageId());
             showNotification(body, NotifUrl);
         }
 
@@ -81,14 +81,15 @@ public class FirebaseCloudMessagingService extends FirebaseMessagingService {
         }
     }
 
-    private void saveNotification(String messageBody, String notifUrl, Date date){
+    private void saveNotification(String messageBody, String notifUrl, Date date, String messageId){
         Map<String, Object> notification = new HashMap<>();
+        notification.put("id", messageId);
         notification.put("messageBody", messageBody);
         notification.put("notifUrl", notifUrl);
         notification.put("notifDate", date);
 
         firestore.collection("notification")
-                .document(docID)
+                .document(messageId)
                 .set(notification);
     }
 

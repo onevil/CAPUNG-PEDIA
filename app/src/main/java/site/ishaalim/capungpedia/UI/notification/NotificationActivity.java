@@ -9,6 +9,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import maes.tech.intentanim.CustomIntent;
 import site.ishaalim.capungpedia.UI.MainActivity;
@@ -54,6 +55,7 @@ public class NotificationActivity extends AppCompatActivity {
                 CustomIntent.customType(getApplicationContext(), "right-to-left");
             }
         });
+
     }
 
     private void loadURL() {

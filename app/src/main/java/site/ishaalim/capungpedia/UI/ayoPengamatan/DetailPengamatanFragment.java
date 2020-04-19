@@ -14,15 +14,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -35,9 +26,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -45,29 +44,27 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.protobuf.StringValue;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.SharedPref.usersPref;
-import site.ishaalim.capungpedia.UI.IdentifikasiCapung.adapter.CapungAdapter;
 import site.ishaalim.capungpedia.UI.IdentifikasiCapung.model.Capung;
 import site.ishaalim.capungpedia.UI.MainActivity;
-import site.ishaalim.capungpedia.R;
 import site.ishaalim.capungpedia.UI.ayoPengamatan.adapter.RekomendasiAdapter;
-import site.ishaalim.capungpedia.UI.tentangPengembang.adapter.ContributorAdapter;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -80,12 +77,16 @@ public class DetailPengamatanFragment extends Fragment {
     Button btnSimpan, btnPlus, btnMinus;
     ImageView ivDetailPengamatan;
     AlertDialog dialogRekomendasi;
-
+    String[] appPermissions = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
     Date date;
     String pukul;
     RequestOptions options;
     usersPref usersPref;
     int jumlah = 0;
+    private static final int PERMISSION_REQUEST_CODE = 1240;
     private int GALERY = 2;
     ArrayList<Capung> capungArrayList = new ArrayList<>();
 
@@ -99,7 +100,7 @@ public class DetailPengamatanFragment extends Fragment {
     private static final int MY_CAMERA_REQUEST_CODE = 1;
     private static final int STORAGE_REQUEST_CODE = 2;
 
-    public interface DetailPengamatanListener{
+    public interface DetailPengamatanListener {
         void addArraylist(String namapengamat, String habitat, String cuaca, String aktifiktas, String deskripsi, String hasil, Uri imageUri, Date date);
     }
 
@@ -143,7 +144,7 @@ public class DetailPengamatanFragment extends Fragment {
         usersPref = new usersPref(getContext());
     }
 
-    private void setEvents(){
+    private void setEvents() {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,14 +155,20 @@ public class DetailPengamatanFragment extends Fragment {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                namaPengamat = edtNamaSpesies.getText().toString();
-                Aktifiktas = edtAktifitas.getText().toString();
-                Habitat = edtHabitat.getText().toString();
-                Lokasi = edtLokasi.getText().toString();
-                Deskripsi = edtDeskripsi.getText().toString();
-                Jumlah = edtJumlah.getText().toString();
-                listener.addArraylist(namaPengamat, Habitat, Lokasi, Aktifiktas, Deskripsi, Jumlah, imageUri, date);
-                removeFragment();
+                if (edtNamaSpesies.getText() != null && edtAktifitas.getText() != null && edtHabitat.getText() != null &&
+                        edtLokasi.getText() != null && edtDeskripsi.getText() != null && edtJumlah.getText() != null
+                        && imageUri != null) {
+                    namaPengamat = edtNamaSpesies.getText().toString();
+                    Aktifiktas = edtAktifitas.getText().toString();
+                    Habitat = edtHabitat.getText().toString();
+                    Lokasi = edtLokasi.getText().toString();
+                    Deskripsi = edtDeskripsi.getText().toString();
+                    Jumlah = edtJumlah.getText().toString();
+                    listener.addArraylist(namaPengamat, Habitat, Lokasi, Aktifiktas, Deskripsi, Jumlah, imageUri, date);
+                    removeFragment();
+                } else {
+                    Toast.makeText(getContext(), "Masih ada data yang kosong", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -191,7 +198,7 @@ public class DetailPengamatanFragment extends Fragment {
         edtNamaSpesies.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
+                if (hasFocus) {
                     showCapungDialog();
                 }
             }
@@ -223,20 +230,22 @@ public class DetailPengamatanFragment extends Fragment {
         pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which){
+                switch (which) {
                     case 0:
                         showImage();
                         break;
                     case 1:
-                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-                            break;
-
-                        }else if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-                        {
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
-                            break;
-                        }else {
+//                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+//                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+//                            break;
+//
+//                        } else if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+//                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_REQUEST_CODE);
+//                            break;
+//                        } else {
+//                            takePhotoFromCamera();
+//                        }
+                        if (checkandRequestPermissions()){
                             takePhotoFromCamera();
                         }
                         break;
@@ -246,6 +255,22 @@ public class DetailPengamatanFragment extends Fragment {
             }
         });
         pictureDialog.show();
+    }
+
+    private boolean checkandRequestPermissions(){
+        List<String> listPermissionNeeded = new ArrayList<>();
+        for (String perm : appPermissions){
+            if (ContextCompat.checkSelfPermission(getContext(), perm) != PackageManager.PERMISSION_GRANTED){
+                listPermissionNeeded.add(perm);
+            }
+        }
+
+        if (!listPermissionNeeded.isEmpty()){
+            requestPermissions(listPermissionNeeded.toArray(new String[listPermissionNeeded.size()]), PERMISSION_REQUEST_CODE);
+            return false;
+        }
+
+        return true;
     }
 
     private void takePhotoFromCamera() {
@@ -258,12 +283,12 @@ public class DetailPengamatanFragment extends Fragment {
         startActivityForResult(cameraintent, MY_CAMERA_REQUEST_CODE);
     }
 
-    private void takePhotoFromGalerry(){
-        Intent galleryIntent =  new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    private void takePhotoFromGalerry() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent, STORAGE_REQUEST_CODE);
     }
 
-    private void  showCapungDialog(){
+    private void showCapungDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_search_capung, null);
         EditText edtSearch = mView.findViewById(R.id.edt_search);
@@ -321,6 +346,7 @@ public class DetailPengamatanFragment extends Fragment {
                     recyclerView.setAdapter(adapter);
                 } else {
                     capungArrayList.clear();
+                    progressBar.setVisibility(View.GONE);
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -349,9 +375,9 @@ public class DetailPengamatanFragment extends Fragment {
             } else if (resultCode == getActivity().RESULT_CANCELED) {
                 Toast.makeText(getContext(), "Cancelled", Toast.LENGTH_LONG).show();
             }
-        }else if (requestCode == STORAGE_REQUEST_CODE){
-            if (resultCode == getActivity().RESULT_OK){
-                if (data != null){
+        } else if (requestCode == STORAGE_REQUEST_CODE) {
+            if (resultCode == getActivity().RESULT_OK) {
+                if (data != null) {
                     imageUri = data.getData();
                     ContentResolver contentResolver = getContext().getContentResolver();
                     Bitmap bitmap = null;
@@ -363,6 +389,27 @@ public class DetailPengamatanFragment extends Fragment {
                     Glide.with(getView()).load(bitmap).apply(options).into(ivDetailPengamatan);
                     setViewImageURI(imageUri);
                 }
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE){
+            HashMap<String, Integer> permissionResults = new HashMap<>();
+            int deniedCount = 0;
+
+            for (int i = 0; i<grantResults.length; i++){
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED){
+                    permissionResults.put(permissions[i], grantResults[i]);
+                    deniedCount++;
+                }
+            }
+
+            if (deniedCount == 0){
+                takePhotoFromCamera();
+            }else {
+                Toast.makeText(getContext(), "Fitur ini perlu Permission, silahkan Diaktifkan", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -397,7 +444,7 @@ public class DetailPengamatanFragment extends Fragment {
         mDialog.show();
     }
 
-    public void setEditText(String nama){
+    public void setEditText(String nama) {
         dialogRekomendasi.dismiss();
         edtNamaSpesies.setText(Html.fromHtml(nama));
     }
@@ -420,7 +467,7 @@ public class DetailPengamatanFragment extends Fragment {
         listener = null;
     }
 
-    private void removeFragment(){
+    private void removeFragment() {
         getFragmentManager().beginTransaction().remove(this).commit();
         String TAG = "detail_pengamatan";
         ((MainActivity) getActivity()).RemoveFragment(TAG);
