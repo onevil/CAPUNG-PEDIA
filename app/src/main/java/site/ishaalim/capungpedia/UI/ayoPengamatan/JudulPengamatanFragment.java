@@ -28,6 +28,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,6 +46,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -78,6 +89,9 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
 
     usersPref usersPref;
 
+    private RequestQueue mRequestQue;
+    private String urlPOST = "https://fcm.googleapis.com/fcm/send";
+
     int IDLength = 20;
 
 
@@ -97,6 +111,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         super.onViewCreated(view, savedInstanceState);
         GenerateID();
         setupFirestore();
+        setupRequestQueue();
         initUI();
         setEvents();
         setHasOptionsMenu(true);
@@ -122,6 +137,10 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
     private void setupFirestore() {
         storageReference = FirebaseStorage.getInstance().getReference();
         firestore = FirebaseFirestore.getInstance();
+    }
+
+    private void setupRequestQueue(){
+        mRequestQue = Volley.newRequestQueue(getContext());
     }
 
     private void initUI() {
@@ -278,7 +297,7 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         final StorageReference fileStorage = storageReference.child("photo_pengamatan").child(tanggal).child(System.currentTimeMillis()+"."+getFileExtension(uri));
         uploadTask = fileStorage.putFile(uri);
 
-        final Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation() {
+        final Task uriTask = uploadTask.continueWithTask(new Continuation() {
             @Override
             public Object then(@NonNull Task task) throws Exception {
                 if (!task.isSuccessful()) {
@@ -324,9 +343,10 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
                             if (position == pengamatanArrayList.size()-1){
                                 clearFragment();
                                 progressDialog.dismiss();
-                                GenerateID();
                                 Toast.makeText(getContext(), "Data Berhasil Disimpan!", Toast.LENGTH_LONG).show();
                             }
+                            sendNotification();
+                            GenerateID();
                             Log.d(TAG, "Pengamatan berhasil disimpan!");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -341,9 +361,46 @@ public class JudulPengamatanFragment extends Fragment implements DatePickerDialo
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
+                e.printStackTrace();
             }
         });
+    }
+
+    private void sendNotification(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("to", "/topics/" + "pengamatan");
+
+            JSONObject dataObject = new JSONObject();
+            dataObject.put("body", "Pengamatan Baru!");
+            dataObject.put("URL", "https://capung-pedia-cb932.firebaseapp.com/index.html?action=pengamatan/detail-pengamatan&id="+ docID);
+
+            jsonObject.put("data", dataObject);
+            jsonObject.put("priority", 10);
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlPOST, jsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("MUR", "onResponse: ");
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("MUR", "onError: "+error.networkResponse);
+                }
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> header = new HashMap<>();
+                    header.put("content-type", "application/json");
+                    header.put("authorization", "key=AAAA8E4ITsk:APA91bGB5CZ9QH6j2Iqmbo_jpwkcZg5hlknvFU-FqRdBooYbKip6ROmo08etOQIz8pPzbJ-ljHtg20-_JTKud5VEhzAehOxsoanQ8C-LKT5VBdwFKBFfy4BzwNuEFNbziVtmE53E5kvp");
+                    return header;
+                }
+            };
+            mRequestQue.add(request);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     private void clearFragment() {
